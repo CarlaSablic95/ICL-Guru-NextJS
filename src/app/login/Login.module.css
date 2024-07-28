@@ -1,0 +1,61 @@
+.background {
+    background-color: var(--secondary-color);
+    height: 100vh;
+}
+
+.backgroundForm {
+    background-color: var(--primary-color);
+    border-radius: 0 50px 50px 0;
+}
+
+.backgroundContainer {
+    background-image: url("/img/bg-fondo.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    border-radius: 50px 0 0 50px;
+    filter: brightness(0.5);
+}
+
+.formLogin {
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.36));
+    height: 55vh;
+}
+
+.button {
+    background-color: var(--tertiary-color);
+}
+
+.form-floating > label {
+    color: var(--secondary-color) !important;
+}
+
+.form-control {
+    color: var(--color-secondary);
+}
+
+.form-control:focus {
+    box-shadow: none !important;
+}
+
+.form-check .form-check-input {
+    margin-left: 1em;
+}
+
+/* MEDIA QUERIES */
+@media (width <= 990px) {
+    .card {
+        width: 300px;
+    }
+
+    .card-form {
+        width: 80%;
+    }
+    .backgroundForm {
+        border-radius: 50px;
+    }
+    
+    .card-form {
+        width: 90%;
+    }
+}
