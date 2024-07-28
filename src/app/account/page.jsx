@@ -1,32 +1,30 @@
-"use client";
+import ButtonModal from "@/components/Button/ButtonModal";
 import Image from "next/image";
 import Edit from "/public/icons/edit.svg";
 import Delete from "/public/icons/delete.svg";
-import ButtonModal from "@/components/Button/ButtonModal";
-import { SearchBar } from "@/components/Inputs/Inputs";
-import styles from "./Clinics.module.css";
+import styles from "./Account.module.css";
 
-const Clinics = () => {
-  // CONSUMO DE API DE CLÍNICAS (ORGANIZACIONES)
-
-  return (
-    <section className="col-12 col-md-11 px-5 py-4 mx-auto">
-      <h1 className="text-center text-uppercase fw-bold mb-4">Clinics</h1>
-        <form className="d-flex justify-content-center" role="search">
-              {/* <SearchBar placeholder="Find clinics" onChange={filterPatients}/> */}
-                <SearchBar placeholder="Find clinics" />
-        </form>
+const Accounts = () => {
+    return (
+        <section className="col-12 col-md-11 px-5 py-4 mx-auto">
+      <h1 className="text-center  text-uppercase  fw-bold mb-4">Account Manager</h1>
         <div className="my-5 d-flex justify-content-end">
-        <ButtonModal dataBsTarget="#modalForm" title="New clinics" icon="./icons/add-clinic.svg" />
+        <ButtonModal dataBsTarget="#modalForm" title="New account" icon="./icons/add-account.svg" />
       </div>
       <div>
         <div className="pb-5">
           <div className="table-responsive mb-4">
-            <table className={`table table-striped ${styles.tableClinics}`}>
+            <table className={`table table-striped ${styles.tableAccounts}`}>
               <thead>
                 <tr>
+                <th scope="col" className="text-center">
+                    Username
+                  </th>
                   <th scope="col" className="text-center">
                     Name
+                  </th>
+                  <th scope="col" className="text-center">
+                    Email
                   </th>
                   <th scope="col" className="text-center">
                     Edit
@@ -39,7 +37,11 @@ const Clinics = () => {
 
               <tbody>
                 <tr>
-                  <td className="text-center align-middle">Clínica prueba</td>
+                <td className="text-center align-middle">user-tester</td>
+
+                <td className="text-center align-middle">Juan</td>
+
+                <td className="text-center align-middle">juan@gmail.com</td>
 
                   <td className="text-center align-middle">
                     <Image
@@ -61,8 +63,11 @@ const Clinics = () => {
                   </td>
                 </tr>
                 <tr>
-                  <td className="text-center">Clínica Rosario</td>
+                <td className="text-center align-middle">user.demo</td>
 
+                <td className="text-center align-middle">Pablo</td>
+
+                <td className="text-center align-middle">pablo@gmail.com</td>
                   <td className="text-center">
                     <Image
                       src={Edit}
@@ -88,7 +93,7 @@ const Clinics = () => {
         </div>
       </div>
     </section>
-  );
-};
+    )
+}
 
-export default Clinics;
+export default Accounts;

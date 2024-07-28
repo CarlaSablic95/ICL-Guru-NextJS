@@ -1,0 +1,95 @@
+/* CALCULATIONS */
+.calculations-table {
+    border-spacing: 10px; /* Adjust spacing value as needed */
+  }
+  
+.calculations-table>:not(caption) {
+    background-color: var(--white-color) !important;
+}
+.calculations-table >tbody>tr:nth-of-type(odd)>* {
+    background-color: #ADD7EE;
+}
+
+.calculations-table >tbody>tr:nth-of-type(even)>* {
+    background-color: #82BECA;
+}
+
+.card {
+    background-color: #E9F1F8;
+    box-shadow: 4px 4px 4px 0px #00507C82;
+    width: 280px;
+    padding: 10px;
+}
+
+.card-surgical-data {
+    height: 180px
+}
+
+/* FOLLOW UP */
+.react-form-wizard .wizard-tab-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 35px;
+}
+
+.card-form .card-header {
+    background-color: var(--secondary-color);
+    border-radius: 24px 24px 0 0;
+}
+
+.card-form {
+    background-color: var(--celestial-blue);
+    border-radius: 24px;
+    width: 50%;
+}
+
+/* STEP REACT SUITE */
+.rs-scroll-view.rs-scroll-view-custom-scrollbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rs-btn-default {
+    background-color: var(--secondary-color) !important;
+    color: var(--white-color) !important;
+    border-radius: .5rem !important;
+}
+
+.rs-btn-disabled {
+    background-color: #869ba6 !important;
+    color: var(--white-color) !important;
+}
+
+.rs-btn-group {
+    position: relative;
+    vertical-align: middle;
+    display: flex;
+    justify-content: space-around;
+}
+
+/* SPLIDE */
+.is-active {
+        background-color: 2px solid #495AFF !important;
+        color: var(--white-color);
+}
+
+/* FORMS (FOLLOW UP) */
+span.input-group-text  {
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    background: white;
+    border-left-color: transparent;
+}
+
+input[type="text"], input[type="number"] {
+    border-right-color: transparent;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+
+.input-date {
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
