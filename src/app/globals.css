@@ -1,107 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import "rsuite/dist/rsuite.css";
+/* PALETA DE COLORES */
 :root {
-  --max-width: 1100px;
-  --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
-    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
-    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
-
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-
-  --primary-glow: conic-gradient(
-    from 180deg at 50% 50%,
-    #16abff33 0deg,
-    #0885ff33 55deg,
-    #54d6ff33 120deg,
-    #0071ff33 160deg,
-    transparent 360deg
-  );
-  --secondary-glow: radial-gradient(
-    rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 0)
-  );
-
-  --tile-start-rgb: 239, 245, 249;
-  --tile-end-rgb: 228, 232, 233;
-  --tile-border: conic-gradient(
-    #00000080,
-    #00000040,
-    #00000030,
-    #00000020,
-    #00000010,
-    #00000010,
-    #00000080
-  );
-
-  --callout-rgb: 238, 240, 241;
-  --callout-border-rgb: 172, 175, 176;
-  --card-rgb: 180, 185, 188;
-  --card-border-rgb: 131, 134, 135;
+    --primary-color: #1A2A2F;
+    --secondary-color: #00507C;
+    --tertiary-color: #3DC2DD;
+    --gray-color: #475467;
+    --bg-modal: #D9D9D9D6;
+    --white-color: #fefefe;
+    --celestial-blue: #4888C81F;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-
-    --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
-    --secondary-glow: linear-gradient(
-      to bottom right,
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0.3)
-    );
-
-    --tile-start-rgb: 2, 13, 46;
-    --tile-end-rgb: 2, 5, 19;
-    --tile-border: conic-gradient(
-      #ffffff80,
-      #ffffff40,
-      #ffffff30,
-      #ffffff20,
-      #ffffff10,
-      #ffffff10,
-      #ffffff80
-    );
-
-    --callout-rgb: 20, 20, 20;
-    --callout-border-rgb: 108, 108, 108;
-    --card-rgb: 100, 100, 100;
-    --card-border-rgb: 200, 200, 200;
-  }
+/* SCROLLBAR */
+*::-webkit-scrollbar {
+    width: 12px;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+*::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+    border-radius: 8px;
+    border: 2px solid var(--white-color);
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    font-family: "Roboto", sans-serif !important;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+/* ÍCONOS */
+.bi::before, [class^="bi-"]::before, [class*=" bi-"]::before {
+    font-weight: 600 !important;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+.icon {
+    top: 6px;
+    right: 5px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.key {
+    transition: opacity 0.3s ease;
+}
+
+.key.invisible {
+    opacity: 0;
+}
+
+.key:not(.invisible) {
+    opacity: 1;
+}
+
+/* BUTTON */
+.button {
+    background-color: var(--tertiary-color) !important;
+}
+
+/* MENÚ VERSIÓN DESKTOP/MOBILE */
+
+header, .navbar-mobile, .patient-name {
+    background-color: var(--secondary-color);
+}
+
+.patient-name {
+    opacity: 0;
+    transition: opacity .2s ease-in-out;
+}
+
+.patient-name.show {
+    opacity: 1;
+    transition: opacity .2s ease-in-out;
+}
+
+aside {
+    min-height: 100vh;
+}
+
+.offcanvas.offcanvas-end {
+    left: -1px;
+    width: 300px;
+}
+
+.offcanvas.offcanvas-end {
+    transform: translateX(0%);
+}
+
+.offcanvas-backdrop {
+    background-color: var(--bg-modal);
+}
+
+  .navbar-toggler:focus {
+    box-shadow: none;
+}
+
+/* TABLAS */
+th {
+    background-color: #EDF2FB !important;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd)>* {
+    background-color: #ABC4FF;
+}
+
+.table-striped>tbody>tr:nth-of-type(even)>* {
+    background-color: #D7E3FC;
+}
+
+.bi-pencil-square, .bi-trash {
+    cursor: pointer;
+}
+
+thead {
+    border-bottom: 1px solid var(--primary-color) !important;
+}
+
+/* FORM */
+
+.form-check-input:checked[type=radio] {
+    background-image: url("/public/icons/radio-button.svg") !important;
+}
+/* .form-check-input:checked {
+    background-color: var(--white-color) !important;
+    border-color: var(--white-color) !important;
+} */
+
+.form-login {
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, .36));
+    height: 55vh;
+}
+
+.eye-icon {
+    top: 6px;
+    right: 5px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.form-floating>label {
+    color: var(--secondary-color) !important;
+}
+
+/* PANEL */
+/* FIXED MENU */
+.menu-list:hover {
+    cursor: pointer;
+}
+
+.is-active {
+    border-bottom: 2px solid var(--tertiary-color);
+}
+
+/* MENÚ VERSIÓN DESKTOP/MOBILE */
+
+header, .navbar-mobile, .patient-name {
+    background-color: var(--secondary-color);
+}
+
+.patient-name {
+    opacity: 0;
+    transition: opacity .2s ease-in-out;
+}
+
+.patient-name.show {
+    opacity: 1;
+    transition: opacity .2s ease-in-out;
+}
+
+aside {
+    min-height: 100vh;
+}
+
+.offcanvas.offcanvas-end {
+    left: -1px;
+    width: 300px;
+}
+
+.offcanvas.offcanvas-end {
+    transform: translateX(0%);
+}
+
+.offcanvas-backdrop {
+    background-color: var(--bg-modal);
+}
+
+.is-active > img {
+    color: #3DC2DD !important;
   }
+
+  .navbar-toggler:focus {
+    box-shadow: none;
+}
+
+.fade {
+    transition: opacity .15s linear;
+}
+
+/* STEP REACT SUITE */
+.rs-scroll-view.rs-scroll-view-custom-scrollbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rs-btn-default {
+    background-color: var(--secondary-color) !important;
+    color: var(--white-color) !important;
+    border-radius: .5rem !important;
+}
+
+.rs-btn-disabled {
+    background-color: #869ba6 !important;
+    color: var(--white-color) !important;
+}
+
+.rs-btn-group {
+    position: relative;
+    vertical-align: middle;
+    display: flex;
+    justify-content: space-around;
+}
+
+/* SPLIDE */
+.is-active {
+        background-color: 2px solid #495AFF !important;
+        color: var(--white-color);
+}
+
+/* FORMS (FOLLOW UP) */
+span.input-group-text  {
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    background: white;
+    border-left-color: transparent;
+}
+
+/* input[type="text"], input[type="number"] {
+    border-right-color: transparent;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+} */
+
+.input-date {
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
 }
