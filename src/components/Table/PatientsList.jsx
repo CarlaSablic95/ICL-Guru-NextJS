@@ -1,10 +1,9 @@
 "use client";
 
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { BASE_URL } from "@/services/ApiService";
-// import { redirect } from "next/navigation";
+import { getPatients } from "@/services/ApiService";
+import { fetchPatientsStart, fetchPatientsSuccess, fetchPatientsFailure } from "@/features/patients/patientSlice";
 import { SearchBar } from "../Inputs/Inputs";
 import CreatePatient from "../Modal/CreatePatient";
 import ButtonModal from "../Button/ButtonModal";
@@ -14,48 +13,64 @@ import Delete from "/public/icons/delete.svg";
 // import styles from "../../patients/Patients.module.css";
 
 const PatientsList = () => {
-// En lugar de usar useState, usamos useSelector, y useDispatch para gestionar el estado con React redux
-const patients = useSelector(state => state.data);
-const dispatch = useDispatch() 
-
-useEffect(()=>{
-  const fetchPatients = async () => {
-    try {
-      const response = await axios.get(`${BASE_URL}/patients`);
-      dispatch({
-        type: "patients/fetchPatients",
-        payload: response.data
-      });
-    } catch (error) {
-      console.error("Error fetching patients: ", error);
-    }
-  }
-fetchPatients();
-}, [dispatch]);
+  const dispatch = useDispatch();
+  const accessToken = useSelector((state) => state.auth.access);
+  const {patients, status, error} = useSelector((state) => state.patients);// tiene acceso a todo el estado, quiero acceder del estado a los pacientes
+  console.log("STATE PATIENTS: ", useSelector((state) => state.patients));
 
   const [searchPatient, setSearchPatient] = useState("");
   const [filteredPatients, setFilteredPatients] = useState([]);
-  // const [selectedPatient, setSelectedPatient] = useState(null); 
+
+
+// trayendo los pacientes 
+useEffect(() => {
+  if(!accessToken) {
+    console.error("Invalid access token: must be a non-empty string");
+    return;
+  }
+
+  const fetchPatients = async () => {
+    dispatch(fetchPatientsStart());
+
+    try {
+      const data = await getPatients();
+      dispatch(fetchPatientsSuccess(data));
+    } catch (error) {
+      dispatch(fetchPatientsFailure(error.message));
+    }
+  };
+
+  fetchPatients();
+}, [dispatch, accessToken]);
+
+useEffect(() => {
+  setFilteredPatients(patients);
+}, [patients]); 
+
 
 // FILTRO DE PACIENTES
 const filterPatients = (event) => {
   const filterValue = event.target.value.toLowerCase();
 
-  console.info("VALOR INGRESADO: ", filterValue)
+  console.log("VALOR INGRESADO: ", filterValue);
 
   // Se actualiza la variable de estado "searchPatient" con el valor filtrado
   setSearchPatient(filterValue);
 
   // Variable que almacena el resultado del filtrado
-  const filteredData = dataPatient.filter((patient) => {
+  const filteredData = patients.filter((patient) => {
       const patientName = patient.name.toLowerCase();
       const patientSurname = patient.surname.toLowerCase();
+
+      console.log("LISTA DE PACIENTES: ", filterPatients)
       return patientName.includes(filterValue) || patientSurname.includes(filterValue);
   });
 
   setFilteredPatients(filteredData);
 }
 
+if(status === "loading") return <div>Loading...</div>;
+if(status === "failed") return <div>Error: {error}</div>;
 // Función para ver el cálculo del paciente
 
 // const handlePatient = (id) => {

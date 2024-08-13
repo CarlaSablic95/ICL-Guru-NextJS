@@ -1,4 +1,9 @@
 "use client";
+
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getClinics } from "@/services/ApiService";
+import { fetchClinicsStart, fetchClinicsSuccess, fetchClinicsFailure } from "@/features/clinics/clinicSlice";
 import Image from "next/image";
 import Edit from "/public/icons/edit.svg";
 import Delete from "/public/icons/delete.svg";
@@ -8,6 +13,26 @@ import styles from "./Clinics.module.css";
 
 const Clinics = () => {
   // CONSUMO DE API DE CLÍNICAS (ORGANIZACIONES)
+  const {clinics, status, error } = useSelector((state) => state.clinics);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchClinics = async () => {
+      dispatch(fetchClinicsStart());
+
+      try {
+        const data = await getClinics();
+        dispatch(fetchClinicsSuccess(data));
+      } catch (error) {
+        dispatch(fetchClinicsFailure(error.message));
+      }
+    };
+
+    fetchClinics();
+  }, [dispatch]);
+
+if(status === "loading") return <div>Loading...</div>;
+if(status === "failed") return <div>Error: {error}</div>;
 
   return (
     <section className="col-12 col-md-11 px-5 py-4 mx-auto">
@@ -38,50 +63,30 @@ const Clinics = () => {
               </thead>
 
               <tbody>
-                <tr>
-                  <td className="text-center align-middle">Clínica prueba</td>
-
-                  <td className="text-center align-middle">
-                    <Image
-                      src={Edit}
-                      style={{ width: "18px", cursor: "pointer" }}
-                      data-bs-toggle="modal"
-                      data-bs-target="#ModalEditPatient"
-                      alt="edit icon"
-                      />
-                  </td>
-                  <td className="text-center align-middle">
-                    <Image
-                      src={Delete}
-                      style={{ width: "22px", cursor: "pointer" }}
-                      data-bs-toggle="modal"
-                      data-bs-target="#modalDelete"
-                      alt="trash icon"
-                      />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="text-center">Clínica Rosario</td>
-
-                  <td className="text-center">
-                    <Image
-                      src={Edit}
-                      style={{ width: "18px", cursor: "pointer" }}
-                      data-bs-toggle="modal"
-                      data-bs-target="#ModalEditPatient"
-                      alt="edit icon"
-                      />
-                  </td>
-                  <td className="text-center">
-                    <Image
-                      src={Delete}
-                      style={{ width: "22px", cursor: "pointer" }}
-                      data-bs-toggle="modal"
-                      data-bs-target="#modalDelete"
-                      alt="trash icon"
-                      />
-                  </td>
-                </tr>
+              { clinics.map((clinic) => (
+                        <tr className="text-center" style={{ cursor: "pointer"}} key={clinic.id}>
+                        <td className="text-center align-middle">{clinic.name}</td>
+                        <td className="text-center align-middle">
+                          <Image
+                            src={Edit}
+                            style={{ width: "18px", cursor: "pointer" }}
+                            data-bs-toggle="modal"
+                            data-bs-target="#ModalEditPatient"
+                            alt="edit icon"
+                            />
+                        </td>
+                        <td className="text-center align-middle">
+                          <Image
+                            src={Delete}
+                            style={{ width: "22px", cursor: "pointer" }}
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalDelete"
+                            alt="trash icon"
+                            />
+                        </td>
+                      </tr>
+                      )) }
+              
               </tbody>
             </table>
           </div>

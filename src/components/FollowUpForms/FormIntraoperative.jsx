@@ -1,4 +1,4 @@
-import Button from "../Button/Button";
+import Button2 from "../Button/Button2";
 
 
 const FormCard = () => {
@@ -96,7 +96,7 @@ const FormCard = () => {
             </div>
           </div>
           <div className="d-flex justify-content-center">
-            <Button title="Save" bgColor="#B02F92" textColor="#fefefe"  rounded="2rem" textTransform="uppercase" />
+            <Button2 title="Save" bgColor="#B02F92" textColor="#fefefe"  rounded="2rem" textTransform="uppercase" />
           </div>
         </div>
         </form>

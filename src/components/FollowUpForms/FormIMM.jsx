@@ -1,4 +1,4 @@
-import Button from "../Button/Button";
+import Button2 from "../Button/Button2";
 
 const FormIMM = () => {
   return (
@@ -177,7 +177,7 @@ const FormIMM = () => {
               {/* Button form */}
               
             <div className="d-flex justify-content-center">
-              <Button
+              <Button2
                 title="Save"
                 bgColor="#B02F92"
                 textColor="#fefefe"

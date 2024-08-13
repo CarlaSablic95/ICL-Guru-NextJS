@@ -1,4 +1,6 @@
-import Button from "../Button/Button";
+import Button2 from "../Button/Button2";
+import Image from "next/image";
+import Icon from "/public/icons/backup.svg";
 
 const Form1D = () => {
   return (
@@ -137,6 +139,18 @@ const Form1D = () => {
               </div>
             </div>
 
+            {/* INPUT FILE */}
+            <div className="mb-3">
+                <label htmlFor="formFile" className="form-label w-100">
+                  <div className="form-control d-flex justify-content-between align-items-center rounded-4">
+                    <Image src={ Icon } alt="icon"/>
+                    <p className="text-secondary mb-0">No file chosen</p>
+                    <Button2 title="Upload" bgColor="#1849D6" textColor="#ffffff" textTransform="capitalize" rounded=".5rem" />
+                  </div>
+                </label>
+                <input className="form-control d-none" type="file" id="formFile" />
+              </div>
+
                 {/* RX */}
                 {/* Sphere */}
             <div className="row justify-content-center justify-content-md-start">
@@ -174,16 +188,10 @@ const Form1D = () => {
               </div>
             </div>
 
-              {/* INPUT FILE */}
-              <div className="mb-3">
-                <label htmlFor="formFile" className="form-label">Default file input example</label>
-                <input className="form-control" type="file" id="formFile" />
-              </div>
-
               {/* Button form */}
               
             <div className="d-flex justify-content-center">
-              <Button
+              <Button2
                 title="Save"
                 bgColor="#B02F92"
                 textColor="#fefefe"

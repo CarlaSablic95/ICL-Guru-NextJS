@@ -41,8 +41,8 @@ const EditPatient = () => {
                         <div className="mb-3">
                             <label className="mb-0">Sex<span className="text-danger">*</span></label>
                                 <div className="d-flex justify-content-evenly">
-                                    <InputRadio id="female" name="sex" value="female" label="Female" />
-                                    <InputRadio id="male" name="sex" value="male" label="Male" />
+                                    <InputRadio id="female2" name="sex" value="female" label="Female" />
+                                    <InputRadio id="male2" name="sex" value="male" label="Male" />
                                 </div>
                         </div>
 

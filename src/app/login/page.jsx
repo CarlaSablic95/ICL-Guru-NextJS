@@ -1,14 +1,19 @@
 "use client";
 
 import { useState } from "react";
+import { useDispatch} from "react-redux";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { authenticate } from "@/services/ApiService";
+import { login } from "@/features/auth/authSlice";
 import Image from "next/image";
 import EyeOff from "/public/icons/eye-off.svg";
 import EyeOn from "/public/icons/eye.svg";
 import styles from "./Login.module.css";
-import { Input } from "@/components/Inputs/Inputs";
 
 const Login = () => {
+    const dispatch = useDispatch();
+    const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
@@ -19,19 +24,34 @@ const Login = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const onSubmit = async () => {
-        setLoading(true);
-        setErrorMessage("");
-
-        try {
-          await login(data);
-           console.log("Login successful for user: ", data.username);
-        } catch (error) {
-            console.error("Login error: ", error);
-            setErrorMessage(error.message || "Error during login");
-        } finally {
-            setLoading(false);
+    const onSubmit = async (data) => {
+        console.log("DATOS ENVIADOS: ", data) // DATA:  {username: 'user.demo', password: 'U4u4iclguru$'}
+      setLoading(true);
+      setErrorMessage("");
+// PROCESO DE AUTENTICACIÓN
+      try {
+        const response = await authenticate(data);
+        dispatch(login(response));
+        console.log("TOKENS RECIBIDOS: ", response)
+        router.push("/patients");
+        
+      } catch (error) {
+        if(error.response) { // El servidor respondió con un estado diferente a 2xx
+            console.error("Error Response: ", error.response.data);
+            console.error("Error Status: ", error.response.status);
+            console.error("Error Headers: ", error.response.headers);
+        } else if( error.request) { // La solicitud fue hecha pero no se recibió respuesta
+            console.error("Error Request: ", error.request);
+            
+        } else { // Ocurrió un error al configurar la solicitud
+            console.error("Error: ", error.message);
+            
         }
+        setErrorMessage("Incorrect username or password");
+        console.error("Error: ", error);
+      } finally {
+        setLoading(false);
+      }
 };
 
 return (

@@ -243,3 +243,73 @@ span.input-group-text  {
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
 }
+
+/* Checkbox - OS / OD */
+.form-check-label > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+}
+
+input#od, input#os {
+    width: 20px;
+    height: 20px;
+}
+
+#od:checked, #os:checked {
+    background-color: #2C98F0;
+    border-color: #2C98F0;
+}
+
+.card {
+    background-color: #e9f1f8;
+    box-shadow: 4px 4px 4px #00507c82;
+    width: 280px;
+    padding: 10px;
+}
+
+/* FORM OPERATIVE */
+.calculation-form {
+    background-color: #e9f1f8;
+    box-shadow: 4px 4px 4px #00507c82;
+    width: 280px;
+    padding: 10px;
+}
+
+.card-form {
+    background-color: var(--celestial-blue) !important;
+    border-radius: 24px !important;
+    width: 50%;
+}
+.card-form .card-header {
+    background-color: var(--secondary-color);
+    border-radius: 24px 24px 0 0 !important;
+}
+
+.input-group:not(.has-validation)>.dropdown-toggle:nth-last-child(n+3), .input-group:not(.has-validation)>.form-floating:not(:last-child)>.form-control, .input-group:not(.has-validation)>.form-floating:not(:last-child)>.form-select, .input-group:not(.has-validation)>:not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+/* LOADER */
+.loader {
+    width: 18px;
+    height: 18px;
+    border: 5px solid #FFF;
+    border-bottom-color: #B02F92;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    } 

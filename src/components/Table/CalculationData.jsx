@@ -61,7 +61,7 @@ const CalculationData = () => {
               <th scope="col" className="align-middle">Surgery date</th>
               <th scope="col" className="align-middle">Result Eyes</th>
               <th scope="col" className="align-middle">Method</th>
-              <th scope="col" className="align-middle">Edit calculation</th>
+              <th scope="col" className="align-middle">Edit</th>
               <th scope="col" className="align-middle">Delete</th>
             </tr>
           </thead>

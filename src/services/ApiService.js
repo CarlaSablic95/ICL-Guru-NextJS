@@ -1,161 +1,178 @@
-export const BASE_URL = "https://test.iclguru.com";
-console.log("URL BASE: " + BASE_URL);
+import axios from "axios"; 
+import{ store }from "@/app/store";
+import { login, logout, refreshToken} from "@/features/auth/authSlice";
+import { isTokenExpiring } from "@/utils/tokenUtils";  // Utilidad para verificar la expiración del token
+
+export const BASE_URL = "https://test.iclguru.com"; 
 
 export const authenticate = async (credentials) => {
+    // console.log("CREDENTIALS: ", credentials); // { username: 'user.demo', password: 'U4u4iclguru$' }
+    
     try {
-        const response = await fetch(`${BASE_URL}/accounts/token/`, {
-            method:"POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(credentials) // username y password
-        });
+        const response = await axios.post(`${BASE_URL}/accounts/token/`, credentials);
+        console.log("DATA RESPONSE AUTHENTICATE: ", response.data);
 
-        console.log("RESPONSE STATUS: ", response.status);
-        console.log("RESPONSE HEADERS: ", response.headers);
-        
-        const data = await response.json();
-        console.log("AUTHENTICATE - DATA ACCESS: ", data.access);
-        console.log("AUTHENTICATE - CREDENTIALS: ", credentials);
-        
-        
-        console.log("RESPONSE DATA: ", data);
-        console.log("AUTHENTICATE - DATA REFRESH: ", data.refresh);
-        if(!response.ok) {
-            console.log("Error data: ", data);
-            throw new Error(data.detail || "Incorrect username or password.");
+        // Guarda el refresh token en una cookie HttpOnly
+        document.cookie = `refreshToken=${response.data.refresh}; path=/; HttpOnly; SameSite=Strict; Max-Age=${24 * 60 * 60}`;
+
+        // document.cookie = `refreshToken=${response.data.refresh}; path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${24 * 60 * 60}`;
+
+        console.log("DOCUMENT COOKIE: ", document.cookie)
+
+        // console.log("LOGIN PAYLOAD: ", payload);
+        // console.log("Despachando acción de login con payload:", payload);
+
+        // console.log("Dispatching login with payload:", payload);
+
+        const payload = {
+            access: response.data.access,
+            user: credentials.username
         }
-        return data;
+
+         store.dispatch(login(payload));
+        console.log("Estado después del login:", store.getState().auth);
+        return response.data;
     } catch (error) {
         console.error("Error during authentication: ", error);
         throw error;
     }
-
 };
 
-// export const refreshAcccessToken = async () => {
-//     const refreshToken = localStorage.getItem("refreshToken");
+const refreshAccessToken = async () => {
+    try {
+        const refreshToken = document.cookie.split("=")[1];
+        const response = await axios.post(`${BASE_URL}/accounts/token/refresh/`, {
+            refresh: refreshToken
+        },
+        {
+            withCredentials: true // Asegura que las cookies HttpOnly se envíen con la solicitud
+        });
+        console.log("RESPONSE DE REFRESH TOKEN: ", response)
 
-//     if(!refreshToken) {
-//         throw new Error("No refresh token found");
-//     }
+        store.dispatch(refreshToken({ access: response.data.access }));
 
-//     try {
-//         const response = await fetch(`${BASE_URL}/accounts/refresh-token`, {
-//             method: "POST",
-//             headers: {
-//                 "Content-Type": "application/json"
-//             },
-//             body: JSON.stringify({ refreshToken })
-//         });
+        console.log("New Access Token:", response.data.access);
+        return response.data.access;
+    } catch(error) {
+        console.error("Error refreshing token: ", error);
+        store.dispatch(logout());
+        return null;
+    }
+}
 
-//         if(!response.ok) {
-//             throw new Error(`HTTP error! status: ${response.status}`)
-//         }
+export const apiRequest = async (url, options = {}) => {
+    let state = store.getState(); // Guardo el estado global actual del almacén de Redux toolkit, de la aplicacion: AUTH, PATIENTS, CLINICS, ACCOUNTS 
 
-//         const data = await response.json();
-//         console.log("accessToken", data.access);
-//         return data.access;
-//     } catch(error) {
-//         console.error("Error during token refresh: ", error);
-//         throw error;
-//     }
-// }
+    // console.log("ESTADO DEL ALMACEN EN REDUX: ", state)
+    let accessToken = state.auth.access;
+    console.log("Token antes de la solicitud:", accessToken);
+    // console.log("ACCESO PERMITIDO: ", accessToken)
+
+    if(!accessToken || typeof accessToken !== "string") {
+        console.error("Invalid access token: must be a non-empty string");
+        throw new Error("Access token is invalid or not present");
+    }
+    try {
+        if (isTokenExpiring(accessToken)) {
+            accessToken = await refreshAccessToken();
+        }
+
+        const fullUrl = `${BASE_URL}${url}`;
+
+        const config = {
+            method: options.method || 'GET',
+            url: fullUrl,
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+                "Content-Type": "application/json",
+                ...options.headers,
+            },
+            ...options,
+        };
+
+        const response = await axios(config);
+
+        if (response && response.data) {
+            console.log(`API Request to ${fullUrl} successful:`, response.data);
+            console.log("RESPUESTA API REQUEST: ", response.data)
+            return response.data;
+        } else {
+            console.error('API response does not contain data');
+            return null;
+        }
+    } catch (error) {
+        console.error(`API Request to ${url} failed:`, error);
+        throw error;
+    }
+};
+
+
 
 // PATIENTS
-// export const getPatients = async (accessToken) => {
-//     try {
-//         const response = await fetch(`${BASE_URL}/patients/patients/`, {
-//             method:"GET",
-//             headers: {
-//                 "Authorization": `Bearer ${accessToken}`,
-//                 "Content-Type": "application/json"
-//             }
-//         });
-//         const data = await response.json();
-//         console.log("DATA: ", data);
+export const getPatients = async () => {
+    try {
+        const response = await apiRequest("/patients/patients/", {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        
+        console.log("PATIENTS: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.error("Error: ", error);
+        throw error;
+    }
+}
 
-//         if(!response.ok) {
-//             throw new Error("Error al obtener pacientes");
-//         }
-//         return data;
-//     } catch (error) {
-//         console.error("Error: ", error);
-//         throw error;
-//     }
-// }
-
-// // PATIENT
-// export const getPatient = async (id, accessToken) => {
-//     try {
-//         const response = await fetch(`${BASE_URL}/patients/patients/id/`, {
-//             method: "GET",
-//             headers: {
-//                 "Authorization": `Bearer ${accessToken}`,
-//                 "Content-Type": "application/json"
-//             }
-//         });
-
-//         const data = await response.json();
-//         console.log("PATIENT: ", data);
-
-//         if(!response.ok) {
-//             if(!response.status === 401) {
-//                 const newAccessToken = await refreshAcccessToken();
-//                 return getPatient(id, newAccessToken);
-//             } else {
-//                 throw new Error(data.detail || "Error al obtener paciente");
-//             }
-//         }
-
-//         return data;
-//     } catch (error) {
-//         console.error("Error: ", error);
-//         throw error;
-//     }
-// }
-
-// // CLINICS
-// export const getClinics = async (accessToken) => {
+// PATIENT
+export const getPatient = async (id) => {
+    try {
+        const response = await apiRequest(`/patients/patients/${id}/`, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
     
-//         const response = await fetch(`${BASE_URL}/accounts/organizations/`, {
-//             method:"GET",
-//             headers: {
-//                 "Authorization": `Bearer ${accessToken}`,
-//                 "Content-Type": "application/json"
-//             }
-//         });
+        console.log("PATIENT: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.error("Error: ", error);
+        throw error;
+    }
+}
 
-//         const data = await response.json();
-//         console.log("DATA: ", data);
+// CLINICS
+export const getClinics = async () => {
+    try {
+        const response = await apiRequest(`/accounts/organizations/`, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
 
-//         if(!response.ok) {  
-//             throw new Error("Error al obtener clínicas");
-//         }
-//         return data;
-    
-// }
+        console.log("CLINICS: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.error("Error: ", error);
+        throw error;
+    }
+        
+}
 
-// // ACCOUNTS
-// export const getAccounts = async (accessToken) => {
-//     try {
-//         const response = await fetch(`${BASE_URL}/accounts/profiles`, {
-//             method:"GET",
-//             headers: {
-//                 "Authorization": `Bearer ${accessToken}`,
-//                 "Content-Type": "application/json"
-//             }
-//         });
+// ACCOUNTS
+export const getAccounts = async () => {
+    try {
+        const response = await apiRequest(`/accounts/profiles/`, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        console.log("DATA: ", response.data);
 
-//         const data = await response.json();
-//         console.log("DATA: ", data);
-
-//         if(!response.ok) {
-//             throw new Error("Error al obtener cuentas");
-//         }
-//         return data;
-//     } catch (error) {
-//         console.error("Error: ", error);
-//         throw error;
-//     }
-// }
+        return response.data;
+    } catch (error) {
+        console.error("Error: ", error);
+        throw error;
+    }
+}

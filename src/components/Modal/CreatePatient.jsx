@@ -38,8 +38,8 @@ const CreatePatient = () => {
                         <div className="mb-3">
                             <label className="mb-0">Sex<span className="text-danger">*</span></label>
                                 <div className="d-flex justify-content-evenly">
-                                    <InputRadio id="female" name="sex" value="female" label="Female" />
-                                    <InputRadio id="male" name="sex" value="male" label="Male" />
+                                    <InputRadio id="female1" name="sex" value="female" label="Female" />
+                                    <InputRadio id="male1" name="sex" value="male" label="Male" />
                                 </div>
                         </div>
 

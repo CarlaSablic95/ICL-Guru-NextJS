@@ -3,6 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { login } from "@/features/auth/authSlice";
 
 const routes = [
   {
@@ -39,6 +42,17 @@ const routes = [
 
 const NavbarMobile = () => {
   const pathname = usePathname();
+  const dispatch = useDispatch();
+    const username = useSelector(state => state.auth.user);
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem("user");
+
+        if(storedUser && !username) {
+            const parsedUser = JSON.parse(storedUser);
+            dispatch(login({user: parsedUser}))
+        }
+    }, [dispatch, username]);
 
   return (
     <nav className="navbar navbar-mobile py-4 d-flex d-lg-none">
@@ -65,7 +79,7 @@ const NavbarMobile = () => {
         >
           <div className="offcanvas-header">
             <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
-              { `User: ` }
+              { `User: ${username}` }
             </h5>
             <button
               type="button"
