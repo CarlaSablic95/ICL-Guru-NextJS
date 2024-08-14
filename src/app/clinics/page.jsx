@@ -14,6 +14,8 @@ import styles from "./Clinics.module.css";
 const Clinics = () => {
   // CONSUMO DE API DE CLÍNICAS (ORGANIZACIONES)
   const {clinics, status, error } = useSelector((state) => state.clinics);
+  console.log("STATE CLINICS: ", useSelector((state) => state.clinics));
+
   const dispatch = useDispatch();
 
   useEffect(() => {

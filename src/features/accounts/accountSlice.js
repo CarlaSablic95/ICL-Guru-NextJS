@@ -12,7 +12,7 @@ const accountSlice = createSlice({
             state.status = "loading";
         },
         fetchAccountsSuccess(state, action) {
-            state.action = action.payload;
+            state.accounts = action.payload;
             state.status = "succeeded";
         },
         fetchAccountsFailure(state, action) {

@@ -6,12 +6,12 @@ export const decodeToken = (token) => {
         console.error("Invalid token: must be a non-empty string");
         return null;
     }
-    // console.log("TOKEN: ", token);
+    console.log("TOKEN: ", token);
     return jwtDecode(token);  
 };
 
 // Función para verificar si el token está a punto de expirar
-export const isTokenExpiring = (token, threshold = 300000) => {
+export const isTokenExpiring = (token, threshold = 300000) => { // 5 mins.
     if(!token) return true;
 
     const decodedToken = decodeToken(token);
@@ -19,8 +19,9 @@ export const isTokenExpiring = (token, threshold = 300000) => {
     if(!decodedToken) return true;
 
     const expirationTime = decodedToken.exp * 1000;
-    // console.log("TIEMPO DE EXPIRACIÓN: ", expirationTime)
     const currentTime = Date.now();
-    // console.log("TIEMPO ACTUAL: ", currentTime)
+    console.log("Token Expiration Time: ", expirationTime);
+    console.log("Current Time: ", currentTime);
+    console.log("Time until expiration: ", expirationTime - currentTime);
     return (expirationTime - currentTime) < threshold;
 }

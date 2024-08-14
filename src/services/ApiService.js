@@ -1,15 +1,12 @@
-import axios from "axios"; 
+import axiosInstance from "./axiosConfig";
 import{ store }from "@/app/store";
-import { login, logout, refreshToken} from "@/features/auth/authSlice";
-import { isTokenExpiring } from "@/utils/tokenUtils";  // Utilidad para verificar la expiración del token
-
-export const BASE_URL = "https://test.iclguru.com"; 
+import { login } from "@/features/auth/authSlice"; // Utilidad para verificar la expiración del token
 
 export const authenticate = async (credentials) => {
     // console.log("CREDENTIALS: ", credentials); // { username: 'user.demo', password: 'U4u4iclguru$' }
     
     try {
-        const response = await axios.post(`${BASE_URL}/accounts/token/`, credentials);
+        const response = await axiosInstance.post("/accounts/token/", credentials);
         console.log("DATA RESPONSE AUTHENTICATE: ", response.data);
 
         // Guarda el refresh token en una cookie HttpOnly
@@ -38,70 +35,16 @@ export const authenticate = async (credentials) => {
     }
 };
 
-const refreshAccessToken = async () => {
-    try {
-        const refreshToken = document.cookie.split("=")[1];
-        const response = await axios.post(`${BASE_URL}/accounts/token/refresh/`, {
-            refresh: refreshToken
-        },
-        {
-            withCredentials: true // Asegura que las cookies HttpOnly se envíen con la solicitud
-        });
-        console.log("RESPONSE DE REFRESH TOKEN: ", response)
-
-        store.dispatch(refreshToken({ access: response.data.access }));
-
-        console.log("New Access Token:", response.data.access);
-        return response.data.access;
-    } catch(error) {
-        console.error("Error refreshing token: ", error);
-        store.dispatch(logout());
-        return null;
-    }
-}
-
 export const apiRequest = async (url, options = {}) => {
-    let state = store.getState(); // Guardo el estado global actual del almacén de Redux toolkit, de la aplicacion: AUTH, PATIENTS, CLINICS, ACCOUNTS 
-
-    // console.log("ESTADO DEL ALMACEN EN REDUX: ", state)
-    let accessToken = state.auth.access;
-    console.log("Token antes de la solicitud:", accessToken);
-    // console.log("ACCESO PERMITIDO: ", accessToken)
-
-    if(!accessToken || typeof accessToken !== "string") {
-        console.error("Invalid access token: must be a non-empty string");
-        throw new Error("Access token is invalid or not present");
-    }
     try {
-        if (isTokenExpiring(accessToken)) {
-            accessToken = await refreshAccessToken();
-        }
-
-        const fullUrl = `${BASE_URL}${url}`;
-
-        const config = {
-            method: options.method || 'GET',
-            url: fullUrl,
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-                "Content-Type": "application/json",
-                ...options.headers,
-            },
+        const response = await axiosInstance({
+            url,
             ...options,
-        };
-
-        const response = await axios(config);
-
-        if (response && response.data) {
-            console.log(`API Request to ${fullUrl} successful:`, response.data);
-            console.log("RESPUESTA API REQUEST: ", response.data)
-            return response.data;
-        } else {
-            console.error('API response does not contain data');
-            return null;
-        }
+        });
+        console.log(`API Request to ${url} successful: `, response.data);
+        return response.data;
     } catch (error) {
-        console.error(`API Request to ${url} failed:`, error);
+        console.error(`API Request to ${url} failed: `, error);
         throw error;
     }
 };
@@ -111,16 +54,11 @@ export const apiRequest = async (url, options = {}) => {
 // PATIENTS
 export const getPatients = async () => {
     try {
-        const response = await apiRequest("/patients/patients/", {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-        
-        console.log("PATIENTS: ", response.data);
-        return response.data;
+        const response = await apiRequest("/patients/patients/");
+        console.log("PATIENTS: ", response);
+        return response;
     } catch (error) {
-        console.error("Error: ", error);
+        console.error("Error fetching patients: ", error);
         throw error;
     }
 }
@@ -128,16 +66,11 @@ export const getPatients = async () => {
 // PATIENT
 export const getPatient = async (id) => {
     try {
-        const response = await apiRequest(`/patients/patients/${id}/`, {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-    
-        console.log("PATIENT: ", response.data);
-        return response.data;
+        const response = await apiRequest(`/patients/patients/${id}/`);
+        console.log("PATIENT: ", response);
+        return response;
     } catch (error) {
-        console.error("Error: ", error);
+        console.error(`Error fetching patient with id ${id}: `, error);
         throw error;
     }
 }
@@ -145,16 +78,11 @@ export const getPatient = async (id) => {
 // CLINICS
 export const getClinics = async () => {
     try {
-        const response = await apiRequest(`/accounts/organizations/`, {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-
-        console.log("CLINICS: ", response.data);
-        return response.data;
+        const response = await apiRequest(`/accounts/organizations/`);
+        console.log("CLINICS: ", response);
+        return response;
     } catch (error) {
-        console.error("Error: ", error);
+        console.error(`Error fetching clinics: `, error);
         throw error;
     }
         
@@ -163,16 +91,12 @@ export const getClinics = async () => {
 // ACCOUNTS
 export const getAccounts = async () => {
     try {
-        const response = await apiRequest(`/accounts/profiles/`, {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-        console.log("DATA: ", response.data);
+        const response = await apiRequest(`/accounts/profiles/`);
+        console.log("ACCOUNTS: ", response);
 
-        return response.data;
+        return response;
     } catch (error) {
-        console.error("Error: ", error);
+        console.error("Error fetching accounts: ", error);
         throw error;
     }
 }

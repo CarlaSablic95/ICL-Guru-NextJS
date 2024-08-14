@@ -12,6 +12,7 @@ import styles from "./Account.module.css";
 
 const Accounts = () => {
   const { accounts, status, error } = useSelector((state) => state.accounts);
+  console.log("STATE ACCOUNTS: ", useSelector((state) => state.accounts));
   const dispatch = useDispatch();
 
 useEffect(() => {
@@ -68,7 +69,7 @@ if(status === "failed") return <div>Error: {error}</div>;
               <tbody>
                 { accounts.map((account) => (
                   <tr className="text-center" style={{ cursor: "pointer"}} key={account.id}>
-                  <td className="text-center align-middle">{account.username}</td>
+                  <td className="text-center align-middle">{account.user}</td>
                   <td className="text-center align-middle">{account.name}</td>
                   <td className="text-center align-middle">{account.mail}</td>
                     <td className="text-center align-middle">
