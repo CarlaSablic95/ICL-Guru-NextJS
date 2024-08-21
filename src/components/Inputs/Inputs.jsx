@@ -63,6 +63,7 @@ export const Input = ({ label, name, type, placeholder, defaultValue }) => { // 
               name={name}
               defaultValue={defaultValue}
               className="form-check-input"
+              required
             />
       </div>
     );

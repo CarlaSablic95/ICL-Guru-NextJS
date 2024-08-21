@@ -1,3 +1,6 @@
+"use client";
+
+import { useParams } from "next/navigation";
 import CalculationTable from "@/components/CalculationsPatient/CalculationTable";
 import CalculationDataPatient from "@/components/CalculationsPatient/CalculationDataPatient";
 import FollowUp from "@/components/CalculationsPatient/FollowUp";
@@ -5,12 +8,12 @@ import FollowUp from "@/components/CalculationsPatient/FollowUp";
 
 const Calculations = () => {
 
-// CONSUMO DE API DE CÁLCULOS
-
+    const { id } = useParams(); // obtiene el ID de la URL
+    console.log("ID recibido en Calculations: ", id);
 
     return (
         <>
-            <CalculationTable />
+            <CalculationTable id={id}/>
             <CalculationDataPatient />
             <FollowUp />
         </>

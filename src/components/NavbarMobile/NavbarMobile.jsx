@@ -15,8 +15,8 @@ const routes = [
     activeIcon: "./icons/user-active.svg",
   },
   {
-    path: "/calculations",
-    link: "Calculations",
+    path: "/calculation",
+    link: "Calculation",
     icon: "./icons/calculation.svg",
     activeIcon: "./icons/calculation-active.svg",
   },
@@ -66,7 +66,7 @@ const NavbarMobile = () => {
           aria-controls="offcanvasNavbar"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon"></span> <span>Menú</span>
+          <span className="navbar-toggler-icon"></span>
         </button>
         <a className="navbar-brand bg-warning" href="#">
           Logo

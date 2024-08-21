@@ -25,14 +25,15 @@ const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = async (data) => {
-        console.log("DATOS ENVIADOS: ", data) // DATA:  {username: 'user.demo', password: 'U4u4iclguru$'}
+        console.log("DATOS ENVIADOS: ", data);
       setLoading(true);
       setErrorMessage("");
+      
 // PROCESO DE AUTENTICACIÓN
       try {
         const response = await authenticate(data);
         dispatch(login(response));
-        console.log("TOKENS RECIBIDOS: ", response)
+        console.log("TOKENS RECIBIDOS: ", response);
         router.push("/patients");
         
       } catch (error) {

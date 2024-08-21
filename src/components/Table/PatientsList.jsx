@@ -1,25 +1,47 @@
 "use client";
 
-import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { getPatients } from "@/services/ApiService";
-import { fetchPatientsStart, fetchPatientsSuccess, fetchPatientsFailure } from "@/features/patients/patientSlice";
-import { SearchBar } from "../Inputs/Inputs";
-import CreatePatient from "../Modal/CreatePatient";
-import ButtonModal from "../Button/ButtonModal";
+import { useRouter } from 'next/navigation';
+import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
+import { fetchPatientsStart, fetchPatientsSuccess, fetchPatientsFailure } from "@/features/patients/patientSlice";
+import { getPatients } from "@/services/ApiService";
+import { SearchBar } from "../Inputs/FormInput";
+import ButtonModal from "../Button/ButtonModal";
+import Pagination from "../Pagination/Pagination";
+import AddPatient from "../Modal/AddPatient";
+import EditPatient from "@/components/Modal/EditPatient";
+import DeletePatient from "@/components/Modal/DeletePatient";
 import Edit from "/public/icons/edit.svg";
 import Delete from "/public/icons/delete.svg";
+// import { current } from "@reduxjs/toolkit";
 // import styles from "../../patients/Patients.module.css";
 
 const PatientsList = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const accessToken = useSelector((state) => state.auth.access);
+  
   const {patients, status, error} = useSelector((state) => state.patients);// tiene acceso a todo el estado, quiero acceder del estado a los pacientes
-  console.log("STATE PATIENTS: ", useSelector((state) => state.patients));
+  console.log("PACIENTES EN EL ESTADO: ", patients);
 
   const [searchPatient, setSearchPatient] = useState("");
   const [filteredPatients, setFilteredPatients] = useState([]);
+  // Paginación
+  const [currentPage, setCurrentPage] = useState(1);
+  const [patientsPerPage] = useState(6);
+  // const [id, setSelectedPatient] = useState([]);
+  const [editingPatientId, setEditingPatientId] = useState(null);
+  const [deletedPatientId, setDeletedPatientId] = useState(null);
+
+
+  // Calcula los pacientes que se mostrarán en la pagina actual
+const indexOfLastPatient = currentPage * patientsPerPage;
+const indexOfFirstPatient = indexOfLastPatient - patientsPerPage;
+const currentPatients = filteredPatients.slice(indexOfFirstPatient, indexOfLastPatient);
+
+// Cambiar página
+const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
 
 // trayendo los pacientes 
@@ -31,9 +53,9 @@ useEffect(() => {
 
   const fetchPatients = async () => {
     dispatch(fetchPatientsStart());
-
     try {
       const data = await getPatients();
+      console.log("Pacientes cargados: ", data);
       dispatch(fetchPatientsSuccess(data));
     } catch (error) {
       dispatch(fetchPatientsFailure(error.message));
@@ -62,7 +84,6 @@ const filterPatients = (event) => {
       const patientName = patient.name.toLowerCase();
       const patientSurname = patient.surname.toLowerCase();
 
-      console.log("LISTA DE PACIENTES: ", filterPatients)
       return patientName.includes(filterValue) || patientSurname.includes(filterValue);
   });
 
@@ -73,14 +94,16 @@ if(status === "loading") return <div>Loading...</div>;
 if(status === "failed") return <div>Error: {error}</div>;
 // Función para ver el cálculo del paciente
 
-// const handlePatient = (id) => {
-//   console.log("PACIENTE: ", id);
-//   setSelectedPatient(id);
-//   redirect(`/calculations/${id}`);
-// }
+const handleSetSelectedPatient = (id) => {
+  console.log("PACIENTE: ", id);
+  // setSelectedPatient(id);
+  router.push(`/calculation/${id}`);
+  // console.log("PACIENTE SELECCIONADO: ", id);
+}
 
 
 return (
+  <>
   <section className="col-12 col-md-11 px-5 mx-auto">
     <div className="row py-4 mb-2">
       <h1 className="mb-4 fw-bold text-uppercase text-center pt-2">Patients</h1>
@@ -89,7 +112,7 @@ return (
       </form>
     </div>
     <div className="mb-4 d-flex justify-content-end">
-      <ButtonModal dataBsTarget="#createPatient" title="Add patients" icon="./icons/add-user.svg" />
+      <ButtonModal dataBsTarget="#addPatient" title="Add patients" icon="./icons/add-user.svg" />
     </div>
 
     {/* TABLA */}
@@ -111,23 +134,23 @@ return (
         </thead>
 
         <tbody className="align-middle">
-          {filteredPatients.map((patient) => (
+          {currentPatients.map((patient) => (
             <tr className="text-center" style={{ cursor:"pointer" }} key={patient.id}>
-              <td className="text-center">{ patient.surname }</td>
-              <td className="text-center">{ patient.name }</td>
-              <td className="text-center">{ patient.sex }</td>
-              <td className="text-center">{ patient.dob }</td>
-              <td className="text-center">{ patient.identification }</td>
-              <td className="text-center">{ patient.medical_record }</td>
-              <td className="text-center">{ patient.organization }</td>
-              <td className="align-middle">
+              <td className="text-center" onClick={() => handleSetSelectedPatient(String(patient.id))}>{ patient.surname }</td>
+              <td className="text-center" onClick={() => handleSetSelectedPatient(String(patient.id))}>{ patient.name }</td>
+              <td className="text-center" onClick={() => handleSetSelectedPatient(String(patient.id))}>{ patient.sex }</td>
+              <td className="text-center" onClick={() => handleSetSelectedPatient(String(patient.id))}>{ patient.dob }</td>
+              <td className="text-center" onClick={() => handleSetSelectedPatient(String(patient.id))}>{patient.identification}</td>
+              <td className="text-center" onClick={() => handleSetSelectedPatient(String(patient.id))}>{ patient.medical_record }</td>
+              <td className="text-center" onClick={() => handleSetSelectedPatient(String(patient.id))}>{ patient.organization }</td>
+              <td className="align-middle" onClick={() => handleSetSelectedPatient(String(patient.id))}>
                 <div className="mx-auto">-</div>
               </td>
-              <td className="align-middle">
-                <Image src={Edit} style={{ width:"18px", cursor:"pointer" }} data-bs-toggle="modal" data-bs-target="#ModalEditPatient" alt="edit icon" />
+              <td className="align-middle" data-bs-toggle="modal" data-bs-target="#ModalEditPatient" onClick={() => setEditingPatientId(patient.id)}>
+                <Image src={Edit} style={{ width:"18px", cursor:"pointer" }} alt="edit icon" />
               </td>
-              <td className="align-middle">
-                <Image src={Delete} style={{ width: "22px", cursor:"pointer" }} data-bs-toggle="modal" data-bs-target="#modalDelete" alt="trash icon" />
+              <td className="align-middle" data-bs-toggle="modal" data-bs-target="#modalDelete" onClick={() => setDeletedPatientId(patient.id)}>
+                <Image src={Delete} style={{ width: "22px", cursor:"pointer" }} alt="trash icon" />
               </td>
             </tr>
           ))}
@@ -135,8 +158,20 @@ return (
       </table>
     </div>
 
-    <CreatePatient />
+    <Pagination 
+    patientsPerPage={patientsPerPage}
+    totalPatients={filteredPatients.length}
+    paginate={paginate}
+    currentPage={currentPage}
+    
+    
+    />
   </section>
+  {/* VENTANAS MODALES */}
+    <AddPatient />
+    <EditPatient patientId={editingPatientId}/>
+    <DeletePatient patientId={deletedPatientId} />
+    </>
 )
 }
 

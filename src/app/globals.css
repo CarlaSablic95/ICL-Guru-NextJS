@@ -26,6 +26,10 @@ body {
     font-family: "Roboto", sans-serif !important;
 }
 
+.bg-aliceblue {
+    background: aliceblue !important;
+}
+
 /* ÍCONOS */
 .bi::before, [class^="bi-"]::before, [class*=" bi-"]::before {
     font-weight: 600 !important;
@@ -55,43 +59,6 @@ body {
     background-color: var(--tertiary-color) !important;
 }
 
-/* MENÚ VERSIÓN DESKTOP/MOBILE */
-
-header, .navbar-mobile, .patient-name {
-    background-color: var(--secondary-color);
-}
-
-.patient-name {
-    opacity: 0;
-    transition: opacity .2s ease-in-out;
-}
-
-.patient-name.show {
-    opacity: 1;
-    transition: opacity .2s ease-in-out;
-}
-
-aside {
-    min-height: 100vh;
-}
-
-.offcanvas.offcanvas-end {
-    left: -1px;
-    width: 300px;
-}
-
-.offcanvas.offcanvas-end {
-    transform: translateX(0%);
-}
-
-.offcanvas-backdrop {
-    background-color: var(--bg-modal);
-}
-
-  .navbar-toggler:focus {
-    box-shadow: none;
-}
-
 /* TABLAS */
 th {
     background-color: #EDF2FB !important;
@@ -115,9 +82,9 @@ thead {
 
 /* FORM */
 
-.form-check-input:checked[type=radio] {
+/* .form-check-input:checked[type=radio] {
     background-image: url("/public/icons/radio-button.svg") !important;
-}
+} */
 /* .form-check-input:checked {
     background-color: var(--white-color) !important;
     border-color: var(--white-color) !important;
@@ -172,10 +139,7 @@ aside {
 .offcanvas.offcanvas-end {
     left: -1px;
     width: 300px;
-}
-
-.offcanvas.offcanvas-end {
-    transform: translateX(0%);
+    transform: translateX(0%) !important;
 }
 
 .offcanvas-backdrop {

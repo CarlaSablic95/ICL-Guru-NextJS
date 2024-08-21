@@ -12,8 +12,8 @@ const routes = [
     activeIcon: "./icons/user-active.svg",
   },
   {
-    path: "/calculations",
-    link: "Calculations",
+    path: "/calculation",
+    link: "Calculation",
     icon: "./icons/calculation.svg",
     activeIcon: "./icons/calculation-active.svg",
   },
