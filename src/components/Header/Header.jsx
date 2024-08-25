@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { login } from "@/features/auth/authSlice";
+import { login } from "@/reduxSlices/auth/authSlice";
 
 const Header = () => {
     const dispatch = useDispatch();

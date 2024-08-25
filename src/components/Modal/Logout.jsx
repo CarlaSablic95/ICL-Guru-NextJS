@@ -1,5 +1,5 @@
 "use client";
-import { logout } from "@/features/auth/authSlice";
+import { logout } from "@/reduxSlices/auth/authSlice";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";

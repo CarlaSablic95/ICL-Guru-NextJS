@@ -2,14 +2,15 @@
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editPatient } from "@/features/patients/patientSlice";
+import { editPatient } from "@/reduxSlices/patients/patientSlice";
 import Button2 from "../Button/Button2";
-import { FormInput, InputRadio } from "../Inputs/FormInput";
+import { Input, InputRadio } from "../Inputs/Input";
 import { useForm, FormProvider } from "react-hook-form";
 
 const EditPatient = ({ patientId }) => {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
+
   const currentPatient = useSelector((state) =>
     state.patients.patients.find((patient) => patient.id === patientId)
   );
@@ -26,12 +27,14 @@ const EditPatient = ({ patientId }) => {
         console.log("CURRENT PATIENT: ", reset(currentPatient) );
         
     }
-  }, [currentPatient, reset])
+  }, [currentPatient, reset]) // reset
 
   const onSubmit = async (data) => {
     setIsLoading(true);
     try {
       await dispatch(editPatient({ id: patientId, ...data })).unwrap();
+      // CERRAR EL MODAL
+      document.getElementById
       console.log("Submitted data: ", data);
     } catch(error) {
       console.error("Error updating data: ", error);
@@ -62,35 +65,32 @@ const EditPatient = ({ patientId }) => {
             <div className="modal-body pb-0">
               <FormProvider {...methods}>
                 <form
-                  onSubmit={handleSubmit(onSubmit)} // methods es un objeto que contiene todas las funciones de useForm(), una de ellas es handleSubmit
+                  onSubmit={methods.handleSubmit(onSubmit)} // methods es un objeto que contiene todas las funciones de useForm(), una de ellas es handleSubmit
                   className="px-3 px-md-5"
                 >
-                  <FormInput
-                    label="Name"
+                  <Input
                     id="name"
                     name="name"
                     type="text"
                     placeholder="example"
-                    {...methods.register("name")}
+                    label="Name"
                     defaultValue={currentPatient?.name}
 
                   />
 
-                  <FormInput
-                    label="Last name"
+                  <Input
                     id="surname"
                     name="surname"
                     type="text"
                     placeholder="example"
-                    {...methods.register("surname")}
+                    label="Last name"
                     defaultValue={currentPatient?.surname}
                   />
 
-                  <FormInput
-                    label="Date of birth"
-                    type="date"
+                  <Input
                     name="dob"
-                    {...methods.register("dob")}
+                    type="date"
+                    label="Date of birth"
                     defaultValue={currentPatient?.dob}
                   />
 
@@ -104,7 +104,7 @@ const EditPatient = ({ patientId }) => {
                         name="sex"
                         value="F"
                         label="Female"
-                        {...methods.register("sex")} // { name: sex }
+                        // {...methods.register("sex")} // { name: sex }
                         checked={watch("sex") === "F"}
                         className={watch("sex") ? "bg-aliceblue" : ""}
                       />
@@ -114,39 +114,37 @@ const EditPatient = ({ patientId }) => {
                         name="sex"
                         value="M"
                         label="Male"
-                        {...methods.register("sex")} // { name: sex }
                         checked={watch("sex") === "M"}
                         className={watch("sex") ? "bg-aliceblue" : ""}
                         />
                     </div>
                   </div>
 
-                  <FormInput
-                    label="Medical records number (MRN)"
+                  <Input
                     id="medical_record"
                     name="medical_record"
                     type="text"
                     placeholder="00000"
-                    {...methods.register("medical_record")}
+                    label="Medical records number (MRN)"
                   />
 
-                    <FormInput 
-                            label="Organization"
+                    <Input 
                             id="organization"
                             name="organization"
                             type="number"
                             placeholder="example"
+                            label="Organization"
                             {...methods.register("organization")}
                     defaultValue={currentPatient?.organization}
                         />
 
 
-                  <FormInput
-                    label="Patients ID"
+                  <Input
                     id="identification"
                     name="identification"
                     type="text"
                     placeholder="00000"
+                    label="Patients ID"
                     {...methods.register("identification")}
                     defaultValue={currentPatient?.identification}
                   

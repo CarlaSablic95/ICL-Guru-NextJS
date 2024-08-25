@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import authReducer from "@/features/auth/authSlice"; // Maneja el estado de autenticación
-import patientsReducer from "@/features/patients/patientSlice";
-import clinicsReducer from "@/features/clinics/clinicSlice";
-import accountsReducer from "@/features/accounts/accountSlice";
-// import calculationsReducer from "@/features/accounts/calculationSlice";
+import authReducer from "@/reduxSlices/auth/authSlice"; // Maneja el estado de autenticación
+import patientsReducer from "@/reduxSlices/patients/patientSlice";
+import clinicsReducer from "@/reduxSlices/clinics/clinicSlice";
+import accountsReducer from "@/reduxSlices/accounts/accountSlice";
+// import calculationsReducer from "@/reduxSlices/accounts/calculationSlice";
 
 // Configuración del almacenamiento de Redux (Redux Store). El store de Redux se configura para manejar el estado de la autenticación, pacientes y clínicas.
 export const store = configureStore({ // Se crea un almacenamiento usando "configureStore"

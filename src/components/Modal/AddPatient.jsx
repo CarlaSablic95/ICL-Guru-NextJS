@@ -3,31 +3,38 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useForm, FormProvider } from "react-hook-form";
-import { addPatient } from "@/features/patients/patientSlice";
+import { addPatient } from "@/reduxSlices/patients/patientSlice";
 import Button2 from "../Button/Button2";
-import {FormInput, InputRadio} from "@/components/Inputs/FormInput";
+import {Input, InputRadio} from "@/components/Inputs/Input";
 
 const AddPatient = () => {
-    const [isLoading, setIsLoading] = useState(false);
     const dispatch = useDispatch();
-
     const methods = useForm();
-    const { handleSubmit } = methods;
+    const [isLoading, setIsLoading] = useState(false);
+    // const [errorMessage, setErrorMessage] = useState("");
 
+    const { handleSubmit } = methods;
+    
     const onSubmit = async (data) => { //async 
         console.log("DATOS A ENVIAR: ", data);
         setIsLoading(true);
-
+        // setErrorMessage("");
         try {
-            const result = await dispatch(addPatient(data)).unwrap();
-            console.log("Paciente añadido con éxito: ", result);
-            setIsLoading(false);
-            // CERRAR EL MODAL
-            document.getElementById("addPatient").classList.remove("show");
-            document.body.classList.remove("modal-open");
-            document.getElementsByClassName("modal-backdrop")[0]?.remove();
+            const response = await dispatch(addPatient(data)).unwrap();
+            console.log("Paciente añadido con éxito: ", response);
+            setIsLoading(true);
+            
         } catch (error) {
-            console.error("Error creating a patient: ", error);
+            if(error.response) {
+                console.error("Data Error: ", error.response.data);
+                console.error("Status Error: ", error.response.status);
+                console.error("Headers Error: ", error.response.headers);
+            } else if(error.request) {
+                console.error("Error creating a patient: ", error);
+            } else {
+                console.error("Error: ", error.message);
+            }
+            // setErrorMessage("")
         } finally {
             setIsLoading(false);
         }
@@ -44,77 +51,74 @@ const AddPatient = () => {
                     <FormProvider {...methods}>
                         { console.log("METHODS: ", methods.getValues()) }
                         <form onSubmit={ handleSubmit(onSubmit) } className="px-3 px-md-5">
-                        <FormInput 
+                        <Input 
                             label="Name"
                             id="name"
                             name="name"
                             type="text"
                             placeholder="example"
-                            {...methods.register("name")}
+                            rules= {{required: "This field is required"}}
                         />
 
-                            <FormInput 
+                            <Input 
                             label="Surname"
                             id="surname"
                             name="surname"
                             type="text"
                             placeholder="example"
-                            {...methods.register("surname")}
+                            rules= {{required: "This field is required"}}
                         />
 
-                        <FormInput 
+                        <Input 
                             label="Date of birth"
                             name="dob"
                             type="date"
-                            {...methods.register("dob")}
                         />
                     <div>
                         <span>Sex <small className="text-danger">*</small></span>
                     <div className="d-flex justify-content-evenly">
                         <InputRadio 
-                            label="Female"
-                            name="sex"
                             id="sexFemale"
+                            name="sex"
+                            label="Female"
                             value="F"
-                            {...methods.register("sex", { required: "Required" })}
+                            rules= {{required: "This field is required"}}
                         />
 
                         <InputRadio 
-                            label="Male"
-                            name="sex"
                             id="sexMale"
+                            name="sex"
+                            label="Male"
                             value="M"
-                            {...methods.register("sex", { required: "Required" })}
                         />
                         </div>
                         {/* { errors.sex && <small className="text-danger">{errors.sex.message}</small> } */}
                     </div>
 
-                        <FormInput 
-                            label="Medical records number (MRN)"
+                        <Input 
                             id="medical_record"
                             name="medical_record"
                             type="text"
                             placeholder="00000"
-                            {...methods.register("medical_record")}
+                            rules= {{required: "This field is required"}}
                         />
 
-                        <FormInput 
+                        <Input 
                             label="Organization"
                             id="organization"
                             name="organization"
                             type="number"
                             placeholder="example"
-                            {...methods.register("organization")}
+                            rules= {{required: "This field is required"}}
                         />
 
-                        <FormInput 
+                        <Input 
                             label="Patients ID"
                             id="identification"
                             name="identification"
                             type="text"
                             placeholder="00000"
-                            {...methods.register("identification")}
+                            rules= {{required: "This field is required"}}
                         />
 
                         <div className="modal-footer border-0 d-flex justify-content-center">

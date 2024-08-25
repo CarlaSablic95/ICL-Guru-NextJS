@@ -1,6 +1,6 @@
 "use client";
 import { useDispatch, useSelector } from "react-redux";
-import { deletePatient } from "@/features/patients/patientSlice";
+import { deletePatient } from "@/reduxSlices/patients/patientSlice";
 
 const DeletePatient = ({ patientId }) => {
     const dispatch = useDispatch();

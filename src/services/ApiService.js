@@ -1,6 +1,6 @@
 import axiosInstance from "./axiosConfig";
 import{ store }from "@/app/store";
-import { login } from "@/features/auth/authSlice"; // Utilidad para verificar la expiración del token
+import { login } from "@/reduxSlices/auth/authSlice"; // Utilidad para verificar la expiración del token
 
 export const authenticate = async (credentials) => {
     try {

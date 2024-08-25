@@ -1,4 +1,4 @@
-import { Input } from "../Inputs/Inputs";
+import { Input } from "../Inputs/Input";
 
 
 const EnterPassword = () => {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { store } from '@/app/store';
-import { logout } from '@/features/auth/authSlice';
+import { logout } from '@/reduxSlices/auth/authSlice';
 
 // Usando Interceptores de Axios para solicitudes HTTP:
 const axiosInstance = axios.create({
