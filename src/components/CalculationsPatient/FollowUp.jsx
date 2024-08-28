@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { InputCheckbox } from "../Inputs/Inputs";
+import { InputCheckbox } from "../Inputs/Input";
 import Return from "/public/icons/arrow-back.png";
 import WizardComponent from "../Wizard/WizardComponent";
 import Image from "next/image";
