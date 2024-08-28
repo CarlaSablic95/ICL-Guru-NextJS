@@ -1,3 +1,5 @@
+"use client";
+
 import { Input } from "../Inputs/Input";
 import Button from "@/components/Button/Button2";
 import Accounts from "@/app/account/page";
