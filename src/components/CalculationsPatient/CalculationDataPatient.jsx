@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { InputCheckbox } from "../Inputs/Inputs";
+import { InputCheckbox } from "../Inputs/Input";
 import Button from "../Button/Button";
 import Eye from "../Eyes/EyesOdOs";
 import SurgicalData from "../OcularSurgeryCards/SurgicalData";
