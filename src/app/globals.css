@@ -26,8 +26,13 @@ body {
     font-family: "Roboto", sans-serif !important;
 }
 
-.bg-aliceblue {
+.bg-aliceblue, .edited-form > div > input {
     background: aliceblue !important;
+}
+
+.btn {
+    color: var(--white-color) !important;
+    font-weight: 500;
 }
 
 /* ÍCONOS */
@@ -89,6 +94,11 @@ thead {
     background-color: var(--white-color) !important;
     border-color: var(--white-color) !important;
 } */
+
+.form-control:focus {
+    border-color: var(--secondary-color) !important;
+    box-shadow: 0 0 0 .25rem #00507c2e !important;
+}
 
 .form-login {
     filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, .36));

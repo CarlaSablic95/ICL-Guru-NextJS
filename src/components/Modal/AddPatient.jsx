@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useForm, FormProvider } from "react-hook-form";
 import { addPatient } from "@/reduxSlices/patients/patientSlice";
-import Button2 from "../Button/Button2";
+import Button from "../Button/Button2";
 import {Input, InputRadio} from "@/components/Inputs/Input";
 
 const AddPatient = () => {
@@ -12,6 +12,7 @@ const AddPatient = () => {
     const methods = useForm();
     const [isLoading, setIsLoading] = useState(false);
     // const [errorMessage, setErrorMessage] = useState("");
+    // const modalRef = useRef(null);
 
     const { handleSubmit } = methods;
     
@@ -22,7 +23,15 @@ const AddPatient = () => {
         try {
             const response = await dispatch(addPatient(data)).unwrap();
             console.log("Paciente añadido con éxito: ", response);
+            // AGREGAR UN MENSAJE CON TOASTIFY
+            // CERRAR EL MODAL
+            // const modalElement = modalRef.current;
+            // const bootstrapModal = bootstrap.Modal.getInstance(modalElement);
+
+            // bootstrapModal.hide();
+        
             setIsLoading(true);
+
             
         } catch (error) {
             if(error.response) {
@@ -41,7 +50,7 @@ const AddPatient = () => {
     }
 
     return (
-        <div className="modal fade" id="addPatient" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal fade" id="addPatient" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
             <div className="modal-dialog modal-dialog-centered py-5">
                 <div className="modal-content">
                 <div className="d-flex justify-content-end p-2"> 
@@ -51,38 +60,49 @@ const AddPatient = () => {
                     <FormProvider {...methods}>
                         { console.log("METHODS: ", methods.getValues()) }
                         <form onSubmit={ handleSubmit(onSubmit) } className="px-3 px-md-5">
-                        <Input 
-                            label="Name"
-                            id="name"
-                            name="name"
-                            type="text"
-                            placeholder="example"
-                            rules= {{required: "This field is required"}}
-                        />
+                            <div className="mb-3">
+                                <label htmlFor="name" className="form-label mb-1">Name<span className="text-danger">*</span>:</label>
+                                <Input 
+                                    id="name"
+                                    name="name"
+                                    type="text"
+                                    placeholder="example"
+                                    rules= {{required: "This field is required"}}
+                                    rounded="2rem"
+                                />
+                            </div>
 
+                            <div className="mb-3">
+                            <label htmlFor="surname" className="form-label mb-1">Surname<span className="text-danger">*</span>:</label>
                             <Input 
-                            label="Surname"
                             id="surname"
                             name="surname"
                             type="text"
                             placeholder="example"
                             rules= {{required: "This field is required"}}
+                            rounded="2rem"
                         />
+                        </div>
 
-                        <Input 
-                            label="Date of birth"
-                            name="dob"
-                            type="date"
-                        />
+                        <div className="mb-3">
+                            <label htmlFor="dob" className="form-label mb-1">Date of birth<span className="text-danger">*</span>:</label>
+                            <Input 
+                                label="Date of birth"
+                                name="dob"
+                                type="date"
+                                rules={{required: "This field is required"}}
+                                rounded="2rem"
+                            />
+                        </div>
+
                     <div>
-                        <span>Sex <small className="text-danger">*</small></span>
+                        <span>Sex<small className="text-danger">*</small>:</span>
                     <div className="d-flex justify-content-evenly">
                         <InputRadio 
                             id="sexFemale"
                             name="sex"
                             label="Female"
                             value="F"
-                            rules= {{required: "This field is required"}}
                         />
 
                         <InputRadio 
@@ -92,37 +112,47 @@ const AddPatient = () => {
                             value="M"
                         />
                         </div>
-                        {/* { errors.sex && <small className="text-danger">{errors.sex.message}</small> } */}
                     </div>
 
-                        <Input 
-                            id="medical_record"
-                            name="medical_record"
-                            type="text"
-                            placeholder="00000"
-                            rules= {{required: "This field is required"}}
-                        />
+                    <div className="mb-3">
+                        <label htmlFor="medical_record" className="form-label mb-1">Medical records number (MRN)<span className="text-danger">*</span>:</label>
+                            <Input 
+                                id="medical_record"
+                                name="medical_record"
+                                type="text"
+                                placeholder="00000"
+                                rules= {{required: "This field is required"}}
+                                rounded="2rem"
+                            />
+                    </div>
 
+                    <div className="mb-3">
+                        <label htmlFor="organization" className="form-label mb-1">Organization<span className="text-danger">*</span>:</label>
                         <Input 
-                            label="Organization"
                             id="organization"
                             name="organization"
+                            label="Organization"
                             type="number"
                             placeholder="example"
                             rules= {{required: "This field is required"}}
+                            rounded="2rem"
                         />
+                    </div>
 
+                    <div className="mb-3">
+                        <label htmlFor="identification" className="form-label mb-1">Patients ID<span className="text-danger">*</span>:</label>
                         <Input 
-                            label="Patients ID"
                             id="identification"
                             name="identification"
+                            label="Patients ID"
                             type="text"
                             placeholder="00000"
                             rules= {{required: "This field is required"}}
+                            rounded="2rem"
                         />
-
+                    </div>
                         <div className="modal-footer border-0 d-flex justify-content-center">
-                            <Button2 type="submit" title="Submit" bgColor="#3DC2DD" textColor="#ffffff" disabled={isLoading} />
+                            <Button type="submit" title="Submit" bgColor="#3DC2DD" disabled={isLoading} />
                         </div>
                         </form>
                     </FormProvider>

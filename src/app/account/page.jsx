@@ -3,7 +3,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAccounts } from "@/services/ApiService";
-import { fetchAccountsStart, fetchAccountsSuccess, fetchAccountsFailure } from "@/features/accounts/accountSlice";
+import { fetchAccountsStart, fetchAccountsSuccess, fetchAccountsFailure } from "@/reduxSlices/accounts/accountSlice";
 import ButtonModal from "@/components/Button/ButtonModal";
 import Image from "next/image";
 import Edit from "/public/icons/edit.svg";
@@ -38,7 +38,7 @@ if(status === "failed") return <div>Error: {error}</div>;
 
     return (
         <section className="col-12 col-md-11 px-5 py-4 mx-auto">
-      <h1 className="text-center  text-uppercase  fw-bold mb-4">Account Manager</h1>
+          <h1 className="text-center text-uppercase fw-bold mb-4">Account Manager</h1>
         <div className="my-5 d-flex justify-content-end">
         <ButtonModal dataBsTarget="#modalForm" title="New account" icon="./icons/add-account.svg" />
       </div>

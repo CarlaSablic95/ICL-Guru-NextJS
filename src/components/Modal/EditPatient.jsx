@@ -17,7 +17,7 @@ const EditPatient = ({ patientId }) => {
   console.log("CURRENT PACIENT: ", currentPatient);
 
   const methods = useForm();
-  const { reset, handleSubmit, watch } = methods;
+  const { reset, watch } = methods;
   // console.log("METHODS: ", methods);
 
 
@@ -34,7 +34,7 @@ const EditPatient = ({ patientId }) => {
     try {
       await dispatch(editPatient({ id: patientId, ...data })).unwrap();
       // CERRAR EL MODAL
-      document.getElementById
+      // document.getElementById
       console.log("Submitted data: ", data);
     } catch(error) {
       console.error("Error updating data: ", error);
@@ -66,45 +66,55 @@ const EditPatient = ({ patientId }) => {
               <FormProvider {...methods}>
                 <form
                   onSubmit={methods.handleSubmit(onSubmit)} // methods es un objeto que contiene todas las funciones de useForm(), una de ellas es handleSubmit
-                  className="px-3 px-md-5"
+                  className="px-3 px-md-5 edited-form"
                 >
+                  <div className="mb-3">
+                  <label htmlFor="name" className="form-label mb-1">Name<span className="text-danger">*</span>:</label>
                   <Input
                     id="name"
                     name="name"
                     type="text"
                     placeholder="example"
-                    label="Name"
                     defaultValue={currentPatient?.name}
-
+                    rules={{required: "This field is required"}}
+                    rounded="2rem"
                   />
+                </div>
 
+                <div className="mb-3">
+                  <label htmlFor="surname" className="form-label mb-1">Surname<span className="text-danger">*</span>:</label>
                   <Input
                     id="surname"
                     name="surname"
                     type="text"
                     placeholder="example"
-                    label="Last name"
                     defaultValue={currentPatient?.surname}
+                    rules={{required: "This field is required"}}
+                    rounded="2rem"
                   />
+                </div>
 
+                <div className="mb-3">
+                  <label htmlFor="dob" className="form-label mb-1">Date of birth<span className="text-danger">*</span>:</label>
                   <Input
                     name="dob"
                     type="date"
-                    label="Date of birth"
                     defaultValue={currentPatient?.dob}
+                    rules={{required: "This field is required"}}
+                    rounded="2rem"
                   />
+                </div>
 
                   <div className="mb-3">
                     <label className="mb-0">
                       Sex<span className="text-danger">*</span>
-                    </label>
+                    :</label>
                     <div className="d-flex justify-content-evenly">
                       <InputRadio
                         id="female"
                         name="sex"
                         value="F"
                         label="Female"
-                        // {...methods.register("sex")} // { name: sex }
                         checked={watch("sex") === "F"}
                         className={watch("sex") ? "bg-aliceblue" : ""}
                       />
@@ -120,35 +130,47 @@ const EditPatient = ({ patientId }) => {
                     </div>
                   </div>
 
-                  <Input
-                    id="medical_record"
-                    name="medical_record"
-                    type="text"
-                    placeholder="00000"
-                    label="Medical records number (MRN)"
-                  />
+                  <div className="mb-3">
+                    <label htmlFor="medical_record" className="form-label mb-1">Medical records number (MRN)<span className="text-danger">*</span>:</label>
+                    <Input
+                      id="medical_record"
+                      name="medical_record"
+                      type="text"
+                      placeholder="00000"
+                      rules={{required: "This field is required"}}
+                      rounded="2rem"
+                    />
+                  </div>
 
+                  <div className="mb-3">
+                    <label htmlFor="organization" className="form-label mb-1">Organization<span className="text-danger">*</span>:</label>
                     <Input 
                             id="organization"
                             name="organization"
                             type="number"
                             placeholder="example"
-                            label="Organization"
                             {...methods.register("organization")}
                     defaultValue={currentPatient?.organization}
+                    rules={{required: "This field is required"}}
+                    rounded="2rem"
                         />
+                  </div>
 
-
-                  <Input
-                    id="identification"
-                    name="identification"
-                    type="text"
-                    placeholder="00000"
-                    label="Patients ID"
-                    {...methods.register("identification")}
-                    defaultValue={currentPatient?.identification}
-                  
-                  />
+                  <div className="mb-3">
+                    <label htmlFor="identification" className="form-label mb-1">Patients ID<span className="text-danger">*</span>:</label>
+                    <Input
+                      id="identification"
+                      name="identification"
+                      type="text"
+                      placeholder="00000"
+                      label="Patients ID"
+                      {...methods.register("identification")}
+                      defaultValue={currentPatient?.identification}
+                      rules={{required: "This field is required"}}
+                      rounded="2rem"
+                    
+                    />
+                  </div>
             <div className="modal-footer border-0 d-flex justify-content-evenly">
               <Button2
                 type={isLoading ? "Updating..." : "Update"}

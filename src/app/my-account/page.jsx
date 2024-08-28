@@ -1,8 +1,7 @@
 "use client";
 
-import BaseForm from "@/components/Form/BaseForm";
-import { Input1 } from "@/components/Inputs/Inputs";
-import Button2 from "@/components/Button/Button2";
+import { Input } from "@/components/Inputs/Input";
+import Button from "@/components/Button/Button2";
 
 const MyAccount = () => {
     
@@ -12,65 +11,94 @@ const MyAccount = () => {
                 <div className="container">
                 <div className="row justify-content-evenly pt-4">
                     <div className="col-10 col-md-5 mb-5 mb-md-3">
-                        <h2 className="fw-bold">Personal Data</h2>
-                        <BaseForm>
-                        <Input1 
-                            label="Name:"
-                            id="name"
-                            name="name"
-                            type="text"
-                            placeholder="First name"
-                        />
+                        <h2 className="fw-bold mb-4">Personal Data</h2>
+                        <form>
+                        <div className="mb-3">
+                            <label className="mb-2" htmlFor="name">Name:<span className="text-danger">*</span>
+                            </label>
+                            <Input 
+                                label="Name:"
+                                id="name"
+                                name="name"
+                                type="text"
+                                placeholder="First name"
+                                rounded="2rem"
+                            />
+                        </div>
 
-                            <Input1 
+                        <div className="mb-3">
+                        <label className="mb-2" htmlFor="name">Last name:<span className="text-danger">*</span>
+                            </label>
+                            <Input 
                             label="Last name:"
                             id="lastname"
                             name="lastname"
                             type="text"
                             placeholder="Last name"
+                            rounded="2rem"
                         />
 
-                        <Input1 
+                        </div>
+
+                        <div className="mb-3">
+                        <label className="mb-2" htmlFor="name">Email:<span className="text-danger">*</span>
+                        </label>
+                        <Input 
                             label="Email:"
                             id="email"
                             name="email"
                             type="email"
                             placeholder="email@email.com"
-                        />
-                        </BaseForm>
+                            rounded="2rem"
+                            />
+                        </div>
+                        </form>
                         <div className="d-flex justify-content-center">
-                            <Button2 title="CHANGE DATA" bgColor="#3DC2DD" textColor="#ffffff" fontWeight="400" rounded="10px" />
+                            <Button title="CHANGE DATA" bgColor="#3DC2DD" textColor="#ffffff" fontWeight="400" rounded="10px" />
                         </div>
                     </div>
                     <div className="col-10 col-md-5">
-                        <h2 className="fw-bold">Change Password</h2>
-                        <BaseForm>
-                        <Input1 
-                            label="Current password:"
-                            id="currentPass"
-                            name="currentPass"
-                            type="password"
-                            placeholder="********"
-                        />
+                        <h2 className="fw-bold mb-4">Change Password</h2>
+                        <form>
+                        <div className="mb-3">
+                            <label className="mb-2" htmlFor="name">Current password:
+                                    <span className="text-danger">*</span>
+                                </label>
+                            <Input
+                                id="currentPass"
+                                name="currentPass"
+                                type="password"
+                                placeholder="********"
+                                rounded="2rem"
+                            />
+                        </div>
 
-                            <Input1 
-                            label="New Password:"
+                        <div className="mb-3">
+                            <label className="mb-2" htmlFor="name">New password:<span className="text-danger">*</span>
+                            </label>
+                            <Input 
                             id="newPass"
                             name="newPass"
                             type="password"
                             placeholder="********"
+                            rounded="2rem"
                         />
+                    </div>
 
-                        <Input1 
-                            label="Confirm Password:"
+                    <div className="mb-3">
+                            <label className="mb-2" htmlFor="name">Confirm password:<span className="text-danger">*</span>
+                            </label>
+                        <Input
                             id="confirmPass"
                             name="confirmPass"
                             type="password"
                             placeholder="********"
+                            rounded="2rem"
                         />
-                        </BaseForm>
+                    </div>
+                        </form>
                         <div className="d-flex justify-content-center">
-                            <Button2 title="CHANGE PASSWORD" bgColor="#3DC2DD" textColor="#ffffff" fontWeight="400" rounded="10px" />
+                            <Button title="CHANGE PASSWORD" bgColor="#3DC2DD" textColor="#ffffff" fontWeight="400" rounded="10px" />
                         </div>
                     </div>
                 </div>

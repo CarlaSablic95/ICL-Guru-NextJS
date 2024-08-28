@@ -8,7 +8,7 @@ export const addPatient =  createAsyncThunk(
         console.log("PATIENT DATA: ", patientData);
         try {
             const response = await postData("/patients/patients/", patientData);
-            console.log("Respuesta de envío de datos para crear pacientes: ", response);
+            console.log("Respuesta de envío de datos para agregar pacientes: ", response);
             return response;
         } catch (error) {
             return rejectWithValue(error.response.data);
@@ -41,11 +41,11 @@ export const deletePatient = createAsyncThunk(
         try {
             const response = await deleteData(`/patients/patients/${id}/` );
             console.log("Respuesta al eliminar paciente: ", response);
+            
             return { id: id };
         } catch(error) {
             return rejectWithValue(error.response.data);
         }
-        
     }
 )
 

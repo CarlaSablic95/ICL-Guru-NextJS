@@ -20,7 +20,7 @@ axiosInstance.interceptors.request.use(
    (error) => Promise.reject(error)
 );
 
-// Interceptor de respuesta
+// Interceptor de respuesta, trabajo con la respuesta en caso de error
 axiosInstance.interceptors.response.use(
     (response) => response,
     async (error) => {

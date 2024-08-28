@@ -15,7 +15,6 @@ export const authenticate = async (credentials) => {
             access: response.data.access,
             user: credentials.username
         }
-
          store.dispatch(login(payload));
         console.log("Estado después del login:", store.getState().auth);
         return response.data;
@@ -25,6 +24,7 @@ export const authenticate = async (credentials) => {
     }
 };
 
+// READ
 export const getData = async (url, options = {}) => {
     try {
         const response = await axiosInstance({

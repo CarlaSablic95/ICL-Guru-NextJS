@@ -30,8 +30,9 @@ const PatientsList = () => {
   // Paginación
   const [currentPage, setCurrentPage] = useState(1);
   const [patientsPerPage] = useState(6);
-  // const [id, setSelectedPatient] = useState([]);
+// Edición de pacientes
   const [editingPatientId, setEditingPatientId] = useState(null);
+  // Eliminación de pacientes
   const [deletedPatientId, setDeletedPatientId] = useState(null);
 
 
@@ -65,12 +66,12 @@ useEffect(() => {
   fetchPatients();
 }, [dispatch, accessToken]);
 
+
+// FILTRO DE PACIENTES
 useEffect(() => {
   setFilteredPatients(patients);
 }, [patients]); 
 
-
-// FILTRO DE PACIENTES
 const filterPatients = (event) => {
   const filterValue = event.target.value.toLowerCase();
 

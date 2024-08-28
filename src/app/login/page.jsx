@@ -76,8 +76,10 @@ return (
                                 type="text"
                                 placeholder="Username"
                                 rules= {{ required: "This field is required"}}
+                                rounded="2rem"
                                 label="Username"
                             />
+                            <label htmlFor="username">Username</label>
                         </div>
 
                         <div className="form-floating mb-3 text-center">
@@ -93,8 +95,10 @@ return (
                                 type={showPassword ? "text" : "password"}
                                 placeholder="Password"
                                 label="Password"
-                                rules= {{ required: "This field is required"}}           
+                                rules= {{ required: "This field is required"}}
+                                rounded="2rem"        
                             />
+                            <label htmlFor="password">Password</label>
                         </div>
                                 { loginError && <div className="text-center mb-3"><small className="text-danger fw-bold">{ loginError }</small></div> }
                         <div className="d-flex justify-content-center">
