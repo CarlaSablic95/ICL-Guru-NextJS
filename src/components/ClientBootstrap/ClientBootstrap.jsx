@@ -10,5 +10,5 @@ const ClientBootstrap = () => {
     return null;
 }
 
-export default ClientBootstrap
+export default ClientBootstrap;
 

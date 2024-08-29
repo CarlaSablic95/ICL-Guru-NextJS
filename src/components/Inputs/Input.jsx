@@ -1,3 +1,4 @@
+"use client";
 import { useFormContext } from "react-hook-form";
   import Image from "next/image";
   import SearchIcon from "/public/icons/search.svg";

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { postData, editData, deleteData } from "@/services/ApiService";
+import { postData, deleteData } from "@/services/ApiService";
 
 // Agrego clínica
 export const addClinic = createAsyncThunk(
@@ -15,9 +15,6 @@ export const addClinic = createAsyncThunk(
         }
     }
 )
-
-// Edito clínica
-
 
 // Elimino clínica
 export const deleteClinic = createAsyncThunk(
@@ -73,12 +70,6 @@ const clinicSlice = createSlice({
             state.status = "failed";
             state.error = action.payload;
         })
-
-        // EDITAR CLÍNICA
-        // .addCase()
-
-
-
 
         // ELIMINAR CLÍNICA
         .addCase(deleteClinic.pending, (state) => {

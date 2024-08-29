@@ -12,7 +12,7 @@ import EnterPassword from "@/components/Modal/EnterPassword";
 import Logout from "@/components/Modal/Logout";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./globals.css";
-import "bootstrap/dist/js/bootstrap"
+import "bootstrap/dist/js/bootstrap";
 
 const ClientBootstrap = dynamic(() => import("@/components/ClientBootstrap/ClientBootstrap"), { ssr: false });
 

@@ -1,3 +1,4 @@
+"use client";
 // import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { addClinic } from "@/reduxSlices/clinics/clinicSlice";
