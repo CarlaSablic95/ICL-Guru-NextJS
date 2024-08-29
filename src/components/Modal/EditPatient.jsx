@@ -34,7 +34,6 @@ const EditPatient = ({ patientId }) => {
     try {
       await dispatch(editPatient({ id: patientId, ...data })).unwrap();
       // CERRAR EL MODAL
-      // document.getElementById
       console.log("Submitted data: ", data);
     } catch(error) {
       console.error("Error updating data: ", error);

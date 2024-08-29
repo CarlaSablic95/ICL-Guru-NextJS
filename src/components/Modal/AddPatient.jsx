@@ -25,11 +25,7 @@ const AddPatient = () => {
             console.log("Paciente añadido con éxito: ", response);
             // AGREGAR UN MENSAJE CON TOASTIFY
             // CERRAR EL MODAL
-            // const modalElement = modalRef.current;
-            // const bootstrapModal = bootstrap.Modal.getInstance(modalElement);
-
-            // bootstrapModal.hide();
-        
+           
             setIsLoading(true);
 
             
