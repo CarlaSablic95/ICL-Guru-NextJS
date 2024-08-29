@@ -1,22 +1,22 @@
 "use client";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteClinic } from "@/reduxSlices/clinics/clinicSlice";
+import { useDispatch, useSelector }  from "react-redux";
+import { deleteAccount } from "@/reduxSlices/accounts/accountSlice";
 
-const DeleteClinic = ({ clinicId }) => {
+const DeleteAccount = ({ accountId }) => {
     const dispatch = useDispatch();
-    const deletedClinic = useSelector((state) => state.clinics.clinics.find((clinic) => clinic.id === clinicId));
+    const deletedAccount = useSelector((state) => state.accounts.accounts.find((account) => account.id === accountId));
 
-    console.log("CLÍNICA A ELIMINAR: ", deletedClinic);
-
+    console.log("CUENTA A ELIMINAR: ", deletedAccount);
+    
     const handleDelete = () => {
         try {
-            dispatch(deleteClinic({id: clinicId}));
+            dispatch(deleteAccount({ id: accountId }));
         } catch (error) {
-            console.error("Error deleting clinic: ", error);
+            console.error("Error deleting account: ", error);
         }
     }
-    
-    return(
+
+    return (
         <div className="col-10 px-5">
         <div className="modal fade" id="modalDelete" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered">
@@ -38,4 +38,4 @@ const DeleteClinic = ({ clinicId }) => {
     )
 }
 
-export default DeleteClinic;
+export default DeleteAccount;

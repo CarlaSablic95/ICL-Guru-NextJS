@@ -52,6 +52,9 @@ const AddPatient = () => {
                 <div className="d-flex justify-content-end p-2"> 
                  <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div className="modal-header border-0 justify-content-center">
+                        <h2>New Patient</h2>
+                    </div>
                 <div className="modal-body pb-0">
                     <FormProvider {...methods}>
                         { console.log("METHODS: ", methods.getValues()) }
@@ -69,10 +72,10 @@ const AddPatient = () => {
                             </div>
 
                             <div className="mb-3">
-                            <label htmlFor="surname" className="form-label mb-1">Surname<span className="text-danger">*</span>:</label>
+                            <label htmlFor="lastname" className="form-label mb-1">Last Name<span className="text-danger">*</span>:</label>
                             <Input 
-                            id="surname"
-                            name="surname"
+                            id="lastname"
+                            name="lastname"
                             type="text"
                             placeholder="example"
                             rules= {{required: "This field is required"}}

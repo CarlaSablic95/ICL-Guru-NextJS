@@ -116,6 +116,10 @@ thead {
     color: var(--secondary-color) !important;
 }
 
+.form-select {
+    width: 60% !important;
+}
+
 /* PANEL */
 /* FIXED MENU */
 .menu-list:hover {

@@ -42,8 +42,10 @@ const AddClinic = () => {
                 <div className="d-flex justify-content-end p-2"> 
                  <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div className="modal-header border-0 justify-content-center">
+                        <h2>New Clinics</h2>
+                    </div>
                 <div className="modal-body pb-0">
-                <h2 className="text-center mb-3">New Clinics</h2>
                     <FormProvider {...methods}>
                         { console.log("METHODS: ", methods.getValues()) }
                         <form onSubmit={ handleSubmit(onSubmit) } className="px-3 px-md-5">
@@ -102,4 +104,4 @@ const AddClinic = () => {
     )
 }
 
-export default AddClinic
+export default AddClinic;

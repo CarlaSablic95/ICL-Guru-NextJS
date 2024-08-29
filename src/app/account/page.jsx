@@ -1,7 +1,7 @@
 "use client"
 
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getAccounts } from "@/services/ApiService";
 import { fetchAccountsStart, fetchAccountsSuccess, fetchAccountsFailure } from "@/reduxSlices/accounts/accountSlice";
 import ButtonModal from "@/components/Button/ButtonModal";
@@ -9,11 +9,19 @@ import Image from "next/image";
 import Edit from "/public/icons/edit.svg";
 import Delete from "/public/icons/delete.svg";
 import styles from "./Account.module.css";
+import AddAccount from "@/components/Modal/AddAccount";
+import EditAccount from "@/components/Modal/EditAccount";
+import DeleteAccount from "@/components/Modal/DeleteAccount";
 
 const Accounts = () => {
+  const dispatch = useDispatch();
   const { accounts, status, error } = useSelector((state) => state.accounts);
   console.log("STATE ACCOUNTS: ", useSelector((state) => state.accounts));
-  const dispatch = useDispatch();
+  
+  // Eliminación de cuentas
+  const [deletedAccountId, setDeletedAccountId] = useState(null);
+
+
 
 useEffect(() => {
   const fetchAccounts = async () => {
@@ -37,6 +45,7 @@ if(status === "failed") return <div>Error: {error}</div>;
 
 
     return (
+      <>
         <section className="col-12 col-md-11 px-5 py-4 mx-auto">
           <h1 className="text-center text-uppercase fw-bold mb-4">Account Manager</h1>
         <div className="my-5 d-flex justify-content-end">
@@ -77,7 +86,7 @@ if(status === "failed") return <div>Error: {error}</div>;
                         src={Edit}
                         style={{ width: "18px", cursor: "pointer" }}
                         data-bs-toggle="modal"
-                        data-bs-target="#ModalEditPatient"
+                        data-bs-target="#ModalEdit"
                         alt="edit icon"
                         />
                     </td>
@@ -88,6 +97,7 @@ if(status === "failed") return <div>Error: {error}</div>;
                         data-bs-toggle="modal"
                         data-bs-target="#modalDelete"
                         alt="trash icon"
+                        onClick={() => setDeletedAccountId(account.id)}
                         />
                     </td>
                   </tr>
@@ -97,7 +107,12 @@ if(status === "failed") return <div>Error: {error}</div>;
           </div>
         </div>
       </div>
-    </section>
+        </section>
+
+        <AddAccount />
+        <EditAccount />
+        <DeleteAccount accountId={deletedAccountId}/>
+      </>
     )
 }
 

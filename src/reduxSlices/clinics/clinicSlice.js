@@ -8,7 +8,7 @@ export const addClinic = createAsyncThunk(
         console.log("CLINIC DATA: ", clinicData);
         try {
             const response = await postData("/accounts/organizations/", clinicData);
-                console.log("Respuesta de envío de datos para agregar clínicas");
+                console.log("Respuesta de envío de datos para agregar clínicas", clinicData);
             return response;
         } catch (error) {
             return rejectWithValue(error.response.data);

@@ -27,10 +27,10 @@ const TokenManager = () => {
                 </div>
 
                 <div className="mb-3 col-6">
-                    <label htmlFor="token">Endpoint</label>
+                    <label htmlFor="endpoint">Endpoint</label>
                 <Input 
-                    name="token"
-                    id="token"
+                    name="endpoint"
+                    id="endpoint"
                     type="text"
                     placeholder="http://iclcalc.zaldivarconcep.com/calculation/upload/sonomed-data-3f-1v/"
                     disabled
