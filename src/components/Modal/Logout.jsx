@@ -14,6 +14,9 @@ const Logout = () => {
         try {
             dispatch(logout());
             
+            // Eliminar la cookie de refresh token
+            document.cookie = "refreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; Secure; SameSite=Strict";
+            
             router.push("/login");
         } catch (error) {
             console.error("Error during logout", error);
@@ -21,11 +24,6 @@ const Logout = () => {
             setLoading(false);
         }
     }
-
- useEffect(() => {
-    // Eliminar la cookie de refresh token
-    document.cookie = "refreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; Secure; SameSite=Strict";
- }, []);
 
   return (
       <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
