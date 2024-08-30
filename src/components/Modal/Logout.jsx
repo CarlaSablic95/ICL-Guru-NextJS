@@ -1,6 +1,6 @@
 "use client";
 import { logout } from "@/reduxSlices/auth/authSlice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 
@@ -12,9 +12,6 @@ const Logout = () => {
     const handleLogout = async () => {
         setLoading(true);
         try {
-            // Eliminar la cookie de refresh token
-            document.cookie = "refreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; Secure; SameSite=Strict";
-
             dispatch(logout());
             
             router.push("/login");
@@ -24,6 +21,11 @@ const Logout = () => {
             setLoading(false);
         }
     }
+
+ useEffect(() => {
+    // Eliminar la cookie de refresh token
+    document.cookie = "refreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; Secure; SameSite=Strict";
+ }, []);
 
   return (
       <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { postData, deleteData } from "@/services/ApiService";
-import AddAccount from "@/components/Modal/AddAccount";
 
 // Agrego cuenta
 export const addAccount = createAsyncThunk(
