@@ -23,6 +23,8 @@ const Clinics = () => {
   // FILTRADO
   const [searchClinic, setSearchClinic] = useState("");
   const [filteredClinics, setFilteredClinics] = useState([]);
+// Mostrar componente token manager
+  const [showTokenManager, setShowTokenManager] = useState(false);
 
 // Eliminación de clínicas
 const [deletedClinicId, setDeletedClinicId] = useState(null);
@@ -65,13 +67,21 @@ const [deletedClinicId, setDeletedClinicId] = useState(null);
     setFilteredClinics(filteredData);
   }
 
+ const handleEdit = () => {
+  setShowTokenManager(true);
+ }
+
+ const handleReturnClick = () => {
+  setShowTokenManager(false);
+ }
 
 if(status === "loading") return <div>Loading...</div>;
 if(status === "failed") return <div>Error: {error}</div>;
 
   return (
     <>
-      <section className="col-12 col-md-11 px-5 py-4 mx-auto">
+    {showTokenManager ? (<TokenManager  onReturn={ handleReturnClick } />) : 
+     ( <section className="col-12 col-md-11 px-5 py-4 mx-auto">
         <h1 className="text-center text-uppercase fw-bold mb-4">Clinics</h1>
           <form className="d-flex justify-content-center" role="search">
                   <SearchBar placeholder="Find clinics" onChange={filterClinics} value={searchClinic} />
@@ -105,9 +115,8 @@ if(status === "failed") return <div>Error: {error}</div>;
                             <Image
                               src={Edit}
                               style={{ width: "18px", cursor: "pointer" }}
-                              data-bs-toggle="modal"
-                              data-bs-target="#ModalEditPatient"
                               alt="edit icon"
+                              onClick={ handleEdit }
                               />
                           </td>
                           <td className="text-center align-middle">
@@ -128,10 +137,10 @@ if(status === "failed") return <div>Error: {error}</div>;
             </div>
           </div>
         </div>
-      </section>
+      </section>)
+      }
 
     <AddClinic />
-    <TokenManager />
     <DeleteClinic clinicId={deletedClinicId} />
     </>
   );

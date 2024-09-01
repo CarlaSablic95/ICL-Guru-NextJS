@@ -3,7 +3,7 @@ import { useFormContext } from "react-hook-form";
   import Image from "next/image";
   import SearchIcon from "/public/icons/search.svg";
 
-  export const Input = ({ name, type, rules, placeholder, rounded, disabled }) => {
+  export const Input = ({ name, type, rules, placeholder, rounded, defaultValue, disabled }) => {
     const formContext = useFormContext();
     const { register, formState } = formContext || {};
     const errors = formState?.errors || {};
@@ -17,6 +17,7 @@ import { useFormContext } from "react-hook-form";
         placeholder={placeholder}
         {...(formContext ? register(name, rules) : { name })}
         className={`form-control ${errors[name] ? "border border-2 border-danger" : ""}`} style={{borderRadius: rounded}}
+        defaultValue={defaultValue}
         disabled={disabled}
         />
         {errors[name] && <div className="text-center"><small className="text-danger fw-bold">{errors[name].message}</small></div>}

@@ -1,6 +1,6 @@
 "use client";
 import { logout } from "@/reduxSlices/auth/authSlice";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 
@@ -12,10 +12,10 @@ const Logout = () => {
     const handleLogout = async () => {
         setLoading(true);
         try {
-            dispatch(logout());
-            
             // Eliminar la cookie de refresh token
-            document.cookie = "refreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; Secure; SameSite=Strict";
+            document.cookie = "refreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; Secure; SameSite=Strict";
+
+            dispatch(logout());
             
             router.push("/login");
         } catch (error) {

@@ -47,6 +47,11 @@ body {
     cursor: pointer;
 }
 
+.icon-arrow {
+    width: 30px;
+    height: 30px;
+}
+
 .key {
     transition: opacity 0.3s ease;
 }
@@ -62,6 +67,14 @@ body {
 /* BUTTON */
 .button {
     background-color: var(--tertiary-color) !important;
+}
+
+.pagination-button {
+    background-color: var(--secondary-color) !important;
+}
+
+li {
+    list-style: none;
 }
 
 /* TABLAS */
@@ -147,7 +160,7 @@ header, .navbar-mobile, .patient-name {
 }
 
 aside {
-    min-height: 100vh;
+    min-height: 915px;
 }
 
 .offcanvas.offcanvas-end {
