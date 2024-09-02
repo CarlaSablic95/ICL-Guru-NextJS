@@ -1,5 +1,7 @@
 "use client";
 
+import { useState, useEffect } from "react";
+import { getClinic } from "@/services/ApiService";
 import { Input } from "../Inputs/Input";
 import Image from "next/image";
 import Button from "@/components/Button/Button2";
@@ -8,7 +10,33 @@ import Accounts from "@/app/account/page";
 import ArrowBack from "/public/icons/arrow-back.png";
 import ClipboardCheck from "/public/icons/clipboard-check.svg";
 
-const TokenManager = ({ onReturn }) => {
+const TokenManager = ({ onReturn, clinic }) => {
+    const [clinicData, setClinicData] = useState(clinic);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(false);
+
+    useEffect(() => {
+        if(clinicData) return; // Si los datos de la clínica ya están establecidos, omitir la carga
+        const fetchClinicData = async () => {
+            try {
+                setIsLoading(true);
+                const clinicData = await getClinic(id);
+                console.log("TRAIGO CLÍNICA: ", clinicData);
+                setClinicData(clinicData);
+            } catch(error) {
+                console.error("Error fetching data: ", error);
+                setError("Failed to load clinic data");
+            } finally {
+                setIsLoading(false);
+            }
+        }
+        fetchClinicData();
+    }, [clinicData, clinic]);
+
+    if(isLoading) return <div>Loading clinic data...</div>
+    if(error) return <div>Error: {error}</div>
+    if(!clinic) return  <div>Clinic not found for ID: {id}</div>
+
     const endpointCopy = () => {
         const endpointInput = document.getElementById("endpoint");
 
@@ -25,14 +53,13 @@ const TokenManager = ({ onReturn }) => {
         }
     }
 
-
     return (
         <>
         <span className="d-block p-2">
             <a onClick={ onReturn } className="text-uppercase text-decoration-none" style={{color: "#666666", fontSize:"18px", cursor: "pointer"}}><Image src={ ArrowBack }  alt="Ícono de retroceso" className="icon-arrow" />{" "} Return</a>
         </span>
             <section className="container px-5 py-4 mx-auto">
-                <h1 className="text-center">Nombre de la clínica</h1>
+                <h1 className="text-center">{clinicData.name}</h1>
                 <h2 className="text-center">Token manager</h2>
 
                 <div className="d-flex justify-content-end">

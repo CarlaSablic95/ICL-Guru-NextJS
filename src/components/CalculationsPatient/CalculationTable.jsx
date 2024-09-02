@@ -9,28 +9,28 @@ import CalculationData from "../Table/CalculationData";
 
 const CalculationTable = ({ id }) => {
   const [patient, setPatient] = useState(null);    
-  const [loading, setLoading] = useState(true);    
+  const [isLoading, setIsLoading] = useState(true);    
   const [error, setError] = useState(null);    
     
     // TRAIGO DATOS DESDE /patients/patients/{id}
     useEffect(() => {
                 const fetchPantientData = async () => {
                     try {
-                        setLoading(true);
+                        setIsLoading(true);
                         const patientData = await getPatient(id);
                         console.log("TRAIGO PACIENTE: ", patientData)
                         setPatient(patientData);
-                        setLoading(false);
                     } catch(error) {
                         console.error("Error fetching data: ", error);
                         setError("Failed to load patient data");
-                        setLoading(false);
+                    } finally {
+                        setIsLoading(false);
                     }
                 }
                 fetchPantientData();
             },[id] )
             
-            if(loading) return <div>Loading patient data...</div>
+            if(isLoading) return <div>Loading patient data...</div>
             if(error) return <div>Error: {error}</div>
             if(!patient) return <div>Patient not found for ID: {id}</div>
     

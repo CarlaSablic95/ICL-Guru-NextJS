@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { postData, deleteData } from "@/services/ApiService";
+import { postData, editData, deleteData } from "@/services/ApiService";
 
 // Agrego cuenta
 export const addAccount = createAsyncThunk(
@@ -16,6 +16,12 @@ export const addAccount = createAsyncThunk(
       }
     }
 )
+
+// Edito cuenta
+// export const editAccount = createAsyncThunk(
+//     "accounts/editAccount",
+//     async ({ id, ...acc })
+// )
 
 // Elimino cuenta
 export const deleteAccount = createAsyncThunk(

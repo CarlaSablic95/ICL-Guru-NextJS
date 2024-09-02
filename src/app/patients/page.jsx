@@ -71,8 +71,8 @@ useEffect(() => {
   setFilteredPatients(patients);
 }, [patients]); 
 
-const filterPatients = (event) => {
-  const filterValue = event.target.value.toLowerCase();
+const filterPatients = (e) => {
+  const filterValue = e.target.value.toLowerCase();
   console.log("VALOR INGRESADO: ", filterValue);
 
   // Se actualiza la variable de estado "searchPatient" con el valor filtrado
@@ -91,6 +91,7 @@ const filterPatients = (event) => {
 
 if(status === "loading") return <div>Loading...</div>;
 if(status === "failed") return <div>Error: {error}</div>;
+
 // Función para ver el cálculo del paciente
 
 const handleSetSelectedPatient = (id) => {

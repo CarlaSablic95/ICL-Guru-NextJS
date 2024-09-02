@@ -2,6 +2,7 @@
 
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
 import { getClinics } from "@/services/ApiService";
 import { fetchClinicsStart, fetchClinicsSuccess, fetchClinicsFailure } from "@/reduxSlices/clinics/clinicSlice";
 import Image from "next/image";
@@ -15,6 +16,9 @@ import DeleteClinic from "@/components/Modal/DeleteClinic";
 import styles from "./Clinics.module.css";
 
 const Clinics = () => {
+  const { id } = useParams();
+  console.log("ID recibido en Clinics: ", id);
+  
   const dispatch = useDispatch();
   // CONSUMO DE API DE CLÍNICAS (ORGANIZACIONES)
   const {clinics, status, error } = useSelector((state) => state.clinics);
@@ -25,7 +29,7 @@ const Clinics = () => {
   const [filteredClinics, setFilteredClinics] = useState([]);
 // Mostrar componente token manager
   const [showTokenManager, setShowTokenManager] = useState(false);
-
+  const [selectedClinic, setSelectedClinic] = useState(null);
 // Eliminación de clínicas
 const [deletedClinicId, setDeletedClinicId] = useState(null);
 
@@ -49,30 +53,30 @@ const [deletedClinicId, setDeletedClinicId] = useState(null);
     setFilteredClinics(clinics);
   }, [clinics]);
 
-  const filterClinics = (event) => {
-    const filterValue = event.target.value.toLowerCase();
-
+  const filterClinics = (e) => {
+    const filterValue = e.target.value.toLowerCase();
     console.log("VALOR INGRESADO: ", filterValue);
-
     // Se actualiza la variable de estado "searchClinic" con el valor filtrado
     setSearchClinic(filterValue);
 
     // Variable que almacena el resultado del filtrado
     const filteredData = clinics.filter((clinic) => {
       const clinicName = clinic.name.toLowerCase();
-
       return clinicName.includes(filterValue);
     });
 
     setFilteredClinics(filteredData);
   }
 
- const handleEdit = () => {
+  // Muestra componente para edición
+ const handleEdit = (clinic) => {
+  setSelectedClinic(clinic);
   setShowTokenManager(true);
  }
-
+// Muestra componente de la tabla de clínicas
  const handleReturnClick = () => {
   setShowTokenManager(false);
+  setSelectedClinic(null);
  }
 
 if(status === "loading") return <div>Loading...</div>;
@@ -80,11 +84,13 @@ if(status === "failed") return <div>Error: {error}</div>;
 
   return (
     <>
-    {showTokenManager ? (<TokenManager  onReturn={ handleReturnClick } />) : 
+    {showTokenManager ? (
+      <TokenManager onReturn={ handleReturnClick } clinic={ selectedClinic } />) 
+      : 
      ( <section className="col-12 col-md-11 px-5 py-4 mx-auto">
         <h1 className="text-center text-uppercase fw-bold mb-4">Clinics</h1>
           <form className="d-flex justify-content-center" role="search">
-                  <SearchBar placeholder="Find clinics" onChange={filterClinics} value={searchClinic} />
+              <SearchBar placeholder="Find clinics" onChange={filterClinics} value={searchClinic} />
           </form>
           <div className="my-5 d-flex justify-content-end">
           <ButtonModal dataBsTarget="#addClinic" title="New clinics" icon="./icons/add-clinic.svg" />
@@ -116,7 +122,7 @@ if(status === "failed") return <div>Error: {error}</div>;
                               src={Edit}
                               style={{ width: "18px", cursor: "pointer" }}
                               alt="edit icon"
-                              onClick={ handleEdit }
+                              onClick={ () => handleEdit(clinic) }
                               />
                           </td>
                           <td className="text-center align-middle">
