@@ -1,4 +1,6 @@
 "use client";
+
+import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { addAccount } from "@/reduxSlices/accounts/accountSlice";
@@ -8,21 +10,46 @@ import { Input } from "../Inputs/Input";
 
 const AddAccount = () => {
     const dispatch = useDispatch();
-    const methods = useForm();
+    const [success, setSuccess] = useState(false);
+    const [error, setError] = useState(null);
 
-    const { handleSubmit } = methods;
+    const methods = useForm({
+        mode: "onBlur",
+        defaultValues: {
+            password: "",
+            confirm_password: ""
+        },
+        criteriaMode: "all",
+        shouldFocusError: true,
+        resolver: async (values) => {
+            const errors = {};
+            if(values.password !== values.confirm_password) {
+                errors.confirm_password = {
+                    type: "manual",
+                    message: "Passwords do not match"
+                };
+            }
+            return { values, errors };
+        }
+    });
+
+    const { handleSubmit, reset } = methods;
 
     const onSubmit = async (data) => {
         console.log("DATOS A ENVIAR: ", data);
 
         try {
             const response = await dispatch(addAccount(data)).unwrap();
-            console.log("Cuenta añadida con éxito: ", response);
+            console.log("Response: ", response);
+            setSuccess(true);
+            setError(null);
+            reset();
         } catch (error) {
             if(error.response) {
                 console.error("Data Error: ", error.response.data);
                 console.error("Status Error: ", error.response.status);
                 console.error("Headers Error: ", error.response.headers);
+                setError(`Error: ${error.response.data.message || 'Unknown error ocurred'}`);
             } else if(error.request) {
                 console.error("Error creating a patient: ", error);
             } else {
@@ -46,6 +73,8 @@ const AddAccount = () => {
                         <h2>New Account</h2>
                     </div>
                     <div className="modal-body pb-0">
+                        { error && <div className="alert alert-danger">{error}</div> }
+                        { success && <div className="alert alert-success">Account created successfully</div> }
                         <FormProvider {...methods}>
                             { console.log("METHODS: ", methods.getValues()) }
                             <form onSubmit={ handleSubmit(onSubmit) } className="px-3 px-md-5">
@@ -117,7 +146,10 @@ const AddAccount = () => {
                                 name="confirm_password"
                                 type="password"
                                 placeholder="*********"
-                                rules= {{required: "This field is required"}}
+                                rules= {{
+                                    required: "This field is required",
+                                }
+                            }
                                 rounded="2rem"
                             />
                         </div>

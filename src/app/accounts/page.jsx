@@ -10,18 +10,21 @@ import Edit from "/public/icons/edit.svg";
 import Delete from "/public/icons/delete.svg";
 import styles from "./Account.module.css";
 import AddAccount from "@/components/Modal/AddAccount";
-import EditAccount from "@/components/Modal/EditAccount";
+import EditAccount from "@/components/EditAccount/EditAccount";
 import DeleteAccount from "@/components/Modal/DeleteAccount";
+import { useParams } from "next/navigation";
 
 const Accounts = () => {
+  const { id } = useParams();
+  console.log("ID recibido en Clinics: ", id);
+  
   const dispatch = useDispatch();
   const { accounts, status, error } = useSelector((state) => state.accounts);
   console.log("STATE ACCOUNTS: ", useSelector((state) => state.accounts));
-  
+  // Mostrar componente Editar cuenta
+  const [showEditAccount, setShowEditAccount] = useState(false);
   // Eliminación de cuentas
   const [deletedAccountId, setDeletedAccountId] = useState(null);
-
-
 
 useEffect(() => {
   const fetchAccounts = async () => {
@@ -38,16 +41,25 @@ useEffect(() => {
   fetchAccounts();
 }, [dispatch]);
 
+// Muestra componente para edición
+const handleEdit = () => {
+  setShowEditAccount(true);
+}
+
+// Muestra componente de la tabla de cuentas
+const handleReturnClick = () => {
+  setShowEditAccount(false);
+}
+
 if(status === "loading") return <div>Loading...</div>;
 if(status === "failed") return <div>Error: {error}</div>;
 
 
-
-
     return (
       <>
-        <section className="col-12 col-md-11 px-5 py-4 mx-auto">
-          <h1 className="text-center text-uppercase fw-bold mb-4">Account Manager</h1>
+     { showEditAccount ? (
+        <EditAccount onReturn={ handleReturnClick } />) : ( <section className="col-12 col-md-11 px-5 py-4 mx-auto">
+          <h1 className="text-center text-uppercase fw-bold mb-4">Accounts</h1>
         <div className="my-5 d-flex justify-content-end">
         <ButtonModal dataBsTarget="#modalForm" title="New account" icon="./icons/add-account.svg" />
       </div>
@@ -85,9 +97,8 @@ if(status === "failed") return <div>Error: {error}</div>;
                       <Image
                         src={Edit}
                         style={{ width: "18px", cursor: "pointer" }}
-                        data-bs-toggle="modal"
-                        data-bs-target="#ModalEdit"
                         alt="edit icon"
+                        onClick={ () => handleEdit() }
                         />
                     </td>
                     <td className="text-center align-middle">
@@ -107,10 +118,9 @@ if(status === "failed") return <div>Error: {error}</div>;
           </div>
         </div>
       </div>
-        </section>
+        </section>)}
 
         <AddAccount />
-        <EditAccount />
         <DeleteAccount accountId={deletedAccountId}/>
       </>
     )

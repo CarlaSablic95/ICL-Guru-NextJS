@@ -3,7 +3,7 @@ import authReducer from "@/reduxSlices/auth/authSlice"; // Maneja el estado de a
 import patientsReducer from "@/reduxSlices/patients/patientSlice";
 import clinicsReducer from "@/reduxSlices/clinics/clinicSlice";
 import accountsReducer from "@/reduxSlices/accounts/accountSlice";
-// import calculationsReducer from "@/reduxSlices/accounts/calculationSlice";
+import calculationsReducer from "@/reduxSlices/calculations/calculationSlice";
 
 // Configuración del almacenamiento de Redux (Redux Store). El store de Redux se configura para manejar el estado de la autenticación, pacientes y clínicas.
 export const store = configureStore({ // Se crea un almacenamiento usando "configureStore"
@@ -12,6 +12,6 @@ export const store = configureStore({ // Se crea un almacenamiento usando "confi
             patients: patientsReducer,
             clinics: clinicsReducer,
             accounts: accountsReducer,
-            // falta calculationsReducer
+            calculations: calculationsReducer
     },
 });

@@ -22,6 +22,7 @@ export default function RootLayout({ children }) {
   const pathname = usePathname();
   const isLoginPage = pathname === "/login";
 
+
   return (
       <Provider store={store}>
       <html lang="en">
@@ -50,6 +51,7 @@ export default function RootLayout({ children }) {
                 {children}
               </main>
             )}
+
             <EnterPassword />
             <Logout />
           </body>

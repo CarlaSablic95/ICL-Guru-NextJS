@@ -11,7 +11,7 @@ import Delete from "/public/icons/delete.svg";
 import ButtonModal from "@/components/Button/ButtonModal";
 import { SearchBar } from "@/components/Inputs/Input";
 import AddClinic from "@/components/Modal/AddClinic";
-import TokenManager from "@/components/Modal/TokenManager";
+import ClinicDetails from "@/components/ClinicDetails/ClinicDetails";
 import DeleteClinic from "@/components/Modal/DeleteClinic";
 import styles from "./Clinics.module.css";
 
@@ -28,7 +28,7 @@ const Clinics = () => {
   const [searchClinic, setSearchClinic] = useState("");
   const [filteredClinics, setFilteredClinics] = useState([]);
 // Mostrar componente token manager
-  const [showTokenManager, setShowTokenManager] = useState(false);
+  const [showClinicDetails, setShowClinicDetails] = useState(false);
   const [selectedClinic, setSelectedClinic] = useState(null);
 // Eliminación de clínicas
 const [deletedClinicId, setDeletedClinicId] = useState(null);
@@ -70,12 +70,12 @@ const [deletedClinicId, setDeletedClinicId] = useState(null);
 
   // Muestra componente para edición
  const handleEdit = (clinic) => {
+  setShowClinicDetails(true);
   setSelectedClinic(clinic);
-  setShowTokenManager(true);
  }
 // Muestra componente de la tabla de clínicas
  const handleReturnClick = () => {
-  setShowTokenManager(false);
+  setShowClinicDetails(false);
   setSelectedClinic(null);
  }
 
@@ -84,8 +84,8 @@ if(status === "failed") return <div>Error: {error}</div>;
 
   return (
     <>
-    {showTokenManager ? (
-      <TokenManager onReturn={ handleReturnClick } clinic={ selectedClinic } />) 
+    {showClinicDetails ? (
+      <ClinicDetails onReturn={ handleReturnClick } clinic={ selectedClinic } />) 
       : 
      ( <section className="col-12 col-md-11 px-5 py-4 mx-auto">
         <h1 className="text-center text-uppercase fw-bold mb-4">Clinics</h1>

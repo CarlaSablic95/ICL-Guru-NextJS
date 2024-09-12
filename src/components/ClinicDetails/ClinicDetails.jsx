@@ -6,7 +6,7 @@ import { Input } from "../Inputs/Input";
 import Image from "next/image";
 import Button from "@/components/Button/Button2";
 import CopyButton from "@/components/Button/Button";
-import Accounts from "@/app/account/page";
+import Accounts from "@/app/accounts/page";
 import ArrowBack from "/public/icons/arrow-back.png";
 import ClipboardCheck from "/public/icons/clipboard-check.svg";
 

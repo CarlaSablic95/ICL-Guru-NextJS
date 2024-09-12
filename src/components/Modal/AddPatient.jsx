@@ -72,10 +72,10 @@ const AddPatient = () => {
                             </div>
 
                             <div className="mb-3">
-                            <label htmlFor="lastname" className="form-label mb-1">Last Name<span className="text-danger">*</span>:</label>
+                            <label htmlFor="surname" className="form-label mb-1">Surname<span className="text-danger">*</span>:</label>
                             <Input 
-                            id="lastname"
-                            name="lastname"
+                            id="surname"
+                            name="surname"
                             type="text"
                             placeholder="example"
                             rules= {{required: "This field is required"}}

@@ -2,14 +2,15 @@
 
 import { useState } from "react";
 import { InputCheckbox } from "../Inputs/Input";
-import Return from "/public/icons/arrow-back.png";
+import ArrowBack from "/public/icons/arrow-back.png";
 import WizardComponent from "../Wizard/WizardComponent";
 import Image from "next/image";
 
-const FollowUp = () => {
+const FollowUp = ({ onReturn }) => {
     //  Para mostrar el cálculo de ambos ojos
     const [showOD, setShowOD] = useState(true);
     const [showOS, setShowOS] = useState(true);
+    
 
     const handleShowOD = (e) => {
         setShowOD(e.target.checked);
@@ -21,9 +22,9 @@ const FollowUp = () => {
 
     return(
         <div className="pt-5 px-3 px-md-5">
-            <a href="/calculations" className="text-decoration-none">
-                <Image src={ Return } alt="ícono de flecha de retroceso" style={{ width:"30px" }}/><span className="text-uppercase" style={{color: "#666666"}}>Return</span>
-            </a>
+            <span className="d-block p-2">
+            <a onClick={ onReturn } className="text-uppercase text-decoration-none" style={{color: "#666666", fontSize:"18px", cursor: "pointer"}}><Image src={ ArrowBack }  alt="Ícono de retroceso" className="icon-arrow" />{" "} Return</a>
+        </span>
             <h1 className="text-uppercase text-center mb-5">Icl calculations</h1>
             <div className="d-flex justify-content-evenly text-align-center">
                 <div>

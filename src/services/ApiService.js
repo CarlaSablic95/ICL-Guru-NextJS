@@ -129,7 +129,7 @@ export const getClinics = async () => {
 // CLINIC
 export const getClinic = async (id) => {
     try {
-        const response = await getData(`/accounts/organizations/${id}`);
+        const response = await getData(`/accounts/organizations/${id}/`);
         console.log("CLINIC: ", response);
         return response;
     } catch (error) {
@@ -142,7 +142,7 @@ export const getClinic = async (id) => {
 export const getAccounts = async () => {
     try {
         const response = await getData(`/accounts/profiles/`);
-        console.log("ACCOUNTS: ", response);
+        console.log("ACCOUNTS: ", response); // 1 - (gabriel quintero) / 2 - (user.demo) / 3 - (user2.demo)
 
         return response;
     } catch (error) {
@@ -155,9 +155,22 @@ export const getAccounts = async () => {
 // CHANGE PASSWORD
 export const changePassword = async () => {
     try {
-        const response = await getData("/accounts/change-password/")
+        const response = await postData("/accounts/change-password/");
+        return response;
     } catch (error) {
         console.error("Error fetching account: ", error);
         
+    }
+}
+
+// CALCULATIONS
+export const getCalculation = async (id) => {
+    try {
+        const response = await getData(`/calculation/register/${id}/`);
+        console.log("Response: ", response);
+        return response;
+    } catch (error) {
+        console.error(`Error fetching calculation with id ${id}:`, error);
+        throw error;
     }
 }

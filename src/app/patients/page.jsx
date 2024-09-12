@@ -95,9 +95,9 @@ if(status === "failed") return <div>Error: {error}</div>;
 // Función para ver el cálculo del paciente
 
 const handleSetSelectedPatient = (id) => {
-  console.log("PACIENTE: ", id);
+  console.log("ID DE PACIENTE: ", id);
   // setSelectedPatient(id);
-  router.push(`/calculation/${id}`);
+  router.push(`/calculation/register/${id}/`);
   // console.log("PACIENTE SELECCIONADO: ", id);
 }
 

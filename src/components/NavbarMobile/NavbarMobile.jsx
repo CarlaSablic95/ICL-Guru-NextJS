@@ -11,32 +11,32 @@ const routes = [
   {
     path: "/patients",
     link: "Patients",
-    icon: "./icons/user.svg",
-    activeIcon: "./icons/user-active.svg",
+    icon: "../icons/user.svg",
+    activeIcon: "../icons/user-active.svg",
   },
   {
     path: "/calculation",
     link: "Calculation",
-    icon: "./icons/calculation.svg",
-    activeIcon: "./icons/calculation-active.svg",
+    icon: "../icons/calculation.svg",
+    activeIcon: "../icons/calculation-active.svg",
   },
   {
     path: "/clinics",
     link: "Clinics",
-    icon: "./icons/clinic.svg",
-    activeIcon: "./icons/clinic-active.svg",
+    icon: "../icons/clinic.svg",
+    activeIcon: "../icons/clinic-active.svg",
   },
   {
-    path: "/account",
-    link: "Account",
-    icon: "./icons/settings.svg",
-    activeIcon: "./icons/settings-active.svg",
+    path: "/accounts",
+    link: "Accounts",
+    icon: "../icons/settings.svg",
+    activeIcon: "../icons/settings-active.svg",
   },
   {
     path: "/my-account",
     link: "My account",
-    icon: "./icons/account.svg",
-    activeIcon: "./icons/account-active.svg",
+    icon: "../icons/account.svg",
+    activeIcon: "../icons/account-active.svg",
   },
 ];
 
@@ -125,7 +125,7 @@ const NavbarMobile = () => {
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
                 >
-                  <Image src="./icons/logout.svg" width="30" height="30" alt="logout icon" /> Logout
+                  <Image src="../icons/logout.svg" width="30" height="30" alt="logout icon" /> Logout
                 </a>
               </li>
             </ul>

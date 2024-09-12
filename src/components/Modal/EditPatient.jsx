@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useForm, FormProvider } from "react-hook-form";
 import { editPatient } from "@/reduxSlices/patients/patientSlice";
 import Button2 from "../Button/Button2";
 import { Input, InputRadio } from "../Inputs/Input";
-import { useForm, FormProvider } from "react-hook-form";
 
 const EditPatient = ({ patientId }) => {
   const [isLoading, setIsLoading] = useState(false);

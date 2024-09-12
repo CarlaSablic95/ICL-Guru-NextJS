@@ -1,6 +1,6 @@
 "use client";
 import { Input } from "../Inputs/Input";
-
+import Button from "../Button/Button2";
 
 const EnterPassword = () => {
     return(
@@ -21,8 +21,7 @@ const EnterPassword = () => {
                         />
                 </div>
                 <div className="d-flex justify-content-evenly pb-3">
-                    <button type="button" className="btn text-white text-uppercase py-2 rounded-4" style={{ backgroundColor: "#3DC2DD", width:"130px" }} data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" className="btn border-0 text-white text-uppercase py-2 rounded-4" style={{ backgroundColor: "#E92F30", width:"130px" }} data-bs-dismiss="modal">Delete</button>
+                    <Button type="submit" title="Submit" bgColor="#3DC2DD"  />
                 </div>
             </div>
         </div>
