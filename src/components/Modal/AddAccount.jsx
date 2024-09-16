@@ -10,30 +10,28 @@ import { Input } from "../Inputs/Input";
 
 const AddAccount = () => {
     const dispatch = useDispatch();
-    const [success, setSuccess] = useState(false);
+    // const [success, setSuccess] = useState(false);
     const [error, setError] = useState(null);
 
-    const methods = useForm({
-        mode: "onBlur",
-        defaultValues: {
-            password: "",
-            confirm_password: ""
-        },
-        criteriaMode: "all",
-        shouldFocusError: true,
-        resolver: async (values) => {
-            const errors = {};
-            if(values.password !== values.confirm_password) {
-                errors.confirm_password = {
-                    type: "manual",
-                    message: "Passwords do not match"
-                };
-            }
-            return { values, errors };
-        }
-    });
+    const methods = useForm();
+    // const methods = useForm({
+    //     defaultValues: {
+    //         password: "",
+    //         confirm_password: ""
+    //     },
+    //     resolver: async (values) => {
+    //         const errors = {};
+    //         if(values.password !== values.confirm_password) {
+    //             errors.confirm_password = {
+    //                 type: "manual",
+    //                 message: "Passwords do not match"
+    //             };
+    //         }
+    //         return { values, errors };
+    //     }
+    // });
 
-    const { handleSubmit, reset } = methods;
+    const { handleSubmit } = methods;
 
     const onSubmit = async (data) => {
         console.log("DATOS A ENVIAR: ", data);
@@ -41,9 +39,9 @@ const AddAccount = () => {
         try {
             const response = await dispatch(addAccount(data)).unwrap();
             console.log("Response: ", response);
-            setSuccess(true);
-            setError(null);
-            reset();
+            // setSuccess(true);
+            // setError(null);
+            // reset();
         } catch (error) {
             if(error.response) {
                 console.error("Data Error: ", error.response.data);
@@ -56,10 +54,6 @@ const AddAccount = () => {
                 console.error("Error: ", error.message);
             }
         }
-        // } finally {
-
-        // }
-        
     }
 
     return (
@@ -74,10 +68,11 @@ const AddAccount = () => {
                     </div>
                     <div className="modal-body pb-0">
                         { error && <div className="alert alert-danger">{error}</div> }
-                        { success && <div className="alert alert-success">Account created successfully</div> }
                         <FormProvider {...methods}>
                             { console.log("METHODS: ", methods.getValues()) }
-                            <form onSubmit={ handleSubmit(onSubmit) } className="px-3 px-md-5">
+                            <form onSubmit={ handleSubmit(onSubmit) } className="px-3 px-md-2">
+                                <div className="d-flex">
+                                <div className="col-6">
                                 <div className="mb-3">
                                     <label htmlFor="username" className="form-label mb-1">Username<span className="text-danger">*</span>:</label>
                                     <Input 
@@ -126,7 +121,35 @@ const AddAccount = () => {
                                     rounded="2rem"
                                 />
                         </div>
-    
+                                </div>
+                        
+                        {/* CAMPOS AGREGADOS, SIN ESTOS NO SE PUEDE CREAR UNA CUENTA */}
+                        <div className="col-6">
+                        <div className="mb-3">
+                            <label htmlFor="roles" className="form-label mb-1">Rol<span className="text-danger">*</span>:</label>
+                                <Input 
+                                    id="roles"
+                                    name="roles"
+                                    type="number"
+                                    placeholder="1"
+                                    rules= {{required: "This field is required"}}
+                                    rounded="2rem"
+                                />
+                        </div>
+
+                        <div className="mb-3">
+                            <label htmlFor="active_organizations" className="form-label mb-1">Organizacion<span className="text-danger">*</span>:</label>
+                                <Input 
+                                    id="active_organizations"
+                                    name="active_organizations"
+                                    type="number"
+                                    placeholder="organizacion"
+                                    rules= {{required: "This field is required"}}
+                                    rounded="2rem"
+                                />
+                        </div>
+
+
                         <div className="mb-3">
                             <label htmlFor="password" className="form-label mb-1">Password<span className="text-danger">*</span>:</label>
                             <Input 
@@ -146,13 +169,12 @@ const AddAccount = () => {
                                 name="confirm_password"
                                 type="password"
                                 placeholder="*********"
-                                rules= {{
-                                    required: "This field is required",
-                                }
-                            }
+                                rules= {{required: "This field is required"}}
                                 rounded="2rem"
                             />
                         </div>
+                        </div>
+                                </div>
                             <div className="modal-footer border-0 d-flex justify-content-center">
                                 {/* <Button type="submit" title="Submit" bgColor="#3DC2DD" disabled={isLoading} /> */}
 

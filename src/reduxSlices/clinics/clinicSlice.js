@@ -33,57 +33,56 @@ export const deleteClinic = createAsyncThunk(
     }
 )
 
-
 const clinicSlice = createSlice({
     name: "clinics",
     initialState: {
         clinics: [],
-        status: "idle",
+        clinicsStatus: "idle",
         error: null
     },
     reducers: {
         fetchClinicsStart(state) {
-            state.status = "loading";
+            state.clinicsStatus = "loading";
         },
         fetchClinicsSuccess(state, action) {
             state.clinics = action.payload;
-            state.status = "succeeded";
+            state.clinicsStatus = "succeeded";
         },
         fetchClinicsFailure(state, action) {
             state.error = action.payload;
-            state.status = "failed";
+            state.clinicsStatus = "failed";
         },
     },
     extraReducers: (builder) => {
         // AGREGAR CLÍNICA
         builder
         .addCase(addClinic.pending, (state) => {
-            state.status = "loading";
+            state.clinicsStatus = "loading";
         })
         .addCase(addClinic.fulfilled, (state, action) => {
             console.log("CLÍNICA AÑADIDA: ", action.payload);
-            state.status = "succeeded";
+            state.clinicsStatus = "succeeded";
             state.clinics.push(action.payload);
         })
         .addCase(addClinic.rejected, (state, action) => {
             console.log("ERROR AL AÑADIR CLÍNICA", action.payload);
-            state.status = "failed";
+            state.clinicsStatus = "failed";
             state.error = action.payload;
         })
 
         // ELIMINAR CLÍNICA
         .addCase(deleteClinic.pending, (state) => {
-            state.status = "loading";
+            state.clinicsStatus = "loading";
         })
         .addCase(deleteClinic.fulfilled, (state, action) => {
             console.log("CLÍNICA ELIMINADA: ", action.payload);
 
-            state.status = "succeeded";
+            state.clinicsStatus = "succeeded";
             state.clinics = state.clinics.filter((clinic) => clinic.id !== action.payload.id);
         })
         .addCase(deleteClinic.rejected, (state, action) => {
             console.log("ERROR AL ELIMINAR EL PACIENTE: ", action.payload);
-            state.status = "failed";
+            state.clinicsStatus = "failed";
             state.error = action.payload;
         })
     }
@@ -92,4 +91,4 @@ const clinicSlice = createSlice({
 
 export const { fetchClinicsStart, fetchClinicsSuccess, fetchClinicsFailure } = clinicSlice.actions;
 
-export default clinicSlice.reducer; // clinicSlide es un objeto, al cual accedo a una de sus propiedades que es "reducers"
+export default clinicSlice.reducer; // clinicSlice es un objeto, al cual accedo a una de sus propiedades que es "reducers"

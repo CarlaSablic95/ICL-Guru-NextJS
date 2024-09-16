@@ -2,6 +2,7 @@
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
 import { getAccounts } from "@/services/ApiService";
 import { fetchAccountsStart, fetchAccountsSuccess, fetchAccountsFailure } from "@/reduxSlices/accounts/accountSlice";
 import ButtonModal from "@/components/Button/ButtonModal";
@@ -10,19 +11,17 @@ import Edit from "/public/icons/edit.svg";
 import Delete from "/public/icons/delete.svg";
 import styles from "./Account.module.css";
 import AddAccount from "@/components/Modal/AddAccount";
-import EditAccount from "@/components/EditAccount/EditAccount";
 import DeleteAccount from "@/components/Modal/DeleteAccount";
-import { useParams } from "next/navigation";
 
 const Accounts = () => {
   const { id } = useParams();
-  console.log("ID recibido en Clinics: ", id);
+  console.log("ID recibido en Accounts: ", id);
+  const router = useRouter();
   
   const dispatch = useDispatch();
   const { accounts, status, error } = useSelector((state) => state.accounts);
   console.log("STATE ACCOUNTS: ", useSelector((state) => state.accounts));
-  // Mostrar componente Editar cuenta
-  const [showEditAccount, setShowEditAccount] = useState(false);
+
   // Eliminación de cuentas
   const [deletedAccountId, setDeletedAccountId] = useState(null);
 
@@ -42,13 +41,8 @@ useEffect(() => {
 }, [dispatch]);
 
 // Muestra componente para edición
-const handleEdit = () => {
-  setShowEditAccount(true);
-}
-
-// Muestra componente de la tabla de cuentas
-const handleReturnClick = () => {
-  setShowEditAccount(false);
+const handleEdit = (id) => {
+  router.push(`/accounts/${id}`);
 }
 
 if(status === "loading") return <div>Loading...</div>;
@@ -57,9 +51,8 @@ if(status === "failed") return <div>Error: {error}</div>;
 
     return (
       <>
-     { showEditAccount ? (
-        <EditAccount onReturn={ handleReturnClick } />) : ( <section className="col-12 col-md-11 px-5 py-4 mx-auto">
-          <h1 className="text-center text-uppercase fw-bold mb-4">Accounts</h1>
+     {( <section className="col-12 col-md-11 px-5 py-4 mx-auto">
+          <h1 className="text-center text-uppercase fw-bold mb-4">Accounts Manager</h1>
         <div className="my-5 d-flex justify-content-end">
         <ButtonModal dataBsTarget="#modalForm" title="New account" icon="./icons/add-account.svg" />
       </div>
@@ -98,7 +91,7 @@ if(status === "failed") return <div>Error: {error}</div>;
                         src={Edit}
                         style={{ width: "18px", cursor: "pointer" }}
                         alt="edit icon"
-                        onClick={ () => handleEdit() }
+                        onClick={ () => handleEdit(account.id) }
                         />
                     </td>
                     <td className="text-center align-middle">

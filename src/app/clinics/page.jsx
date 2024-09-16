@@ -1,8 +1,9 @@
+
 "use client";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { getClinics } from "@/services/ApiService";
 import { fetchClinicsStart, fetchClinicsSuccess, fetchClinicsFailure } from "@/reduxSlices/clinics/clinicSlice";
 import Image from "next/image";
@@ -11,14 +12,15 @@ import Delete from "/public/icons/delete.svg";
 import ButtonModal from "@/components/Button/ButtonModal";
 import { SearchBar } from "@/components/Inputs/Input";
 import AddClinic from "@/components/Modal/AddClinic";
-import ClinicDetails from "@/components/ClinicDetails/ClinicDetails";
 import DeleteClinic from "@/components/Modal/DeleteClinic";
 import styles from "./Clinics.module.css";
 
 const Clinics = () => {
   const { id } = useParams();
   console.log("ID recibido en Clinics: ", id);
-  
+const router = useRouter(); // para redireccionar a la pagina de detalle
+
+
   const dispatch = useDispatch();
   // CONSUMO DE API DE CLÍNICAS (ORGANIZACIONES)
   const {clinics, status, error } = useSelector((state) => state.clinics);
@@ -27,9 +29,7 @@ const Clinics = () => {
   // FILTRADO
   const [searchClinic, setSearchClinic] = useState("");
   const [filteredClinics, setFilteredClinics] = useState([]);
-// Mostrar componente token manager
-  const [showClinicDetails, setShowClinicDetails] = useState(false);
-  const [selectedClinic, setSelectedClinic] = useState(null);
+
 // Eliminación de clínicas
 const [deletedClinicId, setDeletedClinicId] = useState(null);
 
@@ -68,15 +68,9 @@ const [deletedClinicId, setDeletedClinicId] = useState(null);
     setFilteredClinics(filteredData);
   }
 
-  // Muestra componente para edición
- const handleEdit = (clinic) => {
-  setShowClinicDetails(true);
-  setSelectedClinic(clinic);
- }
-// Muestra componente de la tabla de clínicas
- const handleReturnClick = () => {
-  setShowClinicDetails(false);
-  setSelectedClinic(null);
+  // Redirige a la página de detalle de la clínica
+ const handleEdit = (id) => {
+  router.push(`/clinics/${id}`)
  }
 
 if(status === "loading") return <div>Loading...</div>;
@@ -84,10 +78,7 @@ if(status === "failed") return <div>Error: {error}</div>;
 
   return (
     <>
-    {showClinicDetails ? (
-      <ClinicDetails onReturn={ handleReturnClick } clinic={ selectedClinic } />) 
-      : 
-     ( <section className="col-12 col-md-11 px-5 py-4 mx-auto">
+    <section className="col-12 col-md-11 px-5 py-4 mx-auto">
         <h1 className="text-center text-uppercase fw-bold mb-4">Clinics</h1>
           <form className="d-flex justify-content-center" role="search">
               <SearchBar placeholder="Find clinics" onChange={filterClinics} value={searchClinic} />
@@ -122,7 +113,7 @@ if(status === "failed") return <div>Error: {error}</div>;
                               src={Edit}
                               style={{ width: "18px", cursor: "pointer" }}
                               alt="edit icon"
-                              onClick={ () => handleEdit(clinic) }
+                              onClick={ () => handleEdit(clinic.id) }
                               />
                           </td>
                           <td className="text-center align-middle">
@@ -143,8 +134,8 @@ if(status === "failed") return <div>Error: {error}</div>;
             </div>
           </div>
         </div>
-      </section>)
-      }
+      </section>
+
 
     <AddClinic />
     <DeleteClinic clinicId={deletedClinicId} />

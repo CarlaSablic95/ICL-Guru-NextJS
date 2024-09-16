@@ -1,39 +1,43 @@
 "use client";
 
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 import { useForm, FormProvider } from "react-hook-form";
 import NewPassword from "@/components/ChangePassword/NewPassword";
 import { Input } from "@/components/Inputs/Input";
 import Button from "@/components/Button/Button2";
-import { useEffect } from "react";
-import { editAccount } from "@/reduxSlices/accounts/accountSlice";
+import Image from "next/image";
+import Delete from "/public/icons/delete.svg";
+import styles from "../clinics/Clinics.module.css";
+// import { useEffect } from "react";
+// import { editAccount } from "@/reduxSlices/accounts/accountSlice";
 
 
 const MyAccount = () => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const methods = useForm();
-    const { reset, watch } = methods;
+    // const { reset, watch } = methods;
+    const { handleSubmit } = methods;
 
-    const currentAcount = useSelector()
+    // const currentAcount = useSelector()
     // state.accounts.accounts.find((account) => account.id ===
 
-    useEffect(() => {
-        if(currentAcount) {
-            reset(currentAcount);
-            console.log("CURRENT ACCOUNT: ", reset(currentAcount));
+    // useEffect(() => {
+    //     if(currentAcount) {
+    //         reset(currentAcount);
+    //         console.log("CURRENT ACCOUNT: ", reset(currentAcount));
             
-        }
-    }, [currentAcount, reset])
-
-
-    // const onSubmit = async (data) => {
-    //     try {
-    //         await dispatch(editAccount())
-    //         console.log("Submitted data: ", data);
-    //     } catch (error) {
-    //         console.error("Error updating data: ", error);
     //     }
-    // }
+    // }, [currentAcount, reset])
+
+
+    const onSubmit = async (data) => {
+        try {
+            await dispatch(editAccount())
+            console.log("Submitted data: ", data);
+        } catch (error) {
+            console.error("Error updating data: ", error);
+        }
+    }
 
    
     return (

@@ -151,6 +151,19 @@ export const getAccounts = async () => {
     }
 }
 
+// ACOUNT
+export const getAccount = async (id) => {
+    try {
+        const response = await getData(`/accounts/profiles/${id}/`);
+        console.log("ACCOUNT: ", response);
+
+        return response;
+    } catch (error) {
+        console.error("Error fetching account: ", error);
+        throw error;
+    }
+}
+
 
 // CHANGE PASSWORD
 export const changePassword = async () => {

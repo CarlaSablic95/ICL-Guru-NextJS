@@ -1,15 +1,19 @@
 
+"use client";
+
 import { FormProvider, useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 // import { useDispatch, useSelector } from "react-redux";
-import { Input } from "../Inputs/Input";
-import ChangePassword from "../ChangePassword/ChangePassword"
-import Button from "../Button/Button2";
+import { Input } from "@/components/Inputs/Input";
+import ChangePassword from "@/components/ChangePassword/ChangePassword"
+import Button from "@/components/Button/Button2";
 import Image from "next/image";
 import ArrowBack from "/public/icons/arrow-back.png";
 // import { fetchAccountsFailure } from "@/reduxSlices/accounts/accountSlice";
-import FormAttachedClinics from "../FormAttachedClinics/FormAttachedClinics";
+import FormAttachedClinics from "@/components/FormAttachedClinics/FormAttachedClinics";
 
-const EditAccount = ({onReturn }) => {
+const EditAccount = () => {
+    const router = useRouter();
     const methods = useForm();
 
     const { handleSubmit } = methods;
@@ -22,7 +26,7 @@ const EditAccount = ({onReturn }) => {
     return (
         <>
         <span className="d-block p-2">
-            <a onClick={ onReturn } className="text-uppercase text-decoration-none" style={{color: "#666666", fontSize:"18px", cursor: "pointer"}}><Image src={ ArrowBack }  alt="Ícono de retroceso" className="icon-arrow" />{" "} Return</a>
+            <a onClick={ () => router.push("/accounts") } className="text-uppercase text-decoration-none" style={{color: "#666666", fontSize:"18px", cursor: "pointer"}}><Image src={ ArrowBack }  alt="Ícono de retroceso" className="icon-arrow" />{" "} Return</a>
         </span>
         <section className="container px-5 py-4 mx-auto">
                 <div className="row align-items-start justify-content-between">

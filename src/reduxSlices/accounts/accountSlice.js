@@ -8,16 +8,17 @@ export const addAccount = createAsyncThunk(
       console.log("ACCOUNT DATA: ", accountData);
       try {
         const response = await postData("/accounts/profiles/", accountData);
-        console.log("Respuesta de envío de datos para agregar cuentas: ", response);
+        console.log("Respuesta de envío de datos para agregar cuentas: ", accountData);
         
-        const { username, name, email  } = response;
-        return {
-            username,
-            name,
-            email
-        };
+        return response;
+        // const { username, name, email  } = response;
+        // return {
+        //     username,
+        //     name,
+        //     email
+        // };
       } catch (error) {
-         return rejectWithValue(error.response ? error.response.data : error.message);
+         return rejectWithValue(error.response.data);
       }
     }
 )
@@ -33,7 +34,7 @@ export const editAccount = createAsyncThunk(
             console.log("Respuesta al editar datos de cuentas: ", response);
             return response;
         } catch (error) {
-            return rejectWithValue(error.response.data)
+            return rejectWithValue(error.response.data);
         }
     }
 )
@@ -76,74 +77,89 @@ const accountSlice = createSlice({
     name: "accounts",
     initialState: {
         accounts: [],
-        status: "idle",
+        accountsStatus: "idle",
         error: null
     },
     reducers: {
         fetchAccountsStart(state) {
-            state.status = "loading";
+            state.accountsStatus = "loading";
         },
         fetchAccountsSuccess(state, action) {
             state.accounts = action.payload;
-            state.status = "succeeded";
+            state.accountsStatus = "succeeded";
         },
         fetchAccountsFailure(state, action) {
             state.error = action.payload;
-            state.status = "failed";
+            state.accountsStatus = "failed";
+        },
+        addClinicToAccount(state, action) {
+            const { accountId, clinic } = action.payload;
+            const account = state.accounts.find(acc => acc.id === accountId);
+            if(account) {
+                account.organizations.push(clinic);
+            }
+        },
+        removeClinicFromAccount(state, action) {
+            const {accountId, clinicId} = action.payload;
+            const account = state.accounts.find(acc => acc.id === accountId);
+
+            if(account) {
+                account.organizations = account.organizations.filter(org => org.id !== clinicId);
+            }
         }
     },
     extraReducers: (builder) => {
         // AGREGAR CUENTA
         builder
         .addCase(addAccount.pending, (state) => {
-            state.status = "loading";
+            state.accountsStatus = "loading";
         })
         .addCase(addAccount.fulfilled, (state, action) => {
             console.log("CUENTA AÑADIDA: ", action.payload);
-            state.status = "succeeded";
+            state.accountsStatus = "succeeded";
             state.accounts.push(action.payload);
             state.error = null;
         })
         .addCase(addAccount.rejected, (state, action) => {
-            console.log("ERROR AL AÑADIR CLÍNICA: ", action.payload);
-            state.status = "failed";
+            console.log("ERROR AL AÑADIR CUENTA: ", action.payload);
+            state.accountsStatus = "failed";
             state.error = action.payload ? action.payload : "Error";
         })
 
         // ELIMINAR CUENTA
         .addCase(deleteAccount.pending, (state) => {
-            state.status = "loading";
+            state.accountsStatus = "loading";
         })
         .addCase(deleteAccount.fulfilled, (state, action) => {
             console.log("CUENTA ELIMINADA: ", action.payload);
             
-            state.status = "succeeded";
+            state.accountsStatus = "succeeded";
             state.clinics = state.clinics.filter((clinic) => clinic.id !== action.payload.id);
         })
         .addCase(deleteAccount.rejected, (state, action) => {
             console.log("ERROR AL ELIMINAR LA CUENTA: ", action.payload);
-            state.status = "failed";
+            state.accountsStatus = "failed";
             state.error = action.payload;
         })
 
         // ACTUALIZAR CONTRASEÑA
         .addCase(updatePass.pending, (state) => {
-            state.status = "loading";
+            state.accountsStatus = "loading";
         })
         .addCase(updatePass.fulfilled, (state, action) => {
             console.log("CONTRASEÑA CAMBIADA: ", action.payload);
-            state.status = "succeeded";
+            state.accountsStatus = "succeeded";
             state.accounts.push(action.payload);
             state.error = null;
         })
         .addCase(updatePass.rejected, (state, action) => {
             console.log("ERROR AL CAMBIAR CONTRASEÑA: ", action.payload);
-            state.status = "failed";
+            state.accountsStatus = "failed";
             state.error = action.payload ? action.payload : "Error";
         })
     }
 });
 
-export const { fetchAccountsStart, fetchAccountsSuccess, fetchAccountsFailure } = accountSlice.actions;
+export const { fetchAccountsStart, fetchAccountsSuccess, fetchAccountsFailure, addClinicToAccount, removeClinicFromAccount } = accountSlice.actions;
 
 export default accountSlice.reducer;
