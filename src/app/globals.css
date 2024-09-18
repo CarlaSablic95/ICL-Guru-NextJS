@@ -39,6 +39,11 @@ button[data-bs-toggle="collapse"] {
     color:"#5F5C5C" !important;
 }
 
+.selected-button {
+    color: #0051A1;
+    border: 1px solid #0051A1;
+}
+
 /* ÍCONOS */
 .bi::before, [class^="bi-"]::before, [class*=" bi-"]::before {
     font-weight: 600 !important;
@@ -228,11 +233,11 @@ span.input-group-text  {
     border-left-color: transparent;
 }
 
-/* input[type="text"], input[type="number"] {
+input[type="text"], input[type="number"] {
     border-right-color: transparent;
     border-top-left-radius: 1rem;
     border-bottom-left-radius: 1rem;
-} */
+}
 
 .input-date {
     border-top-right-radius: 1rem;
@@ -307,4 +312,4 @@ input#od, input#os {
     100% {
         transform: rotate(360deg);
     }
-    } 
+    }

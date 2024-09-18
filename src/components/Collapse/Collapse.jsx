@@ -8,12 +8,10 @@ import image6 from "@/components/Collapse/img/oct_ang.png";
 import image7 from "@/components/Collapse/img/oct_ang_1.png";
 
 const Collapse = () => {
-
-
     return (
         <>
             <section className="d-flex flex-column justify-content-center align-items-center">
-            <button className="btn mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="button-collapse" style={{ backgroundColor:"#F3EA1F", borderRadius:"1rem" }}>
+            <button className="btn mb-3 text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="button-collapse" style={{ backgroundColor:"#F3EA1F", borderRadius:"1rem" }}>
                 Image references - Please check it
             </button>
 

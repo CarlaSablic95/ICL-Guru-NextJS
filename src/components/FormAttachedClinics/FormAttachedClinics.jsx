@@ -12,6 +12,7 @@ import Button from "../Button/Button2";
 import Image from "next/image";
 import styles from "@/app/clinics/Clinics.module.css"
 import Delete from "/public/icons/delete.svg";
+import DeleteClinic from "../Modal/DeleteClinic";
 
 const FormAttachedClinics = ({ accountId }) => {
   console.log("ACCOUNT ID: ", accountId)
@@ -23,7 +24,10 @@ const FormAttachedClinics = ({ accountId }) => {
   const { clinics, clinicsStatus, clinicsError } = useSelector((state) => state.clinics);
   const { accounts, accountsStatus, accountsError } = useSelector((state) => state.accounts);
 
-  const currentAccount = accounts.find(account => account.id === accountId )
+  const currentAccount = accounts.find((account) => account.id === Number(accountId) );
+  console.log("CUENTA : ", accounts);
+  console.log("CUENTA ACTUAL: ", currentAccount);
+
 
 //   Obtengo las clínicas para añadir, en la lista desplegable
   useEffect(() => {
@@ -61,7 +65,9 @@ const FormAttachedClinics = ({ accountId }) => {
 
 //  AÑADO CLÍNICA A UN PERFIL
 const handleClinics = (data) => {
-    const clinic = clinics.find((clinic) => clinic.id === parseInt(data.clinicId));
+    const clinic = clinics.find((clinic) => clinic.id === Number(data.clinicId));
+    console.log("ID: ", clinic);
+    
     dispatch(addClinicToAccount({ accountId, clinic }));
     console.log("Clinic attached successfully: ", clinic.name);
 }
@@ -115,23 +121,6 @@ const handleClinics = (data) => {
                 />
                 </div>
             </div>
-
-            <div className="mb-3">
-                <div>
-                <p>Delete clinic to user</p>
-                </div>
-                <div className="d-flex align-items-center justify-content-between">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Select one clinic</option>
-                    <option value="option">Option</option> {/* ACÁ DEBO IMPRIMIR EL LISTADO DE CLINICAS ASOCIADAS */}
-                </select>
-                <Button
-                    title="Delete clinic"
-                    bgColor="#FF0000"
-                    borderRadius="2rem"
-                />
-                </div>
-            </div>
             </form>
         </FormProvider>
         </section>
@@ -176,6 +165,8 @@ const handleClinics = (data) => {
             </div>
             </div>
         </section>
+
+        <DeleteClinic />
     </>
   );
 };

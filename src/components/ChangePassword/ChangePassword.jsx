@@ -60,7 +60,7 @@ const ChangePassword = () => {
                                 type="password"
                                 placeholder="********"
                                 rules={{ required: "This field is required" }}
-                                
+                                borderRadius= "2rem"
                             />
                         </div>
 
@@ -75,7 +75,7 @@ const ChangePassword = () => {
                                 rules={{ required: "This field is required",
                                     validate: value => value === newPassword || "Passwords do not match"
                                  }}
-                                
+                                borderRadius= "2rem"
                             />
                         </div>
                         { errorMessage && <p className="text-danger text-center mb-3">{ errorMessage }</p> }

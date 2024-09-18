@@ -2,7 +2,7 @@
 "use client";
 
 import { FormProvider, useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 // import { useDispatch, useSelector } from "react-redux";
 import { Input } from "@/components/Inputs/Input";
 import ChangePassword from "@/components/ChangePassword/ChangePassword"
@@ -15,7 +15,7 @@ import FormAttachedClinics from "@/components/FormAttachedClinics/FormAttachedCl
 const EditAccount = () => {
     const router = useRouter();
     const methods = useForm();
-
+    const { id } = useParams();
     const { handleSubmit } = methods;
 
     // EDITAR DATOS
@@ -85,7 +85,7 @@ const EditAccount = () => {
                 </div>
 
             
-                <FormAttachedClinics />
+                <FormAttachedClinics accountId={id} />
     </section>
         </>
     )

@@ -97,7 +97,7 @@ if(status === "failed") return <div>Error: {error}</div>;
 const handleSetSelectedPatient = (id) => {
   console.log("ID DE PACIENTE: ", id);
   // setSelectedPatient(id);
-  router.push(`/calculation/register/${id}/`);
+  router.push(`/calculation/${id}/`);
   // console.log("PACIENTE SELECCIONADO: ", id);
 }
 

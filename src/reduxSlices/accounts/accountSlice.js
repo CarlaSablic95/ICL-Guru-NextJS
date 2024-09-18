@@ -94,14 +94,14 @@ const accountSlice = createSlice({
         },
         addClinicToAccount(state, action) {
             const { accountId, clinic } = action.payload;
-            const account = state.accounts.find(acc => acc.id === accountId);
+            const account = state.accounts.find(acc => acc.id === Number(accountId));
             if(account) {
                 account.organizations.push(clinic);
             }
         },
         removeClinicFromAccount(state, action) {
             const {accountId, clinicId} = action.payload;
-            const account = state.accounts.find(acc => acc.id === accountId);
+            const account = state.accounts.find(acc => acc.id === Number(accountId));
 
             if(account) {
                 account.organizations = account.organizations.filter(org => org.id !== clinicId);

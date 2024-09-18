@@ -1,10 +1,9 @@
 import Image from "next/image";
 import ArrowBack from "/public/icons/arrow-back.png";
 import Collapse from "../Collapse/Collapse";
+import AddCalculation from "@/components/Wizard/AddCalculation";
 
 const NewCalculation = ({ handleReturnClick }) => {
-
-
 
     return (
         <section className="col-12 col-md-11 px-5 mx-auto">
@@ -26,7 +25,11 @@ const NewCalculation = ({ handleReturnClick }) => {
                 </div>
             </div>
 
+        {/* Collapse de imagenes */}
             <Collapse />
+        
+        {/* WIZARD */}
+            <AddCalculation />
         </section>
     )
 }
