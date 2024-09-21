@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getPatient } from "@/services/ApiService";
 import { InputCheckbox } from "../Inputs/Input";
 import { fetchCalculationsStart, fetchCalculationsSuccess,fetchCalculationsFailure } from "@/reduxSlices/calculations/calculationSlice";
 import { getCalculation } from "@/services/ApiService";
@@ -21,6 +22,8 @@ import { useParams } from "next/navigation";
 const CalculationDataPatient = ({ handleReturnClick }) => {
     const { id } = useParams();
     console.log("ID recibido en Calculations: ", id);
+
+    const [patient, setPatient] = useState(null);
     const [showOD, setShowOD] = useState(true);
     const [showOS, setShowOS] = useState(true);
     const calculations = useSelector((state) => state.calculations.calculations);
@@ -51,6 +54,21 @@ const CalculationDataPatient = ({ handleReturnClick }) => {
     const onReturn = () => {
         setShowFollowUp(false);
     }
+
+//  Traigo datos del paciente
+useEffect(() => {
+    const fetchPantientData = async () => {
+        try {
+            const patientData = await getPatient(id);
+            console.log("TRAIGO PACIENTE: ", patientData);
+            setPatient(patientData);
+        }catch (error) {
+            console.error("Error fetching data: ", error);
+            // setError("Failed to load patient data");
+        }
+    }
+    fetchPantientData();
+}, [id])
 
     // Traigo los datos del cálculo del paciente
     useEffect(() => {
@@ -95,12 +113,21 @@ const CalculationDataPatient = ({ handleReturnClick }) => {
             </div>
         
             <section className="ps-4 py-4">
-                <div className="mb-5 ps-3">
-                        <h5 className="mb-1">Patient: </h5>
-                        <h5 className="text-uppercase mb-1">ID: </h5>
-                        <h5 className="text-uppercase mb-1">DOB</h5>
-                        <h5 className="text-uppercase mb-1">MRN:</h5>
-                        <h5 className="mb-1">Method:</h5>
+               {( patient ? (<div className="mb-5 ps-3">
+                        <h4 className="mb-1 fs-4 fw-bold">
+                            Patient: <small class="text-muted">{`${patient.name} ${patient.surname}`}</small>
+                        </h4>
+                        <h4 className="mb-1 fs-4 fw-bold">
+                            ID: <small class="text-muted">{`${patient.id}`}</small>
+                        </h4>
+                        <h4 className="mb-1 fs-4 fw-bold">
+                        DOB: <small class="text-muted">{`${patient.dob}`}</small>
+                        </h4>
+                        <h4 className="mb-1 fs-4 fw-bold">
+                            MRN: <small class="text-muted">{`${patient.medical_record}`}</small>
+                        </h4>
+                        <h4 className="text-uppercase mb-1">Method:</h4>
+                        {/* <h4 className="mb-1">{`Method: ${patient.method}`}</h4> */}
                     {/* { calculations.map((calc) =>(
                     <>
                         <h5 className="mb-1">{`Patient: ${calc.patient.name}`}</h5>
@@ -110,7 +137,9 @@ const CalculationDataPatient = ({ handleReturnClick }) => {
                         <h5 className="mb-1">Method:</h5>
                     </>
                 ))} */}
-                </div>
+                </div>) : (
+                     <p>Loading patient data...</p>
+                ))}
             <div className="d-flex flex-column flex-md-row justify-content-evenly">
                <div className="d-flex flex-column justify-content-center">
                     <div className="text-center mb-4">

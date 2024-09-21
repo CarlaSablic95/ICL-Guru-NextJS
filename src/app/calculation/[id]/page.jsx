@@ -20,7 +20,6 @@ const Calculations = () => {
     const [isLoading, setIsLoading] = useState(true);    
     const [error, setError] = useState(null);
 
-    
     const dispatch = useDispatch();
     const calculations = useSelector((state) => state.calculations);
     
@@ -122,9 +121,17 @@ const Calculations = () => {
                 <h1 className="text-center text-uppercase fw-bold">Calculations</h1>
             </div>
                     <div className="mb-5 d-flex flex-column align-items-center">
-                        <h4 className="mb-1">{`Patient: ${patient.name} ${patient.surname}`}</h4>
-                        <h4 className="text-uppercase mb-1">{`Dob:  ${patient.dob}`}</h4>
-                        <h4 className="mb-1">{`Organization:  ${patient.organization}`}</h4> {/* MOSTRAR NOMBRE DE LA CLINICA */}
+                    <h4 className="mb-1 fs-4 fw-bold">
+                            Patient: <small class="text-muted">{`${patient.name} ${patient.surname}`}</small>
+                        </h4>
+                        <h4 className="mb-1 fs-4 fw-bold">
+                        DOB: <small class="text-muted">{`${patient.dob}`}</small>
+                        </h4>
+
+                        <h4 className="mb-1 fs-4 fw-bold">
+                        Organization: <small class="text-muted">{`${patient.organization}`}</small>
+                        </h4>
+                        {/* MOSTRAR NOMBRE DE LA CLINICA */}
                     </div>
             <div className="d-flex justify-content-end align-items-center mb-5">
                 <Button title="New calculation" icon="../icons/add-user.svg" bgColor="#3DC2DD" rounded="2rem" fontWeight="bold" onClick={() => handleNewCalculation()} />
