@@ -1,7 +1,7 @@
 import Image from "next/image";
 import ArrowBack from "/public/icons/arrow-back.png";
 import Collapse from "../Collapse/Collapse";
-import AddCalculation from "@/components/Wizard/AddCalculation";
+import AddCalculation from "@/components/Wizard/AddCalculation"
 
 const NewCalculation = ({ handleReturnClick }) => {
 

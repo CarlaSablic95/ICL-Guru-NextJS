@@ -37,7 +37,7 @@ const CasiaFormulas = () => {
                                     <label>12.1 mm:</label>
                                     <div className="input-group calc-form mb-3">
                                         <input step="0.001" className="form-control vault" id="c_vault_postop_QX" aria-describedby="Central vault" type="number" name="c_vault_postop_QX" />
-                                        <span className="input-group-text bg-white" id="basic-addon2">mm</span>
+                                        <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }} id="basic-addon2">mm</span>
                                         </div>
                                 </div>
 
@@ -45,7 +45,7 @@ const CasiaFormulas = () => {
                                     <label>12.6 mm:</label>
                                     <div className="input-group calc-form mb-3">
                                         <input step="0.001" className="form-control vault" id="c_vault_postop_QX" aria-describedby="Central vault" type="number" name="c_vault_postop_QX" />
-                                        <span className="input-group-text bg-white" id="basic-addon2">mm</span>
+                                        <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }} id="basic-addon2">mm</span>
                                         </div>
                                 </div>
 
@@ -53,7 +53,7 @@ const CasiaFormulas = () => {
                                 <label>13.2 mm:</label>
                                     <div className="input-group calc-form mb-3">
                                         <input step="0.001" className="form-control vault" id="c_vault_postop_QX" aria-describedby="Central vault" type="number" name="c_vault_postop_QX" />
-                                        <span className="input-group-text bg-white" id="basic-addon2">mm</span>
+                                        <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }} id="basic-addon2">mm</span>
                                         </div>
                                 </div>
 
@@ -61,7 +61,7 @@ const CasiaFormulas = () => {
                                 <label>13.7 mm:</label>
                                     <div className="input-group calc-form mb-3">
                                         <input step="0.001" className="form-control vault" id="c_vault_postop_QX" aria-describedby="Central vault" type="number" name="c_vault_postop_QX" />
-                                        <span className="input-group-text bg-white" id="basic-addon2">mm</span>
+                                        <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }} id="basic-addon2">mm</span>
                                         </div>
                                 </div>
                                     </div>
@@ -72,7 +72,7 @@ const CasiaFormulas = () => {
                                     <label>12.1 mm:</label>
                                     <div className="input-group calc-form mb-3">
                                         <input step="0.001" className="form-control vault" id="c_vault_postop_QX" aria-describedby="Central vault" type="number" name="c_vault_postop_QX" />
-                                        <span className="input-group-text bg-white" id="basic-addon2">mm</span>
+                                        <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }} id="basic-addon2">mm</span>
                                         </div>
                                 </div>
 
@@ -80,7 +80,7 @@ const CasiaFormulas = () => {
                                     <label>12.6 mm:</label>
                                     <div className="input-group calc-form mb-3">
                                         <input step="0.001" className="form-control vault" id="c_vault_postop_QX" aria-describedby="Central vault" type="number" name="c_vault_postop_QX" />
-                                        <span className="input-group-text bg-white" id="basic-addon2">mm</span>
+                                        <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }} id="basic-addon2">mm</span>
                                         </div>
                                 </div>
 
@@ -88,7 +88,7 @@ const CasiaFormulas = () => {
                                 <label>13.2 mm:</label>
                                     <div className="input-group calc-form mb-3">
                                         <input step="0.001" className="form-control vault" id="c_vault_postop_QX" aria-describedby="Central vault" type="number" name="c_vault_postop_QX" />
-                                        <span className="input-group-text bg-white" id="basic-addon2">mm</span>
+                                        <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }} id="basic-addon2">mm</span>
                                         </div>
                                 </div>
 
@@ -96,7 +96,7 @@ const CasiaFormulas = () => {
                                 <label>13.7 mm:</label>
                                     <div className="input-group calc-form mb-3">
                                         <input step="0.001" className="form-control vault" id="c_vault_postop_QX" aria-describedby="Central vault" type="number" name="c_vault_postop_QX" />
-                                        <span className="input-group-text bg-white" id="basic-addon2">mm</span>
+                                        <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }} id="basic-addon2">mm</span>
                                         </div>
                                 </div>
                                     </div>
@@ -123,7 +123,7 @@ const CasiaFormulas = () => {
                                     <label>12.1 mm:</label>
                                     <div className="input-group calc-form mb-3">
                                         <input step="0.001" className="form-control vault" id="c_vault_postop_QX" aria-describedby="Central vault" type="number" name="c_vault_postop_QX" />
-                                        <span className="input-group-text bg-white" id="basic-addon2">mm</span>
+                                        <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }} id="basic-addon2">mm</span>
                                         </div>
                                 </div>
 
@@ -131,7 +131,7 @@ const CasiaFormulas = () => {
                                     <label>12.6 mm:</label>
                                     <div className="input-group calc-form mb-3">
                                         <input step="0.001" className="form-control vault" id="c_vault_postop_QX" aria-describedby="Central vault" type="number" name="c_vault_postop_QX" />
-                                        <span className="input-group-text bg-white" id="basic-addon2">mm</span>
+                                        <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }} id="basic-addon2">mm</span>
                                         </div>
                                 </div>
 
@@ -139,7 +139,7 @@ const CasiaFormulas = () => {
                                 <label>13.2 mm:</label>
                                     <div className="input-group calc-form mb-3">
                                         <input step="0.001" className="form-control vault" id="c_vault_postop_QX" aria-describedby="Central vault" type="number" name="c_vault_postop_QX" />
-                                        <span className="input-group-text bg-white" id="basic-addon2">mm</span>
+                                        <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }} id="basic-addon2">mm</span>
                                         </div>
                                 </div>
 
@@ -147,7 +147,7 @@ const CasiaFormulas = () => {
                                 <label>13.7 mm:</label>
                                     <div className="input-group calc-form mb-3">
                                         <input step="0.001" className="form-control vault" id="c_vault_postop_QX" aria-describedby="Central vault" type="number" name="c_vault_postop_QX" />
-                                        <span className="input-group-text bg-white" id="basic-addon2">mm</span>
+                                        <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }} id="basic-addon2">mm</span>
                                         </div>
                                 </div>
                                     </div>
@@ -158,7 +158,7 @@ const CasiaFormulas = () => {
                                     <label>12.1 mm:</label>
                                     <div className="input-group calc-form mb-3">
                                         <input step="0.001" className="form-control vault" id="c_vault_postop_QX" aria-describedby="Central vault" type="number" name="c_vault_postop_QX" />
-                                        <span className="input-group-text bg-white" id="basic-addon2">mm</span>
+                                        <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }} id="basic-addon2">mm</span>
                                         </div>
                                 </div>
 
@@ -166,7 +166,7 @@ const CasiaFormulas = () => {
                                     <label>12.6 mm:</label>
                                     <div className="input-group calc-form mb-3">
                                         <input step="0.001" className="form-control vault" id="c_vault_postop_QX" aria-describedby="Central vault" type="number" name="c_vault_postop_QX" />
-                                        <span className="input-group-text bg-white" id="basic-addon2">mm</span>
+                                        <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }} id="basic-addon2">mm</span>
                                         </div>
                                 </div>
 
@@ -174,7 +174,7 @@ const CasiaFormulas = () => {
                                 <label>13.2 mm:</label>
                                     <div className="input-group calc-form mb-3">
                                         <input step="0.001" className="form-control vault" id="c_vault_postop_QX" aria-describedby="Central vault" type="number" name="c_vault_postop_QX" />
-                                        <span className="input-group-text bg-white" id="basic-addon2">mm</span>
+                                        <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }} id="basic-addon2">mm</span>
                                         </div>
                                 </div>
 
@@ -182,7 +182,7 @@ const CasiaFormulas = () => {
                                 <label>13.7 mm:</label>
                                     <div className="input-group calc-form mb-3">
                                         <input step="0.001" className="form-control vault" id="c_vault_postop_QX" aria-describedby="Central vault" type="number" name="c_vault_postop_QX" />
-                                        <span className="input-group-text bg-white" id="basic-addon2">mm</span>
+                                        <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }} id="basic-addon2">mm</span>
                                         </div>
                                 </div>
                                     </div>

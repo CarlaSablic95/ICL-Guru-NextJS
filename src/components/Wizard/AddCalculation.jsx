@@ -9,7 +9,7 @@ import ACM from "../FormCalculation/ACM";
 import CasiaFormulas from "../FormCalculation/CasiaFormulas";
 import WTW from "../FormCalculation/WTW";
 
-// import { Splide, SplideSlide } from '@splidejs/react-splide';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
 
 import ButtonForm from "../Button/ButtonForm";
 
@@ -33,13 +33,13 @@ const cards = [
     <WTW key="wtw" />
 ];
 
-// const stepTitles = [
-//   "Surgical Data",
-//   "Ultrasound",
-//   "Anterior chamber Measurements",
-//   "Casia 2 formulas",
-//   "WTW (required for reference and validation only)"
-// ];
+const stepTitles = [
+  "Surgical Data",
+  "Ultrasound",
+  "Anterior chamber Measurements",
+  "Casia 2 formulas",
+  "WTW (required for reference and validation only)"
+];
 
   return (
     <div>
@@ -47,15 +47,8 @@ const cards = [
         <ButtonForm title="CALCULATE" bgColor="#B02F92" textColor="#fefefe"  rounded="2rem" textTransform="uppercase" />
         <ButtonForm title="VIEW RESULT" bgColor="#B02F92" textColor="#fefefe"  rounded="2rem" textTransform="uppercase" />
       </div>
-      <Steps current={step}>
-        <Steps.Item title="Surgical Data" description="Description" />
-        <Steps.Item title="Ultrasound" description="Description" />
-        <Steps.Item title="Anterior chamber Measurements" description="Description" />
-        <Steps.Item title="Casia 2 formulas" description="Description" />
-        <Steps.Item title="WTW (required for reference and validation only)" description="Description" />
-      </Steps>
 
-      {/* <Splide
+      <Splide
         options={{
           type: "slide",
           perPage: 5,
@@ -73,13 +66,13 @@ const cards = [
               id="step"
               style={{ 
                 cursor: "pointer",
-                background: activeStep === index ? "#495AFF" : "none",
+                // background: activeStep === index ? "#495AFF" : "none",
                 
               }}
             />
           </SplideSlide>
         ))}
-      </Splide> */}
+      </Splide>
 
 
       <hr />
@@ -89,12 +82,14 @@ const cards = [
       </Panel>
       <hr />
       <ButtonGroup>
+      <div className="d-flex justify-content-between">
         <Button onClick={onPrevious} disabled={step === 0}>
           Previous
         </Button>
         <Button onClick={onNext} disabled={step === 4}>
           Next
         </Button>
+      </div>
       </ButtonGroup>
     </div>
   );

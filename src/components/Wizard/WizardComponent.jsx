@@ -72,25 +72,6 @@ const stepTitles = [
         </div>
             <ButtonForm title="New control" bgColor="#B02F92" textColor="#fefefe"  rounded="2rem" textTransform="uppercase" />
       </div>
-      {/* <Steps current={step}>
-     
-        <Steps.Item title="Intraoperative" description="Description" />
-  
-        <Steps.Item title="IMM" description="Description" />
-      
-        <Steps.Item title="1 Day" description="Description" />
-     
-        <Steps.Item title="7 Days" description="Description" />
-      
-        <Steps.Item title="1 Month" description="Description" />
-    
-        <Steps.Item title="3 Months" description="Description" />
-      
-        <Steps.Item title="9 Months" description="Description" />
-      
-        <Steps.Item title="1 Year" description="Description" />
-  
-      </Steps> */}
 
       <Splide
         options={{

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import Button from "../Button/Button2";
 import Image from "next/image";
 import icon from "../../../public/icons/backup.svg";
@@ -6,6 +7,9 @@ import icon from "../../../public/icons/backup.svg";
 const Ultrasound = () => {
     const [selectedOptionOD, setSelectedOptionOD] = useState("Cloud");
     const [selectedOptionOS, setSelectedOptionOS] = useState("Cloud");
+
+    const [isEnabled, setIsEnabled] = useState(false);
+    const { register, handleSubmit, formState: {errors} } = useForm();
 
     const handleOptionClick = (eye, option) => {
         if(eye === "OD") {
@@ -15,28 +19,34 @@ const Ultrasound = () => {
         }
     }
 
+    const handleDisabledInput = () => {
+        setIsEnabled((prevState) => !prevState);
+    }
+
+
+    const onSubmit = () => {
+        console.log("Form data");
+        
+    }
+
     return (
         <section className="w-100">
             <div className="card rounded-5" style={{ width: "100%" }}>
             <div className="card-body">
-            <div className="form-check form-switch">
-                                <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" />
-                                <label className="form-check-label fw-bold" for="flexSwitchCheckChecked">Edit </label>
-                            </div>
                 <h3 className="card-title text-center">Ultrasound *</h3>
                 
                 <div className="container">
                     <div>
                         <form action="" className="row justify-content-evenly">
-                                {/* OD SECTION */}
+                                {/* OD FORM */}
                             <div className="col-10 col-md-5 rounded-5 p-3 mb-3" style={{ backgroundColor:"#AAC7E5" }}>
                                 <div className="rounded-5 mx-auto p-2" style={{ backgroundColor:"#4888C8", width:"50px" }}>
                                     <h4 className="text-white fw-bold text-center">OD</h4>
                                 </div>
                                 <div className="d-flex justify-content-evenly mb-4">
-                                    <button type="button" className={`btn py-2 px-4 ${ selectedOptionOD === "Cloud" ? "selected-button": "" }`} onClick={() => handleOptionClick("OD", "Cloud")}>Cloud</button>
+                                    <button type="button" className={`btn py-2 px-4 ${ selectedOptionOD === "Cloud" ? "selected-button": "unselected-button" }`} onClick={() => handleOptionClick("OD", "Cloud")}>Cloud</button>
 
-                                    <button type="button" className={`btn py-2 px-4 ${ selectedOptionOD === "Local" ? "selected-button": "" }`} onClick={() => handleOptionClick("OD", "Local")}>Local</button>
+                                    <button type="button" className={`btn py-2 px-4 ${ selectedOptionOD === "Local" ? "selected-button": "unselected-button" }`} onClick={() => handleOptionClick("OD", "Local")}>Local</button>
                                 </div>
 
                                { selectedOptionOD === "Cloud" ? (
@@ -70,7 +80,7 @@ const Ultrasound = () => {
                                  </form>
                             </div>
 
-                            {/* OS SECTION */}
+                            {/* OS FORM */}
 
                             <div className="col-10 col-md-5 rounded-5 p-3 mb-3" style={{ backgroundColor:"#98D3C7" }}>
                                 <div className="rounded-5 mx-auto p-2" style={{ backgroundColor:"#2FB297", width:"50px" }}>
@@ -78,9 +88,9 @@ const Ultrasound = () => {
                                 </div>
                             <div>
                             <div className="d-flex justify-content-evenly mb-4">
-                                    <button type="button" className={`btn py-2 px-4 ${ selectedOptionOS === "Cloud" ? "selected-button": "" }`} onClick={ () => handleOptionClick("OS", "Cloud") }>Cloud</button>
+                                    <button type="button" className={`btn py-2 px-4 ${ selectedOptionOS === "Cloud" ? "selected-button": "unselected-button" }`} onClick={ () => handleOptionClick("OS", "Cloud") }>Cloud</button>
 
-                                    <button type="button" className={`btn py-2 px-4 ${ selectedOptionOS === "Local" ? "selected-button": "" }`} onClick={ () => handleOptionClick("OS", "Local") }>Local</button>
+                                    <button type="button" className={`btn py-2 px-4 ${ selectedOptionOS === "Local" ? "selected-button": "unselected-button" }`} onClick={ () => handleOptionClick("OS", "Local") }>Local</button>
                                 </div>
 
                                { selectedOptionOS === "Cloud" ? (<div className="d-flex justify-content-center mb-4">

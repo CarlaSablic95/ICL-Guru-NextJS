@@ -113,7 +113,7 @@ const FormIMM = () => {
                     <p className="fw-bold mb-2">Central vault: </p>
                     <div className="input-group">
                       <input type="number" step="0.001" className="form-control vault" id="c_vault_postop_QX" aria-describedby="Central vault" name="c_vault_postop_QX" />
-                      <span className="input-group-text bg-white" id="basic-addon2">mm</span>
+                      <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }} id="basic-addon2">mm</span>
                     </div>
                   </div>
                 </div>
@@ -124,7 +124,7 @@ const FormIMM = () => {
                     <p className="fw-bold mb-2">Nasal peripheral vault: </p>
                     <div className="input-group">
                       <input type="number" step="0.001" className="form-control vault" id="c_vault_postop_QX" aria-describedby="Central vault" name="c_vault_postop_QX" />
-                      <span className="input-group-text bg-white" id="basic-addon2">mm</span>
+                      <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }} id="basic-addon2">mm</span>
                     </div>
                   </div>
                 </div>
@@ -135,7 +135,7 @@ const FormIMM = () => {
                     <p className="fw-bold mb-2">Temporal peripheral vault: </p>
                     <div className="input-group">
                       <input type="number" step="0.001" className="form-control vault" id="c_vault_postop_QX" aria-describedby="Central vault" name="c_vault_postop_QX" />
-                      <span className="input-group-text bg-white" id="basic-addon2">mm</span>
+                      <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }} id="basic-addon2">mm</span>
                     </div>
                   </div>
                 </div>
@@ -146,7 +146,7 @@ const FormIMM = () => {
                     <p className="fw-bold mb-2">Nasal angle: </p>
                     <div className="input-group">
                       <input type="number" step="0.001" className="form-control vault" id="c_vault_postop_QX" aria-describedby="Central vault" name="c_vault_postop_QX" />
-                      <span className="input-group-text bg-white" id="basic-addon2">°</span>
+                      <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }} id="basic-addon2">°</span>
                     </div>
                   </div>
                 </div>
@@ -157,7 +157,7 @@ const FormIMM = () => {
                     <p className="fw-bold mb-2">Temporal angle: </p>
                     <div className="input-group">
                       <input type="number" step="0.001" className="form-control vault" id="c_vault_postop_QX" aria-describedby="Central vault" name="c_vault_postop_QX" />
-                      <span className="input-group-text bg-white" id="basic-addon2">°</span>
+                      <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }} id="basic-addon2">°</span>
                     </div>
                   </div>
                 </div>
@@ -168,7 +168,7 @@ const FormIMM = () => {
                     <p className="fw-bold mb-2">Pupil diameter: </p>
                     <div className="input-group">
                       <input type="number" step="0.001" className="form-control vault" id="c_vault_postop_QX" aria-describedby="Central vault" name="c_vault_postop_QX" />
-                      <span className="input-group-text bg-white" id="basic-addon2">mm</span>
+                      <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }} id="basic-addon2">mm</span>
                     </div>
                   </div>
                 </div>

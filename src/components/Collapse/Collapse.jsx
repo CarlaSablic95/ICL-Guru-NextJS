@@ -10,7 +10,7 @@ import image7 from "@/components/Collapse/img/oct_ang_1.png";
 const Collapse = () => {
     return (
         <>
-            <section className="d-flex flex-column justify-content-center align-items-center">
+            <section className="d-flex flex-column justify-content-center align-items-center mb-4">
             <button className="btn mb-3 text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="button-collapse" style={{ backgroundColor:"#F3EA1F", borderRadius:"1rem" }}>
                 Image references - Please check it
             </button>
@@ -18,8 +18,6 @@ const Collapse = () => {
             <div className="collapse" id="collapseExample">
                 <div className="card card-body w-100">
                 For videos, please follow this protocol to acquire them and only then upload them. In the case of images, it&apos;s necessary to upload both images from the right and left eye with the following visible measurements: (Please click on the links to get more information about the measurement criteria)
-                
-
                 <hr />
 
                 <section className="d-flex justify-content-evenly">

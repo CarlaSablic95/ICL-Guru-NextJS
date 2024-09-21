@@ -2,7 +2,6 @@
 import { useFormContext } from "react-hook-form";
   import Image from "next/image";
   import SearchIcon from "/public/icons/search.svg";
-
   export const Input = ({ name, type, rules, placeholder, rounded, defaultValue, disabled }) => {
     const formContext = useFormContext();
     const { register, formState } = formContext || {};
