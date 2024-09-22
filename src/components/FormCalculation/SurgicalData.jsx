@@ -73,18 +73,21 @@ const SurgicalData = () => {
                                     ) }
                                     </div>
                                     <div className="form-check form-switch">
-                                <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked1" />
+                                <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked1" disabled={isEnabled} />
                                 <label className="form-check-label fw-bold" for="flexSwitchCheckChecked1">VIVA*</label>
                             </div>
-
+                            
                             <div>
                                     <label>Data of surgery<span className="text-danger">*</span> :</label>
-                                    <div className="input-group mb-3">
-                                        <input type="date" className={`datepicker form-control ${errors.dqx_od ? "border border-2 border-danger" : ""}`} id="id_dqx_od" name="dqx_od" 
-                                        {...register("id_dqx_od", {required: true})}
+                                    <div className="input-group">
+                                        <input type="date" className={`form-control ${errors.dqx_od ? "border border-2 border-danger" : ""}`} id="id_dqx_od" name="dqx_od" 
+                                        {...register("dqx_od", {required: true})}
                                         disabled={isEnabled} />
                                     </div>
                                 </div>
+                                { errors.dqx_od && (
+                                        <div className="text-danger text-center fw-bold mb-3">This field is required</div>
+                                    ) }
                             </div>
 
                             {/* OS FORM */}
@@ -135,11 +138,14 @@ const SurgicalData = () => {
                                 <label className="form-check-label fw-bold" for="flexSwitchCheckChecked2">VIVA* </label>
                             </div>
 
-                            <div>
+                                <div>
                                     <label>Data of surgery<span className="text-danger">*</span> :</label>
-                                    <div className="input-group mb-3">
-                                    <input type="date" className={`datepicker form-control ${errors.dqx_os ? "border border-2 border-danger" : ""}`} id="id_dqx_os" name="dqx_os" disabled={isEnabled} />
+                                    <div className="input-group">
+                                    <input type="date" className={`form-control ${errors.dqx_os ? "border border-2 border-danger" : ""}`} {...register("dqx_os", {required: true})} id="id_dqx_os" name="dqx_os" disabled={isEnabled} />
                                     </div>
+                                    { errors.dqx_os && (
+                                        <div className="text-danger text-center fw-bold mb-3">This field is required</div>
+                                    ) }
                                 </div>
 
                             </div>

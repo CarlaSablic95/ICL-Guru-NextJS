@@ -132,7 +132,11 @@ return (
             <th scope="col" className="align-middle">Delete</th>
           </tr>
         </thead>
-
+        { filteredPatients.length === 0 ? (
+      <div className="text-center">
+        <p>Search not performed</p>
+      </div>
+    ) : (
         <tbody className="align-middle">
           {currentPatients.map((patient) => (
             <tr className="text-center" style={{ cursor:"pointer" }} key={patient.id}>
@@ -154,7 +158,7 @@ return (
               </td>
             </tr>
           ))}
-        </tbody>
+        </tbody>)}
       </table>
     </div>
 

@@ -105,7 +105,10 @@ if(status === "failed") return <div>Error: {error}</div>;
                 </thead>
 
                 <tbody>
-                { filteredClinics.map((clinic) => (
+                { filteredClinics.length === 0 ? 
+                        (<div className="text-center">
+                          <p>Search not performed</p>
+                        </div>) : (filteredClinics.map((clinic) => (
                           <tr className="text-center" style={{ cursor: "pointer"}} key={clinic.id}>
                           <td className="text-center align-middle">{clinic.name}</td>
                           <td className="text-center align-middle">
@@ -127,7 +130,7 @@ if(status === "failed") return <div>Error: {error}</div>;
                               />
                           </td>
                         </tr>
-                        )) }
+                        )))}
                 
                 </tbody>
               </table>

@@ -128,10 +128,10 @@ const Calculations = () => {
                         DOB: <small class="text-muted">{`${patient.dob}`}</small>
                         </h4>
 
+                        {/* MOSTRAR NOMBRE DE LA CLINICA */}
                         <h4 className="mb-1 fs-4 fw-bold">
                         Organization: <small class="text-muted">{`${patient.organization}`}</small>
                         </h4>
-                        {/* MOSTRAR NOMBRE DE LA CLINICA */}
                     </div>
             <div className="d-flex justify-content-end align-items-center mb-5">
                 <Button title="New calculation" icon="../icons/add-user.svg" bgColor="#3DC2DD" rounded="2rem" fontWeight="bold" onClick={() => handleNewCalculation()} />
