@@ -16,7 +16,7 @@ const AddPatient = () => {
 
     const { handleSubmit } = methods;
     
-    const onSubmit = async (data) => { //async 
+    const onSubmit = async (data) => {
         console.log("DATOS A ENVIAR: ", data);
         setIsLoading(true);
         // setErrorMessage("");

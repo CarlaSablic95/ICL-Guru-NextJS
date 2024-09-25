@@ -9,8 +9,8 @@ import Edit from "/public/icons/edit.svg";
 import Delete from "/public/icons/delete.svg";
 import Eye from "@/components/Eyes/EyesOdOs";
 import Image from "next/image";
-import CalculationDataPatient from "@/components/CalculationsPatient/CalculationDataPatient";
-import NewCalculation from "@/components/CalculationsPatient/NewCalculation";
+import CalculationGraphicData from "@/components/CalculationsPatient/CalculationGraphicData";
+import AddCalculation from "@/components/Wizard/AddCalculation";
 
 const Calculations = () => {
 
@@ -21,7 +21,9 @@ const Calculations = () => {
     const [error, setError] = useState(null);
 
     const dispatch = useDispatch();
-    const calculations = useSelector((state) => state.calculations);
+    const calculations = useSelector((state) => state.calculations.calculations);
+    console.log("CALCULATIONS: ", calculations);
+    
     
     // Obtener el nombre del usuario desde Redux
     const userName = useSelector((state) => state.auth.user?.name);
@@ -104,9 +106,9 @@ const Calculations = () => {
             return (
                 <>
                 { showNewCalculation ? (
-                  <NewCalculation handleReturnClick={handleReturnClick} />
+                  <AddCalculation handleReturnClick={handleReturnClick} />
                 ) : showCalculation ?
-                 (<CalculationDataPatient handleReturnClick={handleReturnClick} />)     
+                 (<CalculationGraphicData handleReturnClick={handleReturnClick} />)     
         :
         (<section className="col-12 col-md-11 px-5 mx-auto">
             
@@ -122,15 +124,15 @@ const Calculations = () => {
             </div>
                     <div className="mb-5 d-flex flex-column align-items-center">
                     <h4 className="mb-1 fs-4 fw-bold">
-                            Patient: <small class="text-muted">{`${patient.name} ${patient.surname}`}</small>
+                            Patient: <small className="text-muted">{`${patient.name} ${patient.surname}`}</small>
                         </h4>
                         <h4 className="mb-1 fs-4 fw-bold">
-                        DOB: <small class="text-muted">{`${patient.dob}`}</small>
+                        DOB: <small className="text-muted">{`${patient.dob}`}</small>
                         </h4>
 
                         {/* MOSTRAR NOMBRE DE LA CLINICA */}
                         <h4 className="mb-1 fs-4 fw-bold">
-                        Organization: <small class="text-muted">{`${patient.organization}`}</small>
+                        Organization: <small className="text-muted">{`${patient.organization}`}</small>
                         </h4>
                     </div>
             <div className="d-flex justify-content-end align-items-center mb-5">
@@ -149,6 +151,7 @@ const Calculations = () => {
             </tr>
           </thead>
           <tbody>
+            {/* ERROR 404 */}
             {/* { calculations.map((calc, index) => (
               <tr className="text-center" key={index}>
               <td className="align-middle">February 21,2024</td>
@@ -168,29 +171,25 @@ const Calculations = () => {
             } */}
 
             <tr className="text-center">
-              <td className="align-middle" onClick={ () => handleEdit() } style={{ cursor:"pointer" }}>February 21,2024</td>
-              <td className="align-middle" onClick={ () => handleEdit() } style={{ cursor:"pointer" }}>February 21,2024</td>
+              <td className="align-middle" onClick={ () => handleEdit() } style={{ cursor:"pointer" }}>-</td>
+              <td className="align-middle" onClick={ () => handleEdit() } style={{ cursor:"pointer" }}>-</td>
               <td className="align-middle" onClick={ () => handleEdit() } style={{ cursor:"pointer" }}>
-              <Eye bgColor="#4888C8" color="#fefefe" title="OD" />
+              -
               </td>
-              <td className="align-middle" onClick={ () => handleEdit() } style={{ cursor:"pointer" }}>ZV1</td>
+              <td className="align-middle" onClick={ () => handleEdit() } style={{ cursor:"pointer" }}>-</td>
               <td className="align-middle">
-                <Image src={ Edit }  style={{ width:"18px", cursor:"pointer" }} alt="icon" />
+                <Image src={ Edit }  style={{ width:"18px", cursor:"pointer" }} alt="icon" onClick={() => handleNewCalculation()} />
               </td>
               <td className="align-middle">
                 <Image src={ Delete } style={{ width: "22px", cursor:"pointer"}}data-bs-toggle="modal" data-bs-target="#modalDelete" alt="icon" />
               </td>
             </tr>
-
-          
           </tbody>
         </table>
         </div>
             
         </section>)
         }
-   
-        
     </>
     )
 

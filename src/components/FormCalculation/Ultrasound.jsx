@@ -1,15 +1,22 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../Button/Button2";
 import Image from "next/image";
 import icon from "../../../public/icons/backup.svg";
+import FilesOD from "../Modal/FilesOD";
+import FilesOS from "../Modal/FilesOS";
 
 const Ultrasound = () => {
+    const [fileNameOD, setFileNameOD] = useState("No file chosen");
+    const [fileNameOS, setFileNameOS] = useState("No file chosen");
     const [selectedOptionOD, setSelectedOptionOD] = useState("Cloud");
     const [selectedOptionOS, setSelectedOptionOS] = useState("Cloud");
 
     const [isEnabled, setIsEnabled] = useState(false);
     const { register, handleSubmit, formState: {errors} } = useForm();
+
+    const fileInputRefOD = useRef(null);
+    const fileInputRefOS = useRef(null);
 
     const handleOptionClick = (eye, option) => {
         if(eye === "OD") {
@@ -23,17 +30,43 @@ const Ultrasound = () => {
         setIsEnabled((prevState) => !prevState);
     }
 
+    // Campo file
+    const handleFileChangeOD = (e) => {
+        const file = e.target.files[0];
+        if(file) {
+          setFileNameOD(file.name);
+        } else {
+          setFileNameOD("No file chosen");
+        }
+      }
 
-    const onSubmit = () => {
-        console.log("Form data");
+      const handleFileChangeOS = (e) => {
+        const file = e.target.files[0];
+        if(file) {
+          setFileNameOS(file.name);
+        } else {
+          setFileNameOS("No file chosen");
+        }
+      }
+    
+    const handleUploadClickOD = () => {
+        fileInputRefOD.current.click();
+    };
+
+    const handleUploadClickOS = () => {
+        fileInputRefOS.current.click();
+    };
+
+    // const onSubmit = () => {
+    //     console.log("Form data");
         
-    }
+    // }
 
     return (
         <section className="w-100">
             <div className="card rounded-5" style={{ width: "100%" }}>
             <div className="card-body">
-                <h3 className="card-title text-center">Ultrasound *</h3>
+                <h3 className="card-title text-center">Ultrasound*</h3>
                 
                 <div className="container">
                     <div>
@@ -45,24 +78,24 @@ const Ultrasound = () => {
                                 </div>
                                 <div className="d-flex justify-content-evenly mb-4">
                                     <button type="button" className={`btn py-2 px-4 ${ selectedOptionOD === "Cloud" ? "selected-button": "unselected-button" }`} onClick={() => handleOptionClick("OD", "Cloud")}>Cloud</button>
-
                                     <button type="button" className={`btn py-2 px-4 ${ selectedOptionOD === "Local" ? "selected-button": "unselected-button" }`} onClick={() => handleOptionClick("OD", "Local")}>Local</button>
                                 </div>
 
                                { selectedOptionOD === "Cloud" ? (
                                 <div className="d-flex justify-content-center mb-4">
-                                    <button type="button" className="btn py-2 px-4 text-white rounded-5" id="id_iclguru_cloud_od" style={{ color:"#0051A1", backgroundColor:"#3DC2DD" }}>Upload from ICLGuru Cloud</button>
+                                    <button type="button" className="btn py-2 px-4 text-white rounded-5" id="id_iclguru_cloud_od" style={{ color:"#0051A1", backgroundColor:"#3DC2DD" }} data-bs-toggle="modal" data-bs-target="#filesOD">Upload from ICLGuru Cloud</button>
                                 </div>)
                                 :
                                 (<div className="mb-3">
-                                    <label for="formFile" className="form-label w-100">
+                                    <label htmlFor="id_eyeOD_us" className="form-label w-100">
                                     <div className="form-control d-flex justify-content-between align-items-center rounded-4">
                                         <Image alt="icon" loading="lazy" width="36" height="36" decoding="async" data-nimg="1" src={icon} style={{color: "transparent"}} />
-                                        <p className="text-secondary mb-0">No file chosen</p>
-                                        <button className="btn py-2 px-4" style={{ backgroundColor: "rgb(24, 73, 214)", textTransform: "capitalize", borderRadius: "0.5rem", fontSize: "16px"}}>Upload</button>
+                                        <small className="text-secondary mb-0">{fileNameOD}</small>
+                                        <button type="button" className="btn py-2 px-4" style={{ backgroundColor: "rgb(24, 73, 214)", textTransform: "capitalize", borderRadius: "0.5rem", fontSize: "16px"}}
+                                         onClick={handleUploadClickOD}>Upload</button>
                                     </div>
                                 </label>
-                                    <input className="form-control d-none" id="formFile" type="file" />
+                                    <input className="form-control d-none" type="file" id="id_eyeOD_us" name="eyeOD_us" onChange={handleFileChangeOD}  ref={fileInputRefOD} />
                                     </div>)}
 
                                 <div className="form-check form-switch">
@@ -94,43 +127,47 @@ const Ultrasound = () => {
                                 </div>
 
                                { selectedOptionOS === "Cloud" ? (<div className="d-flex justify-content-center mb-4">
-                                    <button type="button" className="btn py-2 px-4 text-white rounded-5" id="id_iclguru_cloud_od" style={{ color:"#0051A1", backgroundColor:"#3DC2DD" }}>Upload from ICLGuru Cloud</button>
+                                    <button type="button" className="btn py-2 px-4 text-white rounded-5" id="id_iclguru_cloud_os" style={{ color:"#0051A1", backgroundColor:"#3DC2DD" }} data-bs-toggle="modal" data-bs-target="#filesOS">Upload from ICLGuru Cloud</button>
                                 </div>)
                                 :
                                 (<div className="mb-3">
-                                    <label for="formFile" className="form-label w-100">
+                                    <label for="id_eyeOS_us" className="form-label w-100">
                                     <div className="form-control d-flex justify-content-between align-items-center rounded-4">
                                         <Image alt="icon" loading="lazy" width="36" height="36" decoding="async" data-nimg="1" src={icon} style={{color: "transparent"}} />
-                                        <p className="text-secondary mb-0">No file chosen</p>
-                                        <button className="btn py-2 px-4" style={{ backgroundColor: "rgb(24, 73, 214)", textTransform: "capitalize", borderRadius: "0.5rem", fontSize: "16px"}}>Upload</button>
+                                        <small className="text-secondary mb-0">{fileNameOS}</small>
+                                        <button type="button" className="btn py-2 px-4" style={{ backgroundColor: "rgb(24, 73, 214)", textTransform: "capitalize", borderRadius: "0.5rem", fontSize: "16px"}} 
+                                        onClick={handleUploadClickOS}>Upload</button>
                                     </div>
                                 </label>
-                                    <input className="form-control d-none" id="formFile" type="file" />
+                                    <input className="form-control d-none" id="id_eyeOS_us" ref={fileInputRefOS} type="file" onChange={handleFileChangeOS} />
                                     </div>)}
 
                                 <div className="form-check form-switch">
                                     <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked1" />
                                     <label className="form-check-label fw-bold" for="flexSwitchCheckChecked3">Delete image and data</label>
                                  </div>
-                                 <form action="">
+
                                     <select className="form-select" aria-label="Default select example">
                                         <option selected value="unknown">Unknown device</option>
                                         <option value="sonomed_u">Sonomed Escalon VuMAX HD / VuPad</option>
                                         <option value="sonomed_ii">Sonomed - VuMax II</option>
                                         <option value="arcscan">Arcscan</option>
                                     </select>
-                                 </form>
 
                             </div>
                             </div>
                             <div className="d-flex justify-content-center">
-                                <Button title="SAVE" bgColor="#3DC2DD" rounded="2rem" fontWeight="bold" />
+                                <Button title="SAVE" bgColor="#3DC2DD" rounded="2rem" fontWeight="bold" disabled={isEnabled}/>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
             </div>
+
+            {/* VENTANA MODAL PARA SELECCIONAR ARCHIVOS OS/OD*/}
+            <FilesOD />                             
+              <FilesOS /> 
         </section>
     )
 }

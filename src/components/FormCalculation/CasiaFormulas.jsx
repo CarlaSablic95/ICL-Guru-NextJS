@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../Button/Button2";
 import Image from "next/image";
 import icon from "../../../public/icons/backup.svg";
 
 const CasiaFormulas = () => {
+    const [fileNameOD, setFileNameOD] = useState("No file chosen");
+    const [fileNameOS, setFileNameOS] = useState("No file chosen");
     const [isEnabled, setIsEnabled] = useState(true);
+
+    const fileInputRefOD = useRef(null);
+    const fileInputRefOS = useRef(null);
 
     const handleDisabledInput = () => {
         setIsEnabled((prevState) => !prevState);
@@ -16,6 +21,34 @@ const CasiaFormulas = () => {
     const onSubmit = () => {
         console.log("Form data");
     }
+
+    // Campo File
+    const handleFileChangeOD = (e) => {
+        const file = e.target.files[0];
+        if(file) {
+          setFileNameOD(file.name);
+        } else {
+          setFileNameOD("No file chosen");
+        }
+      }
+
+      const handleFileChangeOS = (e) => {
+        const file = e.target.files[0];
+        if(file) {
+          setFileNameOS(file.name);
+        } else {
+          setFileNameOS("No file chosen");
+        }
+      }
+
+      const handleUploadClickOD = () => {
+        fileInputRefOD.current.click();
+    };
+
+    const handleUploadClickOS = () => {
+        fileInputRefOS.current.click();
+    };
+
 
     return (
         <section className="w-100">
@@ -35,13 +68,17 @@ const CasiaFormulas = () => {
                                     <h4 className="text-white fw-bold text-center">OD</h4>
                                 </div>
                                 <div className="mb-3">
-                                    <p className="fw-bold">Image:</p>
+                                <p className="fw-bold">Image:</p>
+                                    <label htmlFor="id_eyeOD_oct" className="form-label w-100">
                                     <div className="form-control d-flex justify-content-between align-items-center rounded-4">
                                         <Image alt="icon" loading="lazy" width="36" height="36" decoding="async" data-nimg="1" src={icon} style={{color: "transparent"}} />
-                                        <p className="text-secondary mb-0">No file chosen</p>
-                                        <button className="btn py-2 px-4" style={{ backgroundColor: "rgb(24, 73, 214)", textTransform: "capitalize", borderRadius: "0.5rem", fontSize: "14px"}}>Upload</button>
+                                        <small className="text-secondary mb-0">{fileNameOD}</small>
+                                        <button type="button" className="btn py-2 px-4" style={{ backgroundColor: "rgb(24, 73, 214)", textTransform: "capitalize", borderRadius: "0.5rem", fontSize: "16px"}}
+                                         onClick={handleUploadClickOD}>Upload</button>
                                     </div>
-                                </div>
+                                </label>
+                                    <input className="form-control d-none" type="file" id="id_eyeOD_oct_f" name="eyeOD_oct_f" ref={fileInputRefOD} onChange={handleFileChangeOD}  />
+                                    </div>
                                 
                                 <div className="row justify-content-evenly">
                                     <div className="col-10 col-md-5">
@@ -148,10 +185,16 @@ const CasiaFormulas = () => {
                                 </div>
                                 <div className="mb-3">
                                     <p className="fw-bold">Image:</p>
+                                    <div className="mb-3">
+                                    <label htmlFor="id_eyeOD_oct" className="form-label w-100">
                                     <div className="form-control d-flex justify-content-between align-items-center rounded-4">
                                         <Image alt="icon" loading="lazy" width="36" height="36" decoding="async" data-nimg="1" src={icon} style={{color: "transparent"}} />
-                                        <p className="text-secondary mb-0">No file chosen</p>
-                                        <button className="btn py-2 px-4" style={{ backgroundColor: "rgb(24, 73, 214)", textTransform: "capitalize", borderRadius: "0.5rem", fontSize: "16px"}}>Upload</button>
+                                        <small className="text-secondary mb-0">{fileNameOS}</small>
+                                        <button type="button" className="btn py-2 px-4" style={{ backgroundColor: "rgb(24, 73, 214)", textTransform: "capitalize", borderRadius: "0.5rem", fontSize: "16px"}}
+                                         onClick={handleUploadClickOS}>Upload</button>
+                                    </div>
+                                </label>
+                                    <input className="form-control d-none" type="file" id="id_eyeOS_oct_f" name="eyeOS_oct_f" ref={fileInputRefOS} onChange={handleFileChangeOS}  />
                                     </div>
                                 </div>
                                 
@@ -254,7 +297,7 @@ const CasiaFormulas = () => {
                             </div>
                                 
                             <div className="d-flex justify-content-center">
-                                <Button type="submit" title="SAVE" bgColor="#3DC2DD" rounded="2rem" fontWeight="bold" />
+                                <Button type="submit" title="SAVE" bgColor="#3DC2DD" rounded="2rem" fontWeight="bold" disabled={isEnabled} />
                             </div>
                         </form>
                     </div>

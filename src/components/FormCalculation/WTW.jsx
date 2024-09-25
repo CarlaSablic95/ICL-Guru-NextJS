@@ -34,7 +34,7 @@ const WTW = () => {
                                 <h4 className="text-white fw-bold text-center">OD</h4>
                             </div>
                             <div className={`${errors.wtw_od ? "mb-0" : "mb-3"}`}>
-                                <label htmlFor="id_wtw_od" className="fw-bold">WTW*: </label>
+                                <label htmlFor="id_wtw_od" className="fw-bold">WTW:<span className="text-danger">*</span></label>
                                         <div className="input-group">
                                         <input type="number" step="0.001" className={`form-control ${errors.wtw_od ? "border border-2 border-danger" : ""}`} id="id_wtw_od" aria-label="WTW" aria-describedby="WTW" name="wtw_od" {...register("wtw_od", { required: true })} disabled={isEnabled}/>
                                             <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }} id="basic-addon2">mm</span>
@@ -51,7 +51,7 @@ const WTW = () => {
                             </div>
                             
                             <div className={`${errors.wtw_os ? "mb-0" : "mb-3"}`}>
-                            <label htmlFor="id_wtw_os" className="fw-bold">WTW*: </label>
+                            <label htmlFor="id_wtw_os" className="fw-bold">WTW:<span className="text-danger">*</span></label>
                                         <div className="input-group">
                                             <input type="number" step="0.001" className={`form-control ${errors.wtw_os ? "border border-2 border-danger" : ""}`} id="id_wtw_os" aria-label="WTW" aria-describedby="WTW" name="wtw_os" {...register("wtw_os", { required: true })} disabled={isEnabled}/>
                                             <span className="input-group-text"  style={{ backgroundColor:"#e9ecef" }} id="basic-addon2">mm</span>
@@ -63,7 +63,7 @@ const WTW = () => {
                         </div>
                             
                         <div className="d-flex justify-content-center">
-                            <Button type="submit" title="SAVE" bgColor="#3DC2DD" rounded="2rem" fontWeight="bold" />
+                            <Button type="submit" title="SAVE" bgColor="#3DC2DD" rounded="2rem" fontWeight="bold" disabled={isEnabled} />
                         </div>
                     </form>
                 </div>

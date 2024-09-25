@@ -1,11 +1,18 @@
-// import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createSlice } from "@reduxjs/toolkit";
-// import { postData, editData, deleteData } from "@/services/ApiService";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { postData } from "@/services/ApiService";
 
-// export const addCalculation = createAsyncThunk(
-//     "calculations/addCalculation",
-//     async ()
-// )
+export const addCalculation = createAsyncThunk(
+    "calculations/addCalculation",
+    async (calculationData, { rejectWithValue }) => {
+        console.log("CALCULATION PATIENT DATA");
+        try {
+            const response = await postData(`/calculation/register/${id}/`, calculationData);
+            return response;
+        } catch (error) {
+           return rejectWithValue(error.response.data);
+        }
+    }
+)
 
 const calculationSlice = createSlice({
     name: "calculations",

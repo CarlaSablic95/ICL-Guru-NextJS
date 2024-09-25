@@ -1,20 +1,40 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
+import { addCalculation } from "@/reduxSlices/calculations/calculationSlice";
 import Button from "../Button/Button2";
 
-const SurgicalData = () => {
 
+const SurgicalData = () => {
+    const dispatch = useDispatch();
+    const { register, handleSubmit, formState: {errors} } = useForm();
+    const [isLoading, setIsLoading] = useState(false);
     const [isEnabled, setIsEnabled] = useState(true);
 
     const handleDisabledInput = () => {
         setIsEnabled((prevState) => !prevState);
     }
 
-    const { register, handleSubmit, formState: {errors} } = useForm();
 
-    const onSubmit = () => {
-        console.log("Form data");
-        
+    const onSubmit = async (data) => {
+        console.log("DATOS A ENVIAR: ", data);
+        try {
+            const response = await dispatch(addCalculation(data)).unwrap();
+            console.log("Cálculo añadido con éxito: ", response);
+            setIsLoading(true);
+        } catch (error) {
+            if(error.response) {
+                console.error("Data Error: ", error.response.data);
+                console.error("Status Error: ", error.response.status);
+                console.error("Headers Error: ", error.response.headers);
+            } else if(error.request) {
+                console.error("Error creating a patient: ", error);
+            } else {
+                console.error("Error: ", error.message);
+            }
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     return (
@@ -36,7 +56,7 @@ const SurgicalData = () => {
                                     <h4 className="text-white fw-bold text-center">OD</h4>
                                 </div>
                                 <div>
-                                    <label htmlFor="id_power_sph_od" className="fw-bold">IOL power<span className="text-danger">*</span>:</label>
+                                    <label htmlFor="id_power_sph_od" className="fw-bold">IOL power:<span className="text-danger">*</span></label>
                                     <div className={`${errors.power_sph_od ? "mb-0" : "mb-3"}`}>
                                         <div className="input-group">
                                             <input type="number" step="0.5" min="-18" max="-0.5" className={`form-control ${errors.power_sph_od ? "border border-2 border-danger" : ""}`} placeholder="Sphere" aria-label="Sphere power" id="id_power_sph_od" name="power_sph_od"
@@ -52,7 +72,7 @@ const SurgicalData = () => {
                                     <div className={`${errors.power_cyl_od ? "mb-0" : "mb-3"}`}>
                                         <div className="input-group">
                                         <input type="number" step="0.5" min="-18" max="-0.5" className={`form-control ${errors.power_cyl_od ? "border border-2 border-danger" : ""}`} placeholder="Cylinder" aria-label="Cylinder power" id="id_power_cyl_od" name="power_cyl_od"
-                                        {...register("power_cyl_od", { required: true })} disabled={isEnabled} />
+                                        {...register("power_cyl_od")} disabled={isEnabled} />
                                         <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }}>Dp</span>
                                     </div> 
                                     </div>
@@ -63,7 +83,7 @@ const SurgicalData = () => {
                                             <div className={`${errors.power_axis_od ? "mb-0" : "mb-3"}`}>
                                                 <div className="input-group">
                                                 <input type="number" step="0.1" className={`form-control ${errors.power_axis_od ? "border border-2 border-danger" : ""}`} placeholder="Axis" aria-label="Axis" id="id_power_axis_od" name="power_axis_od" 
-                                                {...register("power_axis_od", { required: true })}
+                                                {...register("power_axis_od")}
                                                 disabled={isEnabled} />
                                             <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }}>°</span>
                                             </div>
@@ -73,12 +93,12 @@ const SurgicalData = () => {
                                     ) }
                                     </div>
                                     <div className="form-check form-switch">
-                                <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked1" disabled={isEnabled} />
-                                <label className="form-check-label fw-bold" for="flexSwitchCheckChecked1">VIVA*</label>
+                                <input className="form-check-input" type="checkbox" role="switch" name="viva_od" id="id_viva_od" {...register("viva_od")} disabled={isEnabled} />
+                                <label className="form-check-label fw-bold" for="id_viva_od">VIVA*</label>
                             </div>
                             
                             <div>
-                                    <label>Data of surgery<span className="text-danger">*</span> :</label>
+                                    <label className="fw-bold">Data of surgery:<span className="text-danger">*</span></label>
                                     <div className="input-group">
                                         <input type="date" className={`form-control ${errors.dqx_od ? "border border-2 border-danger" : ""}`} id="id_dqx_od" name="dqx_od" 
                                         {...register("dqx_od", {required: true})}
@@ -96,7 +116,7 @@ const SurgicalData = () => {
                             <div className="rounded-5 mx-auto p-2" style={{ backgroundColor:"#2FB297", width:"50px" }}>
                                     <h4 className="text-white fw-bold text-center">OS</h4>
                                 </div>
-                                <label htmlFor="id_power_sph_os" className="fw-bold">IOL power<span className="text-danger">*</span>:</label>
+                                <label htmlFor="id_power_sph_os" className="fw-bold">IOL power:<span className="text-danger">*</span></label>
                                 <div className={`${errors.power_sph_os ? "mb-0" : "mb-3"}`}>
                                         <div className="input-group">
                                         <input type="number" step="0.5" min="-18" max="-0.5" className={`form-control ${errors.power_sph_os ? "border border-2 border-danger" : ""}`} placeholder="Sphere" aria-label="Sphere power" id="id_power_sph_os" name="power_sph_os" 
@@ -112,7 +132,7 @@ const SurgicalData = () => {
                                     <div className={`${errors.power_cyl_os ? "mb-0" : "mb-3"}`}>
                                     <div className="input-group">
                                         <input type="number" step="0.5" className={`form-control ${errors.power_cyl_os ? "border border-2 border-danger" : ""}`} placeholder="Cylinder" aria-label="Cylinder power" id="id_power_cyl_os" name="power_cyl_os" 
-                                        {...register("power_cyl_os", {required: true})}
+                                        {...register("power_cyl_os")}
                                         disabled={isEnabled} />
                                         <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }}>Dp</span>
                                     </div>
@@ -124,7 +144,7 @@ const SurgicalData = () => {
                                     <div className={`${errors.power_axis_os ? "mb-0" : "mb-3"}`}>
                                                 <div className="input-group">
                                         <input type="number" step="0.1" className={`form-control ${errors.power_axis_os ? "border border-2 border-danger" : ""}`} placeholder="Axis" aria-label="Axis" id="id_power_axis_os" name="power_axis_os" 
-                                        {...register("power_axis_os", {required:true})}
+                                        {...register("power_axis_os")}
                                         disabled={isEnabled} />
                                         <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }}>°</span>
                                     </div>
@@ -134,12 +154,12 @@ const SurgicalData = () => {
                                     </div>
 
                                     <div className="form-check form-switch">
-                                <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked2" disabled={isEnabled} />
-                                <label className="form-check-label fw-bold" for="flexSwitchCheckChecked2">VIVA* </label>
+                                <input className="form-check-input" type="checkbox" role="switch" name="viva_os" id="id_viva_os" {...register("viva_os")} disabled={isEnabled} />
+                                <label className="form-check-label fw-bold" for="id_viva_os">VIVA* </label>
                             </div>
 
                                 <div>
-                                    <label>Data of surgery<span className="text-danger">*</span> :</label>
+                                    <label className="fw-bold">Data of surgery:<span className="text-danger">*</span> </label>
                                     <div className="input-group">
                                     <input type="date" className={`form-control ${errors.dqx_os ? "border border-2 border-danger" : ""}`} {...register("dqx_os", {required: true})} id="id_dqx_os" name="dqx_os" disabled={isEnabled} />
                                     </div>
@@ -151,13 +171,16 @@ const SurgicalData = () => {
                             </div>
                             <div className="d-flex justify-content-center">
                                 <Button title="SAVE" 
-                                type="submit" bgColor="#3DC2DD" rounded="2rem" fontWeight="bold" />
+                                type="submit" bgColor="#3DC2DD" rounded="2rem" fontWeight="bold" disabled={isEnabled || isLoading} />
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
             </div>
+
+                                        
+
         </section>
     )
 }

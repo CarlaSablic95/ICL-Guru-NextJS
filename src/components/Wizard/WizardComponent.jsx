@@ -33,34 +33,34 @@ const WizardComponent = () => {
   const onPrevious = () => onChange(step - 1);
 
 // Array de componentes FORMULARIOS para que renderice en cada paso (step)
-const cards = [
+const formControl = [
     <FormIntraoperative key="intraoperative" />,
-    <FormIMM key="imm" />,
-    <Form1D key="1-day" />,
-    <Form7D key="7-days" />,
-    <Form1M key="1-month" />,
-    <Form3M key="3-months" />,
-    <Form6M key="6-months" />,
-    <Form9M key="9-months" />,
-    <Form1Y key="1-year" />,
-    <Form3Y key="3-years" />,
-    <Form5Y key="5-years" />,
-    <Form10Y key="10-years" />,
+    // <FormIMM key="imm" />,
+    // <Form1D key="1-day" />,
+    // <Form7D key="7-days" />,
+    // <Form1M key="1-month" />,
+    // <Form3M key="3-months" />,
+    // <Form6M key="6-months" />,
+    // <Form9M key="9-months" />,
+    // <Form1Y key="1-year" />,
+    // <Form3Y key="3-years" />,
+    // <Form5Y key="5-years" />,
+    // <Form10Y key="10-years" />,
 ];
 
 const stepTitles = [
   "Intraoperative",
-  "IMM",
-  "1 Day",
-  "7 Days",
-  "1 Month",
-  "3 Months",
-  "6 Months",
-  "9 Months",
-  "1 Year",
-  "3 Years",
-  "5 Years",
-  "10 Years",
+  // "IMM",
+  // "1 Day",
+  // "7 Days",
+  // "1 Month",
+  // "3 Months",
+  // "6 Months",
+  // "9 Months",
+  // "1 Year",
+  // "3 Years",
+  // "5 Years",
+  // "10 Years",
 ];
 
   return (
@@ -70,13 +70,13 @@ const stepTitles = [
           <h3 className="my-4">Postoperative</h3>
           <Eye title="OD" />
         </div>
-            <ButtonForm title="New control" bgColor="#B02F92" textColor="#fefefe"  rounded="2rem" textTransform="uppercase" />
+            <button type="button" className="btn py-2 px-4 border-0" style={{ backgroundColor: "#B02F92", color: "#fefefe", textTransform: "uppercase", borderRadius: "2rem"}}  data-bs-toggle="modal" data-bs-target="#controlForm">New control</button>
       </div>
 
       <Splide
         options={{
           type: "slide",
-          perPage: 4,
+          perPage: 1,
           focus: "center",
           gap: "1px",
           pagination: false,
@@ -91,8 +91,7 @@ const stepTitles = [
               id="step"
               style={{ 
                 cursor: "pointer",
-                background: activeStep === index ? "#495AFF" : "none",
-                
+                backgroundColor: activeStep === index ? "#00507C" : "none",
               }}
             />
           </SplideSlide>
@@ -103,7 +102,7 @@ const stepTitles = [
       <hr />
       {/* <Panel header={`PASO: ${step + 1}`}> */}
       <Panel>
-        { cards[step]}
+        { formControl[step]}
       </Panel>
       <hr />
       <ButtonGroup>
@@ -114,6 +113,9 @@ const stepTitles = [
           Next
         </Button>
       </ButtonGroup>
+
+      {/* FORM CONTROL  */}
+      <FormIMM />
     </div>
   );
 };

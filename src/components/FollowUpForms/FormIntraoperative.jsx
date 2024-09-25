@@ -17,7 +17,7 @@ const FormCard = () => {
                 <p className="fw-bold mb-2">Central vault (end):</p>
                 <div className="input-group mb-3">
                   <input type="number" step="0.001" className="form-control vault" id="c_vault_postop_QX" aria-describedby="Central vault" name="c_vault_postop_QX" />
-                  <span className="input-group-text bg-white" id="basic-addon2">mm</span>
+                  <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }} id="basic-addon2">mm</span>
                 </div>
               </div>
             </div>
@@ -30,13 +30,13 @@ const FormCard = () => {
                 </p>
                 <div className="input-group">
                   <select
-                    className="form-select"
-                    aria-label="Default select example"
+                    className="form-select" id="id_size_postop" name="size_postop" aria-label="IOL overall diameter"
                   >
                     <option defaultValue="selected">Select an option</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="121">12.1</option>
+                    <option value="126">12.6</option>
+                    <option value="132">13.2</option>
+                    <option value="137">13.7</option>
                   </select>
                 </div>
               </div>
@@ -50,13 +50,12 @@ const FormCard = () => {
                 </p>
                 <div className="input-group">
                   <select
-                    className="form-select"
-                    aria-label="Default select example"
+                    className="form-select" id="id_end_position" name="end_position" aria-label="IOL final position"
                   >
                     <option defaultValue="selected">Select an option</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="0">Horizontal</option>
+                    <option value="90">Vertical</option>
+                    <option value="45">Oblique</option>
                   </select>
                 </div>
               </div>
@@ -72,13 +71,16 @@ const FormCard = () => {
                 </p>
                 <div className="input-group">
                   <select
-                    className="form-select"
-                    aria-label="Default select example"
+                    className="form-select" id="id_maneuver" name="maneuver" aria-label="Rotation maneuver"
                   >
                     <option defaultValue="selected">Select an option</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="NM">No maneuver</option>
+                    <option value="HV">Horizontal -&gt; Vertical</option>
+                    <option value="HO">Horizontal -&gt; Oblique</option>
+                    <option value="VH">Vertical -&gt; Horizontal</option>
+                    <option value="VO">Vertical -&gt; Oblique</option>
+                    <option value="OH">Oblique -&gt; Horizontal</option>
+                    <option value="OV">Oblique -&gt; Vertical</option>
                   </select>
                 </div>
               </div>
@@ -89,8 +91,8 @@ const FormCard = () => {
               <div className="d-flex flex-column align-items-start mb-4">
                 <p className="fw-bold mb-2">Central vault (initial):</p>
                 <div className="input-group mb-3">
-                  <input type="number" step="0.001" className="form-control vault" id="c_vault_postop_QX" aria-describedby="Central vault" name="c_vault_postop_QX" />
-                  <span className="input-group-text bg-white" id="basic-addon2">mm</span>
+                  <input type="number" step="0.001" className="form-control vault" id="c_vault_init_postop_QX" aria-describedby="Central vault" name="c_vault_init_postop_QX" />
+                  <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }} id="basic-addon2">mm</span>
                 </div>
               </div>
             </div>

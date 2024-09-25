@@ -19,7 +19,7 @@ import graphicOd from "/public/icons/graphic-od.png";
 import graphicOs from "/public/icons/graphic-os.png";
 import { useParams } from "next/navigation";
 
-const CalculationDataPatient = ({ handleReturnClick }) => {
+const CalculationGraphicData = ({ handleReturnClick }) => {
     const { id } = useParams();
     console.log("ID recibido en Calculations: ", id);
 
@@ -230,4 +230,4 @@ useEffect(() => {
     )
 }
 
-export default CalculationDataPatient;
+export default CalculationGraphicData;
