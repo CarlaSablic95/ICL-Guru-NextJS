@@ -212,8 +212,8 @@ const CalculationDataGraphic = ({ handleReturnClick }) => {
                                     <div className="text-center mb-4">
                                         <Eye bgColor="#2FB297" color="#fefefe" title="OS" width={50} height={50} fontSize="1.5rem" />
                                     </div>
-                                    <div className="mb-5 w-50">
-                                        <Image src={graphicOs} alt="OS Graphic" className="img-fluid" />
+                                    <div className="mb-5">
+                                        <Image src={graphicOs} alt="OS Graphic" className="img-fluid" width={500} height={500} />
                                     </div>
                                     <div className="container">
                                         <div className="row flex-column justify-content-center align-items-center">
