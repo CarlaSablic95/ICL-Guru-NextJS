@@ -45,7 +45,7 @@ const routes = [
   },
 ];
   return (
-    <aside className="shadow d-none d-lg-flex flex-column justify-content-start align-items-center">
+    <aside className="shadow d-none d-lg-flex flex-column justify-content-start align-items-center" style={{ minHeight: "100%" }}>
       <ul className="list-unstyled">
         <li className="mb-3">
           <div

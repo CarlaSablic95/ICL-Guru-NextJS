@@ -15,7 +15,7 @@ import { useFormContext } from "react-hook-form";
         type={type} 
         placeholder={placeholder}
         {...(formContext ? register(name, rules) : { name })}
-        className={`form-control ${errors[name] ? "border border-2 border-danger" : ""}`} style={{borderRadius: rounded}}
+        className={`form-control ${errors[name] ? "border border-2 border-danger" : ""}`} style={{borderRadius: "2rem"}}
         defaultValue={defaultValue}
         disabled={disabled}
         />
@@ -53,16 +53,29 @@ export const InputRadio = (({ id, name, value, label}) => {
   );
 
 
-  export const Select = ({}) =>{
-   return (
-    <select class="form-select" aria-label="Default select example">
-      <option selected>Select one clinic</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-  </select>
-   )
-  }
+  export const Select = ({ name, rules, defaultValue, options }) => {
+    const { register, formState: { errors } } = useFormContext();
+    const error = errors[name];
+  
+    return (
+      <>
+        <select
+          {...register(name, rules)}
+          className={`form-select ${error ? "border border-2 border-danger" : ""}`}
+          defaultValue={defaultValue}
+          aria-label={`Select ${name}`}
+        >
+          <option value="" disabled>Select one clinic</option>
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+        {error && <div className="text-center"><small className="text-danger fw-bold">{error.message}</small></div>}
+      </>
+    );
+  };
 
 
   export const InputCheckbox = ({
@@ -72,13 +85,14 @@ export const InputRadio = (({ id, name, value, label}) => {
     bgColor,
     onChange,
     label,
+    checked
   }) => {
     return (
-      <div className="form-check">
+      <div className="form-check" style={{ marginLeft:"10px" }}>
         <label className="form-check-label fw-bold" htmlFor={id}>
           <span
             className="rounded-5 p-1 text-white fw-bold"
-            style={{ backgroundColor: bgColor }}
+            style={{ backgroundColor: bgColor}}
           >
             {label}
           </span>
@@ -91,6 +105,7 @@ export const InputRadio = (({ id, name, value, label}) => {
           className="form-check-input pe-0"
           onChange={onChange}
           defaultValue={defaultValue}
+          checked={checked}
         />
       </div>
     );
@@ -99,7 +114,7 @@ export const InputRadio = (({ id, name, value, label}) => {
 
   export const SearchBar = ({ placeholder, onChange }) => {
     return (
-      <div className="position-relative w-100" style={{ maxWidth: "60%" }}>
+      <div className="position-relative w-100 search-bar">
         <input
           className="form-control me-2 rounded-5 border-2 border-dark shadow-sm"
           style={{ backgroundColor: "#D7E3FC" }}

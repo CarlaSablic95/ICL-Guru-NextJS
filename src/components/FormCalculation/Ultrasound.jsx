@@ -63,7 +63,7 @@ const Ultrasound = () => {
     // }
 
     return (
-        <section className="w-100">
+        <section className="col-12 w-100">
             <div className="card rounded-5" style={{ width: "100%" }}>
             <div className="card-body">
                 <h3 className="card-title text-center">Ultrasound*</h3>
@@ -72,7 +72,7 @@ const Ultrasound = () => {
                     <div>
                         <form action="" className="row justify-content-evenly">
                                 {/* OD FORM */}
-                            <div className="col-10 col-md-5 rounded-5 p-3 mb-3" style={{ backgroundColor:"#AAC7E5" }}>
+                            <div className="col-12 col-md-5 rounded-5 p-3 mb-3" style={{ backgroundColor:"#AAC7E5" }}>
                                 <div className="rounded-5 mx-auto p-2" style={{ backgroundColor:"#4888C8", width:"50px" }}>
                                     <h4 className="text-white fw-bold text-center">OD</h4>
                                 </div>
@@ -83,7 +83,7 @@ const Ultrasound = () => {
 
                                { selectedOptionOD === "Cloud" ? (
                                 <div className="d-flex justify-content-center mb-4">
-                                    <button type="button" className="btn py-2 px-4 text-white rounded-5" id="id_iclguru_cloud_od" style={{ color:"#0051A1", backgroundColor:"#3DC2DD" }} data-bs-toggle="modal" data-bs-target="#filesOD">Upload from ICLGuru Cloud</button>
+                                    <button type="button" className="btn py-2 px-4 text-white rounded-5 btn-cloud" id="id_iclguru_cloud_od" style={{ color:"#0051A1", backgroundColor:"#3DC2DD" }} data-bs-toggle="modal" data-bs-target="#filesOD">Upload from ICLGuru Cloud</button>
                                 </div>)
                                 :
                                 (<div className="mb-3">
@@ -91,11 +91,11 @@ const Ultrasound = () => {
                                     <div className="form-control d-flex justify-content-between align-items-center rounded-4">
                                         <Image alt="icon" loading="lazy" width="36" height="36" decoding="async" data-nimg="1" src={icon} style={{color: "transparent"}} />
                                         <small className="text-secondary mb-0">{fileNameOD}</small>
-                                        <button type="button" className="btn py-2 px-4" style={{ backgroundColor: "rgb(24, 73, 214)", textTransform: "capitalize", borderRadius: "0.5rem", fontSize: "16px"}}
+                                        <button type="button" className="btn py-2 px-4 btn-cloud" id="btn-cloud" style={{ backgroundColor: "rgb(24, 73, 214)", textTransform: "capitalize", borderRadius: "0.5rem", fontSize: "16px"}}
                                          onClick={handleUploadClickOD}>Upload</button>
                                     </div>
                                 </label>
-                                    <input className="form-control d-none" type="file" id="id_eyeOD_us" name="eyeOD_us" onChange={handleFileChangeOD}  ref={fileInputRefOD} />
+                                    <input className="form-control d-none btn-local" type="file" id="id_eyeOD_us" name="eyeOD_us" onChange={handleFileChangeOD}  ref={fileInputRefOD} />
                                     </div>)}
 
                                 <div className="form-check form-switch">
@@ -115,7 +115,7 @@ const Ultrasound = () => {
 
                             {/* OS FORM */}
 
-                            <div className="col-10 col-md-5 rounded-5 p-3 mb-3" style={{ backgroundColor:"#98D3C7" }}>
+                            <div className="col-12 col-md-5 rounded-5 p-3 mb-3" style={{ backgroundColor:"#98D3C7" }}>
                                 <div className="rounded-5 mx-auto p-2" style={{ backgroundColor:"#2FB297", width:"50px" }}>
                                     <h4 className="text-white fw-bold text-center">OS</h4>
                                 </div>
@@ -127,7 +127,7 @@ const Ultrasound = () => {
                                 </div>
 
                                { selectedOptionOS === "Cloud" ? (<div className="d-flex justify-content-center mb-4">
-                                    <button type="button" className="btn py-2 px-4 text-white rounded-5" id="id_iclguru_cloud_os" style={{ color:"#0051A1", backgroundColor:"#3DC2DD" }} data-bs-toggle="modal" data-bs-target="#filesOS">Upload from ICLGuru Cloud</button>
+                                    <button type="button" className="btn py-2 px-4 text-white rounded-5 btn-cloud" id="id_iclguru_cloud_os" style={{ color:"#0051A1", backgroundColor:"#3DC2DD" }} data-bs-toggle="modal" data-bs-target="#filesOS">Upload from ICLGuru Cloud</button>
                                 </div>)
                                 :
                                 (<div className="mb-3">
@@ -135,11 +135,11 @@ const Ultrasound = () => {
                                     <div className="form-control d-flex justify-content-between align-items-center rounded-4">
                                         <Image alt="icon" loading="lazy" width="36" height="36" decoding="async" data-nimg="1" src={icon} style={{color: "transparent"}} />
                                         <small className="text-secondary mb-0">{fileNameOS}</small>
-                                        <button type="button" className="btn py-2 px-4" style={{ backgroundColor: "rgb(24, 73, 214)", textTransform: "capitalize", borderRadius: "0.5rem", fontSize: "16px"}} 
+                                        <button type="button" className="btn py-2 px-4 btn-local" style={{ backgroundColor: "rgb(24, 73, 214)", textTransform: "capitalize", borderRadius: "0.5rem", fontSize: "16px"}} 
                                         onClick={handleUploadClickOS}>Upload</button>
                                     </div>
                                 </label>
-                                    <input className="form-control d-none" id="id_eyeOS_us" ref={fileInputRefOS} type="file" onChange={handleFileChangeOS} />
+                                    <input className="form-control d-none btn-local" id="id_eyeOS_us" ref={fileInputRefOS} type="file" onChange={handleFileChangeOS} />
                                     </div>)}
 
                                 <div className="form-check form-switch">

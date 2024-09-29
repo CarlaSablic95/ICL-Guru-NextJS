@@ -46,11 +46,11 @@ const MyAccount = () => {
                 <div className="container">
                 <div className="row justify-content-evenly pt-4">
                     <div className="col-10 col-md-5 mb-5 mb-md-3">
-                        <h2 className="fw-bold mb-4">Personal Data</h2>
+                        <h3 className="fw-bold mb-4">Personal Data</h3>
                             <FormProvider {...methods}>
                                 { console.log("METHODS: ", methods.getValues()) }
                                 
-                                <form onSubmit={handleSubmit(onSubmit)} className="px-3 px-md-5 edited-form">
+                                <form onSubmit={handleSubmit(onSubmit)} className="px-3 px-md-2 edited-form">
                                 <div className="mb-3">
                                     <label className="mb-2" htmlFor="name">Name<span className="text-danger">*</span>:
                                     </label>

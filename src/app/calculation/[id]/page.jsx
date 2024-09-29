@@ -9,7 +9,7 @@ import Edit from "/public/icons/edit.svg";
 import Delete from "/public/icons/delete.svg";
 import Eye from "@/components/Eyes/EyesOdOs";
 import Image from "next/image";
-import CalculationGraphicData from "@/components/CalculationsPatient/CalculationGraphicData";
+import CalculationDataGraphic from "@/components/CalculationsPatient/CalculationDataGraphic";
 import AddCalculation from "@/components/Wizard/AddCalculation";
 
 const Calculations = () => {
@@ -24,29 +24,9 @@ const Calculations = () => {
     const calculations = useSelector((state) => state.calculations.calculations);
     console.log("CALCULATIONS: ", calculations);
     
-    
-    // Obtener el nombre del usuario desde Redux
-    const userName = useSelector((state) => state.auth.user?.name);
-    
-    const [showUsername, setShowUsername] = useState(false);
     const [showCalculation, setShowCalculation] = useState(false);
     const [showNewCalculation, setShowNewCalculation] = useState(false);
-    
-    useEffect(() => {
-      const handleScroll = () => {
-        if(window.scrollY > 100) {
-          setShowUsername(true);
-        } else {
-          setShowUsername(false);
-        }
-      };
-  
-      window.addEventListener("scroll", handleScroll);
-  
-      return () => {
-        window.removeEventListener("scroll", handleScroll)
-      };
-    }, []);
+
      
      // TRAIGO DATOS DESDE /patients/patients/{id}
      useEffect(() => {
@@ -108,17 +88,9 @@ const Calculations = () => {
                 { showNewCalculation ? (
                   <AddCalculation handleReturnClick={handleReturnClick} />
                 ) : showCalculation ?
-                 (<CalculationGraphicData handleReturnClick={handleReturnClick} />)     
+                 (<CalculationDataGraphic handleReturnClick={handleReturnClick} />)     
         :
         (<section className="col-12 col-md-11 px-5 mx-auto">
-            
-            {/* Muestro nombre del usuario */}
-            { showUsername && (
-              <div className="bg-warning">
-                <p>{ userName }</p>
-              </div>
-            ) }
-
             <div className="mb-5">
                 <h1 className="text-center text-uppercase fw-bold">Calculations</h1>
             </div>

@@ -1,125 +1,98 @@
-"use client";
-
 import { useState } from "react";
 import { Steps, Panel, ButtonGroup, Button } from 'rsuite';
-import '@splidejs/react-splide/css';
 import FormIntraoperative from "../FollowUpForms/FormIntraoperative";
 import FormIMM from "../FollowUpForms/FormIMM";
-import Form1D from "../FollowUpForms/Form1D";
-import Form7D from "../FollowUpForms/Form7D";
-import Form1M from "../FollowUpForms/Form1M";
-import Form3M from "../FollowUpForms/Form3M";
-import Form6M from "../FollowUpForms/Form6M";
-import Form9M from "../FollowUpForms/Form9M";
-import Form1Y from "../FollowUpForms/Form1Y";
-import Form3Y from "../FollowUpForms/Form3Y";
-import Form5Y from "../FollowUpForms/Form5Y";
-import Form10Y from "../FollowUpForms/Form10Y";
-
-import Eye from "../Eyes/EyesOdOs";
-import { Splide, SplideSlide } from '@splidejs/react-splide';
-
-import ButtonForm from "../Button/ButtonForm";
+import Image from "next/image";
+import Graphic from "../../../public/img/graphic.png";
 
 const WizardComponent = () => {
   const [step, setStep] = useState(0);
   const [activeStep, setActiveStep] = useState(step);
-  const onChange = nextStep => {
-    setStep(nextStep < 0 ? 0 : nextStep > 10 ? 10 : nextStep);
-    setActiveStep(nextStep); // Update activeStep for highlighting
+  const [stepTitles, setStepTitles] = useState(["Intraoperative"]);
+  const [formControl, setFormControl] = useState([<FormIntraoperative key="intraoperative" />]);
+
+  const onChange = (nextStep) => {
+    setStep(nextStep < 0 ? 0 : nextStep > formControl.length - 1 ? formControl.length - 1 : nextStep);
+    setActiveStep(nextStep); // Actualizar el step activo
   };
 
   const onNext = () => onChange(step + 1);
   const onPrevious = () => onChange(step - 1);
 
-// Array de componentes FORMULARIOS para que renderice en cada paso (step)
-const formControl = [
-    <FormIntraoperative key="intraoperative" />,
-    // <FormIMM key="imm" />,
-    // <Form1D key="1-day" />,
-    // <Form7D key="7-days" />,
-    // <Form1M key="1-month" />,
-    // <Form3M key="3-months" />,
-    // <Form6M key="6-months" />,
-    // <Form9M key="9-months" />,
-    // <Form1Y key="1-year" />,
-    // <Form3Y key="3-years" />,
-    // <Form5Y key="5-years" />,
-    // <Form10Y key="10-years" />,
-];
+  // Función para manejar el agregar de un nuevo control
+  const handleAddControl = () => {
+    const newTitle = `Postoperative IMM ${stepTitles.length + 1}`;
+    const newForm = <FormIMM key={newTitle} />;
+    
+    setStepTitles((prevTitles) => [...prevTitles, newTitle]);
+    setFormControl((prevForms) => [...prevForms, newForm]);
 
-const stepTitles = [
-  "Intraoperative",
-  // "IMM",
-  // "1 Day",
-  // "7 Days",
-  // "1 Month",
-  // "3 Months",
-  // "6 Months",
-  // "9 Months",
-  // "1 Year",
-  // "3 Years",
-  // "5 Years",
-  // "10 Years",
-];
+    // Mover al nuevo paso
+    setStep(stepTitles.length);
+    setActiveStep(stepTitles.length);
+  };
 
   return (
-    <div>
-      <div className="d-flex justify-content-between align-items-center mb-5">
+    <section>
+      <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-5">
         <div className="d-flex">
           <h3 className="my-4">Postoperative</h3>
-          <Eye title="OD" />
         </div>
-            <button type="button" className="btn py-2 px-4 border-0" style={{ backgroundColor: "#B02F92", color: "#fefefe", textTransform: "uppercase", borderRadius: "2rem"}}  data-bs-toggle="modal" data-bs-target="#controlForm">New control</button>
+        <button type="button" className="btn py-2 px-4 border-0 mb-3 mb-md-0" style={{ backgroundColor: "#59B03D", color: "#fefefe", borderRadius: "2rem"}}>
+          Exported to Excel
+        </button>
+        <button
+          type="button"
+          className="btn py-2 px-4 border-0"
+          style={{ backgroundColor: "#B02F92", color: "#fefefe", borderRadius: "2rem"}}
+          onClick={handleAddControl}
+        >
+          New control
+        </button>
       </div>
 
-      <Splide
-        options={{
-          type: "slide",
-          perPage: 1,
-          focus: "center",
-          gap: "1px",
-          pagination: false,
-        }}
-      >
+      <Steps current={activeStep} onChange={onChange}>
         {stepTitles.map((title, index) => (
-          <SplideSlide key={index}>
-            <Steps.Item
-              title={title}
-              description="Description"
-              onClick={() => setStep(index)}
-              id="step"
-              style={{ 
-                cursor: "pointer",
-                backgroundColor: activeStep === index ? "#00507C" : "none",
-              }}
-            />
-          </SplideSlide>
+          <Steps.Item
+            key={index}
+            title={title}
+            onClick={() => setStep(index)}
+            style={{ cursor: "pointer" }}
+          />
         ))}
-      </Splide>
-
+      </Steps>
 
       <hr />
-      {/* <Panel header={`PASO: ${step + 1}`}> */}
-      <Panel>
-        { formControl[step]}
-      </Panel>
+      <Panel>{formControl[step]}</Panel>
       <hr />
+
       <ButtonGroup>
         <Button onClick={onPrevious} disabled={step === 0}>
           Previous
         </Button>
-        <Button onClick={onNext} disabled={step === 12}>
+        <Button onClick={onNext} disabled={step === formControl.length - 1}>
           Next
         </Button>
       </ButtonGroup>
 
-      {/* FORM CONTROL  */}
-      <FormIMM />
-    </div>
+       {/* GRAPHIC RESULT */}
+       <section>
+        <div className="d-flex justify-content-end gap-3">
+            <div className="form-check form-switch my-4">
+              <label className="form-check-label fw-bold" for="flexSwitchCheckDefault">See new controls</label>
+              <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style={{cursor: 
+            "pointer"}} />
+            </div>
+
+            <button className="text-white my-4" type="button" style={{backgroundColor: "#2C98F0"}}>ADD ANOTHER DAY</button>
+        </div>
+        
+        <div className="col-12">
+          <Image src={Graphic} alt="graphic result" className="img-fluid"/>
+        </div>
+      </section>
+    </section>
   );
 };
-
-
 
 export default WizardComponent;

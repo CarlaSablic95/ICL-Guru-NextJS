@@ -65,10 +65,10 @@ return (
         <div className="container">
             <div className="row justify-content-center form-login">
             <div className={`col-10 col-lg-5 ${styles.backgroundContainer} d-none d-lg-block`}></div>
-            <div className={`col-10 col-lg-5 px-5 px-md-4 ${styles.backgroundForm} d-flex flex-column justify-content-center`}>
+            <div className={`col-10 col-lg-5 px-2 px-md-4 ${styles.backgroundForm} d-flex flex-column justify-content-center`}>
                 <FormProvider {...methods}>
                     <form onSubmit={methods.handleSubmit(onSubmit)} className="px-3 px-md-5">
-                        <h1 className="text-uppercase text-center py-4 text-white">Icl Guru</h1>
+                        <h3 className="text-uppercase text-center py-4 text-white">Icl Guru</h3>
                         <div className="form-floating mb-4 text-center">
                             <Input
                                 id="username"
@@ -76,7 +76,6 @@ return (
                                 type="text"
                                 placeholder="Username"
                                 rules= {{ required: "This field is required"}}
-                                rounded="2rem"
                                 label="Username"
                             />
                             <label htmlFor="username">Username</label>
@@ -95,8 +94,7 @@ return (
                                 type={showPassword ? "text" : "password"}
                                 placeholder="Password"
                                 label="Password"
-                                rules= {{ required: "This field is required"}}
-                                rounded="2rem"        
+                                rules= {{ required: "This field is required"}}        
                             />
                             <label htmlFor="password">Password</label>
                         </div>

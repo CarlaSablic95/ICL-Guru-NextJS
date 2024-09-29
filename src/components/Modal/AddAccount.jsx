@@ -71,7 +71,7 @@ const AddAccount = () => {
                         <FormProvider {...methods}>
                             { console.log("METHODS: ", methods.getValues()) }
                             <form onSubmit={ handleSubmit(onSubmit) } className="px-3 px-md-2">
-                                <div className="d-flex">
+                                <div className="d-flex justify-content-evenly">
                                 <div className="col-6">
                                 <div className="mb-3">
                                     <label htmlFor="username" className="form-label mb-1">Username<span className="text-danger">*</span>:</label>
@@ -125,29 +125,29 @@ const AddAccount = () => {
                         
                         {/* CAMPOS AGREGADOS, SIN ESTOS NO SE PUEDE CREAR UNA CUENTA */}
                         <div className="col-6">
-                        <div className="mb-3">
-                            <label htmlFor="roles" className="form-label mb-1">Rol<span className="text-danger">*</span>:</label>
-                                <Input 
-                                    id="roles"
-                                    name="roles"
-                                    type="number"
-                                    placeholder="1"
-                                    rules= {{required: "This field is required"}}
-                                    rounded="2rem"
-                                />
-                        </div>
+                            {/* <div className="mb-3">
+                                <label htmlFor="roles" className="form-label mb-1">Rol<span className="text-danger">*</span>:</label>
+                                    <Input 
+                                        id="roles"
+                                        name="roles"
+                                        type="text"
+                                        placeholder="1"
+                                        rules= {{required: "This field is required"}}
+                                        rounded="2rem"
+                                    />
+                            </div>
 
-                        <div className="mb-3">
-                            <label htmlFor="active_organizations" className="form-label mb-1">Organizacion<span className="text-danger">*</span>:</label>
-                                <Input 
-                                    id="active_organizations"
-                                    name="active_organizations"
-                                    type="number"
-                                    placeholder="organizacion"
-                                    rules= {{required: "This field is required"}}
-                                    rounded="2rem"
-                                />
-                        </div>
+                            <div className="mb-3">
+                                <label htmlFor="active_organizations" className="form-label mb-1">Organizacion<span className="text-danger">*</span>:</label>
+                                    <Input 
+                                        id="active_organizations"
+                                        name="active_organizations"
+                                        type="text"
+                                        placeholder="organizacion"
+                                        rules= {{required: "This field is required"}}
+                                        rounded="2rem"
+                                    />
+                            </div> */}
 
 
                         <div className="mb-3">

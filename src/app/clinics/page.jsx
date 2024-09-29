@@ -7,6 +7,7 @@ import { useParams, useRouter } from "next/navigation";
 import { getClinics } from "@/services/ApiService";
 import { fetchClinicsStart, fetchClinicsSuccess, fetchClinicsFailure } from "@/reduxSlices/clinics/clinicSlice";
 import Image from "next/image";
+import Pagination from "@/components/Pagination/Pagination";
 import Edit from "/public/icons/edit.svg";
 import Delete from "/public/icons/delete.svg";
 import ButtonModal from "@/components/Button/ButtonModal";
@@ -29,9 +30,21 @@ const router = useRouter(); // para redireccionar a la pagina de detalle
   // FILTRADO
   const [searchClinic, setSearchClinic] = useState("");
   const [filteredClinics, setFilteredClinics] = useState([]);
+  // Paginación
+  const [currentPage, setCurrentPage] = useState(1);
+  const [clinicsPerPage] = useState(4);
 
 // Eliminación de clínicas
 const [deletedClinicId, setDeletedClinicId] = useState(null);
+
+// Calcula las clinicas que se mostrarán en la pagina actual
+const indexOfLastClinic = currentPage * clinicsPerPage;
+const indexOfFirstClinic = indexOfLastClinic - clinicsPerPage;
+const currentClinics = filteredClinics.slice(indexOfFirstClinic, indexOfLastClinic);
+
+const totalPages = Math.ceil(filteredClinics.length / clinicsPerPage);
+
+
 
   useEffect(() => {
     const fetchClinics = async () => {
@@ -78,7 +91,7 @@ if(status === "failed") return <div>Error: {error}</div>;
 
   return (
     <>
-    <section className="col-12 col-md-11 px-5 py-4 mx-auto">
+    <section className="col-12 col-md-11 px-3 px-md-5 py-4 mx-auto">
         <h1 className="text-center text-uppercase fw-bold mb-4">Clinics</h1>
           <form className="d-flex justify-content-center" role="search">
               <SearchBar placeholder="Find clinics" onChange={filterClinics} value={searchClinic} />
@@ -87,9 +100,9 @@ if(status === "failed") return <div>Error: {error}</div>;
           <ButtonModal dataBsTarget="#addClinic" title="New clinics" icon="./icons/add-clinic.svg" />
         </div>
         <div>
-          <div className="pb-5">
+          <div className="pb-2">
             <div className="table-responsive mb-4">
-              <table className={`table table-striped ${styles.tableClinics}`}>
+            <table className={`table table-striped ${styles.tableClinics}`} style={{ backgroundColor:"#EDF2FB"}}>
                 <thead>
                   <tr>
                     <th scope="col" className="text-center">
@@ -104,11 +117,17 @@ if(status === "failed") return <div>Error: {error}</div>;
                   </tr>
                 </thead>
 
-                <tbody>
+              
                 { filteredClinics.length === 0 ? 
-                        (<div className="text-center">
-                          <p>Search not performed</p>
-                        </div>) : (filteredClinics.map((clinic) => (
+                        (<tbody>
+                          <tr>
+                            <td colSpan={10} className="text-center">
+                              <p>Clinic not found</p>
+                            </td>
+                          </tr>
+                        </tbody>) : (
+                          <tbody className="align-middle">
+                          {currentClinics.map((clinic) => (
                           <tr className="text-center" style={{ cursor: "pointer"}} key={clinic.id}>
                           <td className="text-center align-middle">{clinic.name}</td>
                           <td className="text-center align-middle">
@@ -129,14 +148,19 @@ if(status === "failed") return <div>Error: {error}</div>;
                               alt="trash icon"
                               />
                           </td>
-                        </tr>
-                        )))}
+                        </tr>))}
                 
-                </tbody>
+                      </tbody> )} 
               </table>
             </div>
           </div>
         </div>
+
+        <Pagination
+      currentPage={currentPage}
+      totalPages={totalPages}
+      onPageChange={setCurrentPage}
+    />
       </section>
 
 

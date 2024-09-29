@@ -24,7 +24,7 @@ export const deleteClinic = createAsyncThunk(
         
         try {
             const response = await deleteData(`/accounts/organizations/${id}/`);
-            console.log("Elimino el paciente: ", response);
+            console.log("Elimino clinica: ", response);
 
             return { id: id }
         } catch(error) {
@@ -81,7 +81,7 @@ const clinicSlice = createSlice({
             state.clinics = state.clinics.filter((clinic) => clinic.id !== action.payload.id);
         })
         .addCase(deleteClinic.rejected, (state, action) => {
-            console.log("ERROR AL ELIMINAR EL PACIENTE: ", action.payload);
+            console.log("ERROR AL ELIMINAR LA CLINICA: ", action.payload);
             state.clinicsStatus = "failed";
             state.error = action.payload;
         })

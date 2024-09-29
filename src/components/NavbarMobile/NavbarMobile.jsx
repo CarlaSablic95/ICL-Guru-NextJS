@@ -55,18 +55,20 @@ const NavbarMobile = () => {
     }, [dispatch, username]);
 
   return (
-    <nav className="navbar navbar-mobile py-4 d-flex d-lg-none">
+    <nav className="navbar navbar-mobile py-3 py-md-4 d-flex d-lg-none">
       <div className="container-fluid">
         <button
-          className="navbar-toggler rounded-5"
-          style={{ backgroundColor:"#3DC2DD" }}
+          className="navbar-toggler"
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasNavbar"
           aria-controls="offcanvasNavbar"
           aria-label="Toggle navigation"
+          style={{ border:"none" }}
         >
-          <span className="navbar-toggler-icon"></span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="currentColor" className="bi bi-list text-white" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+      </svg>
         </button>
         <a className="navbar-brand bg-warning" href="#">
           Logo

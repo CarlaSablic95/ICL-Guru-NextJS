@@ -20,7 +20,6 @@ import Delete from "/public/icons/delete.svg";
 const PatientsList = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const accessToken = useSelector((state) => state.auth.access);
   
   const {patients, status, error} = useSelector((state) => state.patients);// tiene acceso a todo el estado, quiero acceder del estado a los pacientes
   console.log("PACIENTES EN EL ESTADO: ", patients);
@@ -29,7 +28,7 @@ const PatientsList = () => {
   const [filteredPatients, setFilteredPatients] = useState([]);
   // Paginación
   const [currentPage, setCurrentPage] = useState(1);
-  const [patientsPerPage] = useState(6);
+  const [patientsPerPage] = useState(4);
 // Edición de pacientes
   const [editingPatientId, setEditingPatientId] = useState(null);
   // Eliminación de pacientes
@@ -46,11 +45,6 @@ const totalPages = Math.ceil(filteredPatients.length / patientsPerPage);
 
 // trayendo los pacientes 
 useEffect(() => {
-  if(!accessToken) {
-    console.error("Invalid access token: must be a non-empty string");
-    return;
-  }
-
   const fetchPatients = async () => {
     dispatch(fetchPatientsStart());
     try {
@@ -63,7 +57,7 @@ useEffect(() => {
   };
 
   fetchPatients();
-}, [dispatch, accessToken]);
+}, [dispatch]);
 
 
 // FILTRO DE PACIENTES
@@ -104,7 +98,7 @@ const handleSetSelectedPatient = (id) => {
 
 return (
   <>
-  <section className="col-12 col-md-11 px-5 mx-auto">
+  <section className="col-12 col-md-11 px-3 px-md-5 mx-auto">
     <div className="row py-4 mb-2">
       <h1 className="mb-4 fw-bold text-uppercase text-center pt-2">Patients</h1>
       <form className="d-flex justify-content-center" role="search">
@@ -133,9 +127,13 @@ return (
           </tr>
         </thead>
         { filteredPatients.length === 0 ? (
-      <div className="text-center">
-        <p>Search not performed</p>
-      </div>
+       <tbody>
+       <tr>
+         <td colSpan={10} className="text-center">
+           <p>Patient not found</p>
+         </td>
+       </tr>
+     </tbody>
     ) : (
         <tbody className="align-middle">
           {currentPatients.map((patient) => (

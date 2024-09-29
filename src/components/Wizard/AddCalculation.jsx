@@ -18,14 +18,13 @@
   import { Splide, SplideSlide } from "@splidejs/react-splide";
 
   import ButtonForm from "../Button/ButtonForm";
-  import CalculationGraphicData from "../CalculationsPatient/CalculationGraphicData";
+  import CalculationDataGraphic from "../CalculationsPatient/CalculationDataGraphic";
 
   const AddCalculation = ({handleReturnClick}) => {
     const [step, setStep] = useState(0);
     const [activeStep, setActiveStep] = useState(step);
     const [showCalculation, setShowCalculation] = useState(false);
     const { id } = useParams();
-    const router = useRouter();
     console.log("ID recibido en Calculations: ", id);
     const [patient, setPatient] = useState(null);
     // const [isLoading, setIsLoading] = useState(true);
@@ -80,27 +79,19 @@
       setShowCalculation(true);
     };
 
-    // Retorna a la vista anterior
-    // const handleReturnClick = () => {
-    //   setShowCalculation(false);
-    // };
-
-    // const handleReturn = () => {
-    //   router.back();
-    // };
     return (
-      <section className="col-10 col-md-12 px-5 mx-auto">
+      <section className="col-12 col-md-12 px-3 px-md-5 mx-auto">
         {showCalculation ? (
-          <CalculationGraphicData handleReturnClick={handleReturnClick} />
+          <CalculationDataGraphic handleReturnClick={handleReturnClick} />
         ) : (
           <>
-              <span className="d-block p-2">
+              <span className="d-block py-2 p-md-2">
               <a onClick={ handleReturnClick } className="text-uppercase text-decoration-none" style={{color: "#666666", fontSize:"18px", cursor: "pointer"}}><Image src={ ArrowBack }  alt="Ícono de retroceso" className="icon-arrow" /> Return</a>
           </span>
           <h1 className="text-center mb-3 text-uppercase">Patient</h1>
 
           { patient ? (
-          <div className="d-flex justify-content-evenly mb-5">
+          <div className="d-flex flex-column flex-md-row justify-content-evenly mb-5">
               <div>
               <h4 className="mb-1 fs-4 fw-bold">
                           Patient: <small class="text-muted">{`${patient.name} ${patient.surname}`}</small>

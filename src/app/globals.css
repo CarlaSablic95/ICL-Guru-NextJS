@@ -35,6 +35,11 @@ body {
     font-family: "Roboto", sans-serif !important;
 }
 
+#id_time {
+    border-top-right-radius: 1rem !important;
+    border-bottom-right-radius: 1rem !important;
+}
+
 .bg-aliceblue, .edited-form > div > input {
     background: aliceblue !important;
 }
@@ -43,6 +48,10 @@ body {
     color: var(--white-color) !important;
     font-weight: 500;
 }
+
+.search-bar {
+    max-width: 60%;
+   }
 
 button[data-bs-toggle="collapse"] {
     color:"#5F5C5C" !important;
@@ -188,12 +197,12 @@ aside {
 
 .offcanvas.offcanvas-end {
     left: -1px;
-    width: 300px;
+    width: 290px !important;
     transform: translateX(0%) !important;
 }
 
 .offcanvas-backdrop {
-    background-color: var(--bg-modal);
+    background-color: var(--bg-modal) !important;
 }
 
 .is-active > img {
@@ -241,21 +250,8 @@ aside {
 
 /* FORMS (FOLLOW UP) */
 span.input-group-text  {
-    border-top-right-radius: 1rem;
-    border-bottom-right-radius: 1rem;
     background: white;
     border-left-color: transparent;
-}
-
-input[type="text"], input[type="number"] {
-    border-right-color: transparent;
-    border-top-left-radius: 1rem;
-    border-bottom-left-radius: 1rem;
-}
-
-.input-date {
-    border-top-right-radius: 1rem;
-    border-bottom-right-radius: 1rem;
 }
 
 /* Checkbox - OS / OD */
@@ -325,5 +321,31 @@ input#od, input#os {
     }
     100% {
         transform: rotate(360deg);
+    }
+    }
+
+    @media (max-width: 600px) {
+       h1 {
+        font-size: 35px !important;
+        line-height: 50px !important;
+       }
+       h4 {
+        font-size: 20px !important;
+    }
+
+       .search-bar {
+        max-width: 80%;
+       }
+
+       #button-collapse {
+        font-size: 14px;
+       }
+
+       .button-cloud, .button-local {
+        font-size: 13px !important;
+       }
+
+       .card-form {
+        width: 80%;
     }
     }

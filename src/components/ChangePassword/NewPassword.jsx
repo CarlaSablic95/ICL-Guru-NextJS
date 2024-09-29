@@ -47,7 +47,7 @@ const NewPassword = () => {
 
     return (
         <div className="col-10 col-md-5">
-                        <h2 className="fw-bold mb-4">Change Password</h2>
+                        <h3 className="fw-bold mb-4">Change Password</h3>
                         <FormProvider {...methods}>
                            { console.log("METHODS: ", methods.getValues())}                            
                             <form onSubmit={handleSubmit(onSubmit)}>
