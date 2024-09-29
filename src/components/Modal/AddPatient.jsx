@@ -8,7 +8,6 @@ import { fetchClinicsStart, fetchClinicsSuccess, fetchClinicsFailure } from "@/r
 import { addPatient } from "@/reduxSlices/patients/patientSlice";
 import Button from "../Button/Button2";
 import { Input, InputRadio, Select } from "@/components/Inputs/Input";
-import { Modal } from "bootstrap";
 
 const AddPatient = () => {
     const dispatch = useDispatch();
@@ -36,35 +35,6 @@ const AddPatient = () => {
     fetchClinics();
   }, [dispatch]);
 
-    useEffect(() => {
-        const modalElement = document.getElementById("addPatient");
-        if (!modalRef.current) {
-            modalRef.current = new Modal(modalElement, {
-                backdrop: 'static',
-                keyboard: false
-            });
-        }
-
-        const handleModalHidden = () => {
-            document.body.classList.remove("modal-open");
-            // Retrasar la eliminación del backdrop
-            setTimeout(() => {
-                const backdrops = document.querySelectorAll(".modal-backdrop");
-                backdrops.forEach(backdrop => backdrop.remove());
-            }, 300); // Ajusta este tiempo según lo que desees
-        };
-
-        modalElement.addEventListener('hidden.bs.modal', handleModalHidden);
-
-        return () => {
-            if (modalRef.current) {
-                modalRef.current.dispose();
-                modalRef.current = null;
-            }
-            modalElement.removeEventListener('hidden.bs.modal', handleModalHidden);
-            handleModalHidden();
-        };
-    }, []);
 
     const onSubmit = async (data) => {
         console.log("DATOS A ENVIAR: ", data);
