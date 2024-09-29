@@ -1,3 +1,5 @@
+"use client";
+
 const Pagination = ({ currentPage, totalPages, onPageChange  }) => {
     const pageNumbers = [];
 

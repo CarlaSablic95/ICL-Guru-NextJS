@@ -1,3 +1,5 @@
+"use client";
+
 const RightEyeResult = () => {
     return (
         <div className="table-responsive p-2 w-100">

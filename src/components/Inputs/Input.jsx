@@ -65,7 +65,7 @@ export const InputRadio = (({ id, name, value, label}) => {
           defaultValue={defaultValue}
           aria-label={`Select ${name}`}
         >
-          <option value="" disabled>Select one clinic</option>
+          <option value="">Select one clinic</option>
           {options.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}

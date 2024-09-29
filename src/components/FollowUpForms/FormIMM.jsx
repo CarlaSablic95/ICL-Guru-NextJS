@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";

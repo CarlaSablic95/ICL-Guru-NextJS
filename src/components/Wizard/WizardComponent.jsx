@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { Steps, Panel, ButtonGroup, Button } from 'rsuite';
 import FormIntraoperative from "../FollowUpForms/FormIntraoperative";

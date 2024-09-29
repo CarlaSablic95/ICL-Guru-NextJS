@@ -1,3 +1,5 @@
+"use client";
+
 import Modal from "../Modal/Modal";
 import image1 from "@/components/Collapse/img/us_sts.png";
 import image2 from "@/components/Collapse/img/us_srise.png";

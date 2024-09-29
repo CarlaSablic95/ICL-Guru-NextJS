@@ -11,7 +11,6 @@ import NavbarMobile from "@/components/NavbarMobile/NavbarMobile";
 import EnterPassword from "@/components/Modal/EnterPassword";
 import Logout from "@/components/Modal/Logout";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./globals.css";
 
 const ClientBootstrap = dynamic(() => import("@/components/ClientBootstrap/ClientBootstrap"), { ssr: false });
