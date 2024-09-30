@@ -19,22 +19,22 @@ const EditPatient = ({ patientId, showToast }) => {
   const { reset, watch } = methods;
 
   useEffect(() => {
-    if(currentPatient) {
-        reset(currentPatient);
-        console.log("CURRENT PATIENT: ", reset(currentPatient) );
-        
+    if (currentPatient) {
+      reset(currentPatient);
+      console.log("CURRENT PATIENT: ", reset(currentPatient));
     }
-  }, [currentPatient, reset]) // reset
+  }, [currentPatient, reset]); // reset
 
   const onSubmit = async (data) => {
     setIsLoading(true);
     try {
-      const response = await dispatch(editPatient({ id: patientId, ...data })).unwrap();
+      const response = await dispatch(
+        editPatient({ id: patientId, ...data })
+      ).unwrap();
 
       showToast("success", "Patient edited successfully");
       console.log("Patient edited successfully: ", response);
-
-    } catch(error) {
+    } catch (error) {
       showToast("error", "Patient edited failed.");
       console.error("Patient edited failed: ", error);
     } finally {
@@ -68,46 +68,52 @@ const EditPatient = ({ patientId, showToast }) => {
                   className="px-3 px-md-5 edited-form"
                 >
                   <div className="mb-3">
-                  <label htmlFor="name" className="form-label mb-1">Name<span className="text-danger">*</span>:</label>
-                  <Input
-                    id="name"
-                    name="name"
-                    type="text"
-                    placeholder="example"
-                    defaultValue={currentPatient?.name}
-                    rules={{required: "This field is required"}}
-                    rounded="2rem"
-                  />
-                </div>
+                    <label htmlFor="name" className="form-label mb-1">
+                      Name<span className="text-danger">*</span>:
+                    </label>
+                    <Input
+                      id="name"
+                      name="name"
+                      type="text"
+                      placeholder="example"
+                      defaultValue={currentPatient?.name}
+                      rules={{ required: "This field is required" }}
+                      rounded="2rem"
+                    />
+                  </div>
 
-                <div className="mb-3">
-                  <label htmlFor="surname" className="form-label mb-1">Surname<span className="text-danger">*</span>:</label>
-                  <Input
-                    id="surname"
-                    name="surname"
-                    type="text"
-                    placeholder="example"
-                    defaultValue={currentPatient?.surname}
-                    rules={{required: "This field is required"}}
-                    rounded="2rem"
-                  />
-                </div>
+                  <div className="mb-3">
+                    <label htmlFor="surname" className="form-label mb-1">
+                      Surname<span className="text-danger">*</span>:
+                    </label>
+                    <Input
+                      id="surname"
+                      name="surname"
+                      type="text"
+                      placeholder="example"
+                      defaultValue={currentPatient?.surname}
+                      rules={{ required: "This field is required" }}
+                      rounded="2rem"
+                    />
+                  </div>
 
-                <div className="mb-3">
-                  <label htmlFor="dob" className="form-label mb-1">Date of birth<span className="text-danger">*</span>:</label>
-                  <Input
-                    name="dob"
-                    type="date"
-                    defaultValue={currentPatient?.dob}
-                    rules={{required: "This field is required"}}
-                    rounded="2rem"
-                  />
-                </div>
+                  <div className="mb-3">
+                    <label htmlFor="dob" className="form-label mb-1">
+                      Date of birth<span className="text-danger">*</span>:
+                    </label>
+                    <Input
+                      name="dob"
+                      type="date"
+                      defaultValue={currentPatient?.dob}
+                      rules={{ required: "This field is required" }}
+                      rounded="2rem"
+                    />
+                  </div>
 
                   <div className="mb-3">
                     <label className="mb-0">
-                      Sex<span className="text-danger">*</span>
-                    :</label>
+                      Sex<span className="text-danger">*</span>:
+                    </label>
                     <div className="d-flex justify-content-evenly">
                       <InputRadio
                         id="female"
@@ -125,38 +131,45 @@ const EditPatient = ({ patientId, showToast }) => {
                         label="Male"
                         checked={watch("sex") === "M"}
                         className={watch("sex") ? "bg-aliceblue" : ""}
-                        />
+                      />
                     </div>
                   </div>
 
                   <div className="mb-3">
-                    <label htmlFor="medical_record" className="form-label mb-1">Medical records number (MRN)<span className="text-danger">*</span>:</label>
+                    <label htmlFor="medical_record" className="form-label mb-1">
+                      Medical records number (MRN)
+                      <span className="text-danger">*</span>:
+                    </label>
                     <Input
                       id="medical_record"
                       name="medical_record"
                       type="text"
                       placeholder="00000"
-                      rules={{required: "This field is required"}}
+                      rules={{ required: "This field is required" }}
                       rounded="2rem"
                     />
                   </div>
 
                   <div className="mb-3">
-                    <label htmlFor="organization" className="form-label mb-1">Organization<span className="text-danger">*</span>:</label>
-                    <Input 
-                            id="organization"
-                            name="organization"
-                            type="number"
-                            placeholder="example"
-                            {...methods.register("organization")}
-                    defaultValue={currentPatient?.organization}
-                    rules={{required: "This field is required"}}
-                    rounded="2rem"
-                        />
+                    <label htmlFor="organization" className="form-label mb-1">
+                      Organization<span className="text-danger">*</span>:
+                    </label>
+                    <Input
+                      id="organization"
+                      name="organization"
+                      type="number"
+                      placeholder="example"
+                      {...methods.register("organization")}
+                      defaultValue={currentPatient?.organization}
+                      rules={{ required: "This field is required" }}
+                      rounded="2rem"
+                    />
                   </div>
 
                   <div className="mb-3">
-                    <label htmlFor="identification" className="form-label mb-1">Patients ID<span className="text-danger">*</span>:</label>
+                    <label htmlFor="identification" className="form-label mb-1">
+                      Patients ID<span className="text-danger">*</span>:
+                    </label>
                     <Input
                       id="identification"
                       name="identification"
@@ -165,21 +178,35 @@ const EditPatient = ({ patientId, showToast }) => {
                       label="Patients ID"
                       {...methods.register("identification")}
                       defaultValue={currentPatient?.identification}
-                      rules={{required: "This field is required"}}
+                      rules={{ required: "This field is required" }}
                       rounded="2rem"
-                    
                     />
                   </div>
-            <div className="modal-footer border-0 d-flex justify-content-evenly">
-            <button
-                                type="submit"
-                                className="btn py-2 px-4 border-0 fw-bold"
-                                style={{ backgroundColor: "#3DC2DD", color: "#fefefe", textTransform: "uppercase", borderRadius: "3rem", width: "220px", height: "50px"}}
-                                disabled={ isLoading } data-bs-dismiss="modal"
-                            >
-                                {isLoading ? (<div className="d-flex justify-content-center align-items-center"><span className="me-1">Submitting</span> <span className="loader"></span></div>) : "Submit"}
-                            </button>
-            </div>
+                  <div className="modal-footer border-0 d-flex justify-content-evenly">
+                    <button
+                      type="submit"
+                      className="btn py-2 px-4 border-0 fw-bold"
+                      style={{
+                        backgroundColor: "#3DC2DD",
+                        color: "#fefefe",
+                        textTransform: "uppercase",
+                        borderRadius: "3rem",
+                        width: "220px",
+                        height: "50px",
+                      }}
+                      disabled={isLoading}
+                      data-bs-dismiss="modal"
+                    >
+                      {isLoading ? (
+                        <div className="d-flex justify-content-center align-items-center">
+                          <span className="me-1">Submitting</span>{" "}
+                          <span className="loader"></span>
+                        </div>
+                      ) : (
+                        "Submit"
+                      )}
+                    </button>
+                  </div>
                 </form>
               </FormProvider>
             </div>

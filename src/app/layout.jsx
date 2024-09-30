@@ -13,7 +13,10 @@ import Logout from "@/components/Modal/Logout";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./globals.css";
 
-const ClientBootstrap = dynamic(() => import("@/components/ClientBootstrap/ClientBootstrap"), { ssr: false });
+const ClientBootstrap = dynamic(
+  () => import("@/components/ClientBootstrap/ClientBootstrap"),
+  { ssr: false }
+);
 
 console.log(metadata);
 
@@ -21,40 +24,33 @@ export default function RootLayout({ children }) {
   const pathname = usePathname();
   const isLoginPage = pathname === "/login";
 
-
   return (
-      <Provider store={store}>
+    <Provider store={store}>
       <html lang="en">
-          <body className="d-flex flex-column min-vh-100">
-            <ClientBootstrap />
-            {!isLoginPage && (
-              <>
-                <Header />
-                <div className="container-fluid">
-                  <div className="row justify-content-evenly">
-                    <div className="d-none d-lg-block col-lg-2 px-0">
-                      <Sidebar />
-                    </div>
-                    <div className="d-block d-lg-none px-0">
-                      <NavbarMobile />
-                    </div>
-                    <main className="col-12 col-lg-10 px-0">
-                      {children}
-                    </main>
+        <body className="d-flex flex-column min-vh-100">
+          <ClientBootstrap />
+          {!isLoginPage && (
+            <>
+              <Header />
+              <div className="container-fluid">
+                <div className="row justify-content-evenly">
+                  <div className="d-none d-lg-block col-lg-2 px-0">
+                    <Sidebar />
                   </div>
+                  <div className="d-block d-lg-none px-0">
+                    <NavbarMobile />
+                  </div>
+                  <main className="col-12 col-lg-10 px-0">{children}</main>
                 </div>
-              </>
-            )}
-            {isLoginPage && (
-              <main>
-                {children}
-              </main>
-            )}
+              </div>
+            </>
+          )}
+          {isLoginPage && <main>{children}</main>}
 
-            <EnterPassword />
-            <Logout />
-          </body>
+          <EnterPassword />
+          <Logout />
+        </body>
       </html>
-      </Provider>
+    </Provider>
   );
 }

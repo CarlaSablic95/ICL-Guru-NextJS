@@ -28,10 +28,16 @@ const FormAttachedClinics = ({ accountId }) => {
   const dispatch = useDispatch();
 
   // Fetch clinics and accounts from Redux state
-  const { clinics, status, clinicsError } = useSelector((state) => state.clinics);
-  const { accounts, accountsStatus, accountsError } = useSelector((state) => state.accounts);
+  const { clinics, status, clinicsError } = useSelector(
+    (state) => state.clinics
+  );
+  const { accounts, accountsStatus, accountsError } = useSelector(
+    (state) => state.accounts
+  );
 
-  const currentAccount = accounts.find((account) => account.id === Number(accountId));
+  const currentAccount = accounts.find(
+    (account) => account.id === Number(accountId)
+  );
 
   // Obtener clínicas
   useEffect(() => {
@@ -63,25 +69,29 @@ const FormAttachedClinics = ({ accountId }) => {
 
   // Añadir clínica al perfil
   const handleClinics = (data) => {
-    const clinic = clinics.find((clinic) => clinic.id === Number(data.clinicId));
+    const clinic = clinics.find(
+      (clinic) => clinic.id === Number(data.clinicId)
+    );
     if (clinic) {
       const roles = currentAccount.roles || [1];
       const activeOrganizations = currentAccount.active_organizations;
-  
+
       // Verifica que active_organizations tenga un valor válido
       if (!activeOrganizations || activeOrganizations.length === 0) {
-        console.error("active_organizations es obligatorio y no se ha proporcionado.");
+        console.error(
+          "active_organizations es obligatorio y no se ha proporcionado."
+        );
         return; // O asigna un valor por defecto válido
       }
-  
+
       const payload = {
         roles,
         active_organizations: activeOrganizations,
       };
-  
+
       // Log para depuración
       console.log("Payload a enviar: ", payload);
-  
+
       dispatch(addClinicToAccount({ accountId, ...payload }));
     } else {
       console.error("No se encontró la clínica con el ID proporcionado.");
@@ -89,11 +99,14 @@ const FormAttachedClinics = ({ accountId }) => {
   };
   // Eliminar clínica
   const deleteClinic = (clinicToDelete) => {
-    dispatch(removeClinicFromAccount({ accountId, clinicId: clinicToDelete.id }));
+    dispatch(
+      removeClinicFromAccount({ accountId, clinicId: clinicToDelete.id })
+    );
   };
 
   // Manejando estados de carga y error
-  if (status === "loading" || status === "loading") return <div>Loading...</div>;
+  if (status === "loading" || status === "loading")
+    return <div>Loading...</div>;
   if (status === "failed") return <div>Error: {clinicsError}</div>;
   if (status === "failed") return <div>Error: {accountsError}</div>;
   if (!currentAccount) return <div>Cuenta no encontrada</div>;
@@ -103,7 +116,10 @@ const FormAttachedClinics = ({ accountId }) => {
       <section className="col-12 col-md-5">
         <FormProvider {...methods}>
           <h2 className="text-center mb-3">Clinics Attached to user</h2>
-          <form onSubmit={handleSubmit(handleClinics)} className="px-3 px-md-5 mb-4">
+          <form
+            onSubmit={handleSubmit(handleClinics)}
+            className="px-3 px-md-5 mb-4"
+          >
             <div className="mb-3">
               <p>Add clinic to user</p>
               <div className="d-flex align-items-center justify-content-between">
@@ -122,7 +138,12 @@ const FormAttachedClinics = ({ accountId }) => {
                     </option>
                   ))}
                 </select>
-                <Button title="Add clinic" bgColor="#59B03D" borderRadius="2rem" type="submit" />
+                <Button
+                  title="Add clinic"
+                  bgColor="#59B03D"
+                  borderRadius="2rem"
+                  type="submit"
+                />
               </div>
             </div>
           </form>
@@ -137,15 +158,25 @@ const FormAttachedClinics = ({ accountId }) => {
               <table className={`table table-striped ${styles.tableClinics}`}>
                 <thead>
                   <tr>
-                    <th scope="col" className="text-center">Clinic</th>
-                    <th scope="col" className="text-center">Delete</th>
+                    <th scope="col" className="text-center">
+                      Clinic
+                    </th>
+                    <th scope="col" className="text-center">
+                      Delete
+                    </th>
                   </tr>
                 </thead>
 
                 <tbody>
                   {currentAccount?.organizations?.map((clinic) => (
-                    <tr className="text-center" style={{ cursor: "pointer" }} key={clinic.id}>
-                      <td className="text-center align-middle">{clinic.name}</td>
+                    <tr
+                      className="text-center"
+                      style={{ cursor: "pointer" }}
+                      key={clinic.id}
+                    >
+                      <td className="text-center align-middle">
+                        {clinic.name}
+                      </td>
                       <td className="text-center align-middle">
                         <Image
                           src={Delete}

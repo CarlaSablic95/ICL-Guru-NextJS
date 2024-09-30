@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Steps, Panel, ButtonGroup, Button } from 'rsuite';
+import { Steps, Panel, ButtonGroup, Button } from "rsuite";
 import FormIntraoperative from "../FollowUpForms/FormIntraoperative";
 import FormControl from "../FollowUpForms/FormControl";
 import Image from "next/image";
@@ -12,12 +12,20 @@ const FollowUpOD = () => {
   const [step, setStep] = useState(0);
   const [activeStep, setActiveStep] = useState(step);
   const [stepTitles, setStepTitles] = useState(["Intraoperative"]);
-  const [formControl, setFormControl] = useState([<FormIntraoperative key="intraoperative" />]);
+  const [formControl, setFormControl] = useState([
+    <FormIntraoperative key="intraoperative" />,
+  ]);
   const [customValue, setCustomValue] = useState("Value");
-  const [customUnit, setCustomUnit] = useState("Select a time unit"); 
+  const [customUnit, setCustomUnit] = useState("Select a time unit");
 
   const onChange = (nextStep) => {
-    setStep(nextStep < 0 ? 0 : nextStep > formControl.length - 1 ? formControl.length - 1 : nextStep);
+    setStep(
+      nextStep < 0
+        ? 0
+        : nextStep > formControl.length - 1
+        ? formControl.length - 1
+        : nextStep
+    );
     setActiveStep(nextStep);
   };
 
@@ -29,7 +37,7 @@ const FollowUpOD = () => {
     const unitMapping = {
       days: "D",
       months: "M",
-      years: "Y"
+      years: "Y",
     };
     return `Postoperative - ${value}${unitMapping[unit] || ""}`;
   };
@@ -39,7 +47,7 @@ const FollowUpOD = () => {
     const unitMultiplier = {
       days: 1,
       months: 30,
-      years: 365
+      years: 365,
     };
     return value * (unitMultiplier[unit] || 1); // Multiplicar por los días
   };
@@ -54,7 +62,10 @@ const FollowUpOD = () => {
     const insertIndex = stepTitles.findIndex((title, index) => {
       const currentUnit = title.match(/[DYM]/)?.[0] || "D";
       const currentValue = parseInt(title.match(/\d+/)?.[0] || "0", 10);
-      return calculateTimeValue(currentValue, currentUnit.toLowerCase()) > newTimeValue;
+      return (
+        calculateTimeValue(currentValue, currentUnit.toLowerCase()) >
+        newTimeValue
+      );
     });
 
     const indexToInsert = insertIndex === -1 ? stepTitles.length : insertIndex;
@@ -81,9 +92,27 @@ const FollowUpOD = () => {
     <section>
       <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-5">
         <div className="d-flex">
-          <h3 className="my-4">Postoperative <Eye bgColor="#4888C8" color="#fefefe" title="OD" width={50} height={50} fontSize="1.5rem" /></h3>
+          <h3 className="my-4">
+            Postoperative{" "}
+            <Eye
+              bgColor="#4888C8"
+              color="#fefefe"
+              title="OD"
+              width={50}
+              height={50}
+              fontSize="1.5rem"
+            />
+          </h3>
         </div>
-        <button type="button" className="btn py-2 px-4 border-0 mb-3 mb-md-0" style={{ backgroundColor: "#59B03D", color: "#fefefe", borderRadius: "2rem" }}>
+        <button
+          type="button"
+          className="btn py-2 px-4 border-0 mb-3 mb-md-0"
+          style={{
+            backgroundColor: "#59B03D",
+            color: "#fefefe",
+            borderRadius: "2rem",
+          }}
+        >
           Exported to Excel
         </button>
       </div>
@@ -91,7 +120,15 @@ const FollowUpOD = () => {
       {/* Inputs para facilitar el control personalizado */}
       <div className="d-flex flex-column justify-content-center justify-content-md-start align-items-center">
         <h4 className="text-center text-md-start mb-2">Add control</h4>
-        <div className="col-10 col-md-5 px-2 d-flex flex-column flex-md-row justify-content-center align-items-center gap-3 mb-3" style={{ backgroundColor: "#E9F1F8", borderRadius: "1rem", paddingTop: "20px", paddingBottom: "20px"}}>
+        <div
+          className="col-10 col-md-5 px-2 d-flex flex-column flex-md-row justify-content-center align-items-center gap-3 mb-3"
+          style={{
+            backgroundColor: "#E9F1F8",
+            borderRadius: "1rem",
+            paddingTop: "20px",
+            paddingBottom: "20px",
+          }}
+        >
           <div>
             <label htmlFor="value fs-4">Enter a value</label>
             <input
@@ -121,18 +158,21 @@ const FollowUpOD = () => {
               <option value="years">Years</option>
             </select>
           </div>
-          
+
           <button
             type="button"
             className="btn py-2 px-4 border-0 mb-4 mb-md-0"
-            style={{ backgroundColor: "#B02F92", color: "#fefefe", borderRadius: "2rem" }}
+            style={{
+              backgroundColor: "#B02F92",
+              color: "#fefefe",
+              borderRadius: "2rem",
+            }}
             onClick={handleAddControl}
           >
             New control
           </button>
         </div>
       </div>
-
 
       <Steps current={activeStep} onChange={onChange}>
         {stepTitles.map((title, index) => (
@@ -150,7 +190,11 @@ const FollowUpOD = () => {
         <Button onClick={onPrevious} disabled={step === 0}>
           Previous
         </Button>
-        <Button onClick={onNext} disabled={step === formControl.length - 1} className="ms-2">
+        <Button
+          onClick={onNext}
+          disabled={step === formControl.length - 1}
+          className="ms-2"
+        >
           Next
         </Button>
       </ButtonGroup>
@@ -161,9 +205,20 @@ const FollowUpOD = () => {
 
       {/* GRÁFICO RESULTADO */}
       <section className="d-flex flex-column justify-content-center">
-          <div className="form-check form-switch my-4">
-            <label className="form-check-label fw-bold" htmlFor="flexSwitchCheckDefault">See new controls</label>
-            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style={{ cursor: "pointer" }} />
+        <div className="form-check form-switch my-4">
+          <label
+            className="form-check-label fw-bold"
+            htmlFor="flexSwitchCheckDefault"
+          >
+            See new controls
+          </label>
+          <input
+            className="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="flexSwitchCheckDefault"
+            style={{ cursor: "pointer" }}
+          />
         </div>
 
         <div className="col-10 d-flex justify-content-center">

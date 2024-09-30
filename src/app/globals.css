@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import "rsuite/dist/rsuite.css";
+
 /* PALETA DE COLORES */
 :root {
     --primary-color: #1A2A2F;
@@ -51,7 +52,8 @@ body {
     border-bottom-right-radius: 1rem !important;
 } */
 
-.bg-aliceblue, .edited-form > div > input {
+.bg-aliceblue,
+.edited-form>div>input {
     background: aliceblue !important;
 }
 
@@ -62,10 +64,10 @@ body {
 
 .search-bar {
     max-width: 60%;
-   }
+}
 
 button[data-bs-toggle="collapse"] {
-    color:"#5F5C5C" !important;
+    color: "#5F5C5C" !important;
 }
 
 .selected-button {
@@ -79,7 +81,9 @@ button[data-bs-toggle="collapse"] {
 }
 
 /* ÍCONOS */
-.bi::before, [class^="bi-"]::before, [class*=" bi-"]::before {
+.bi::before,
+[class^="bi-"]::before,
+[class*=" bi-"]::before {
     font-weight: 600 !important;
 }
 
@@ -133,7 +137,8 @@ th {
     background-color: #D7E3FC;
 }
 
-.bi-pencil-square, .bi-trash {
+.bi-pencil-square,
+.bi-trash {
     cursor: pointer;
 }
 
@@ -188,7 +193,9 @@ thead {
 
 /* MENÚ VERSIÓN DESKTOP/MOBILE */
 
-header, .navbar-mobile, .patient-name {
+header,
+.navbar-mobile,
+.patient-name {
     background-color: var(--secondary-color);
 }
 
@@ -220,7 +227,7 @@ aside {
     background-color: var(--bg-modal) !important;
 }
 
-  .navbar-toggler:focus {
+.navbar-toggler:focus {
     box-shadow: none;
 }
 
@@ -255,18 +262,18 @@ aside {
 
 /* SPLIDE */
 .is-active {
-        background-color: 2px solid #495AFF !important;
-        color: var(--white-color);
+    background-color: 2px solid #495AFF !important;
+    color: var(--white-color);
 }
 
 /* FORMS (FOLLOW UP) */
-span.input-group-text  {
+span.input-group-text {
     background: white;
     border-left-color: transparent;
 }
 
 /* Checkbox - OS / OD */
-.form-check-label > span {
+.form-check-label>span {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -274,12 +281,14 @@ span.input-group-text  {
     height: 35px;
 }
 
-input#od, input#os {
+input#od,
+input#os {
     width: 20px;
     height: 20px;
 }
 
-#od:checked, #os:checked {
+#od:checked,
+#os:checked {
     background-color: #2C98F0;
     border-color: #2C98F0;
 }
@@ -304,12 +313,16 @@ input#od, input#os {
     border-radius: 24px !important;
     width: 50%;
 }
+
 .card-form .card-header {
     background-color: var(--secondary-color);
     border-radius: 24px 24px 0 0 !important;
 }
 
-.input-group:not(.has-validation)>.dropdown-toggle:nth-last-child(n+3), .input-group:not(.has-validation)>.form-floating:not(:last-child)>.form-control, .input-group:not(.has-validation)>.form-floating:not(:last-child)>.form-select, .input-group:not(.has-validation)>:not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating) {
+.input-group:not(.has-validation)>.dropdown-toggle:nth-last-child(n+3),
+.input-group:not(.has-validation)>.form-floating:not(:last-child)>.form-control,
+.input-group:not(.has-validation)>.form-floating:not(:last-child)>.form-select,
+.input-group:not(.has-validation)>:not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating) {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
@@ -324,41 +337,44 @@ input#od, input#os {
     display: inline-block;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
-    }
+}
 
-    @keyframes rotation {
+@keyframes rotation {
     0% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(360deg);
     }
-    }
+}
 
-    @media (max-width: 768px) {
-       h1 {
+@media (max-width: 768px) {
+    h1 {
         font-size: 35px !important;
         line-height: 50px !important;
-       }
-       h4 {
+    }
+
+    h4 {
         font-size: 20px !important;
     }
 
-       .search-bar {
+    .search-bar {
         max-width: 80%;
-       }
+    }
 
-       #button-collapse {
+    #button-collapse {
         font-size: 14px;
-       }
+    }
 
-       .button-cloud, .button-local {
+    .button-cloud,
+    .button-local {
         font-size: 13px !important;
-       }
+    }
 
-       .card-form {
+    .card-form {
         width: 90%;
     }
 
-    
-    }
+
+}

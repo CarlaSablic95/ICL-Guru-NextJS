@@ -26,7 +26,7 @@
     background-color: var(--tertiary-color);
 }
 
-.form-floating > label {
+.form-floating>label {
     color: var(--secondary-color) !important;
 }
 
@@ -43,7 +43,7 @@
 }
 
 /* MEDIA QUERIES */
-@media (width <= 990px) {
+@media (width <=990px) {
     .card {
         width: 300px;
     }
@@ -51,10 +51,11 @@
     .card-form {
         width: 80%;
     }
+
     .backgroundForm {
         border-radius: 50px;
     }
-    
+
     .card-form {
         width: 90%;
     }

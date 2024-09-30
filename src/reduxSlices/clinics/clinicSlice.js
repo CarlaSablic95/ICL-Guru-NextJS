@@ -8,7 +8,7 @@ export const addClinic = createAsyncThunk(
         console.log("CLINIC DATA: ", clinicData);
         try {
             const response = await postData("/accounts/organizations/", clinicData);
-                console.log("Respuesta de envío de datos para agregar clínicas", clinicData);
+            console.log("Respuesta de envío de datos para agregar clínicas", clinicData);
             return response;
         } catch (error) {
             return rejectWithValue(error.response.data);
@@ -19,15 +19,15 @@ export const addClinic = createAsyncThunk(
 // Elimino clínica
 export const deleteClinic = createAsyncThunk(
     "clinics/deleteClinic",
-    async({id}, { rejectWithValue }) => {
+    async ({ id }, { rejectWithValue }) => {
         console.log("ID: ", id);
-        
+
         try {
             const response = await deleteData(`/accounts/organizations/${id}/`);
             console.log("Elimino clinica: ", response);
 
             return { id: id }
-        } catch(error) {
+        } catch (error) {
             return rejectWithValue(error.response.data);
         }
     }
@@ -56,37 +56,37 @@ const clinicSlice = createSlice({
     extraReducers: (builder) => {
         // AGREGAR CLÍNICA
         builder
-        .addCase(addClinic.pending, (state) => {
-            state.status = "loading";
-        })
-        .addCase(addClinic.fulfilled, (state, action) => {
-            console.log("CLÍNICA AÑADIDA: ", action.payload);
-            state.status = "succeeded";
-            state.clinics.push(action.payload);
-        })
-        .addCase(addClinic.rejected, (state, action) => {
-            console.log("ERROR AL AÑADIR CLÍNICA", action.payload);
-            state.status = "failed";
-            state.error = action.payload;
-        })
+            .addCase(addClinic.pending, (state) => {
+                state.status = "loading";
+            })
+            .addCase(addClinic.fulfilled, (state, action) => {
+                console.log("CLÍNICA AÑADIDA: ", action.payload);
+                state.status = "succeeded";
+                state.clinics.push(action.payload);
+            })
+            .addCase(addClinic.rejected, (state, action) => {
+                console.log("ERROR AL AÑADIR CLÍNICA", action.payload);
+                state.status = "failed";
+                state.error = action.payload;
+            })
 
-        // ELIMINAR CLÍNICA
-        .addCase(deleteClinic.pending, (state) => {
-            state.status = "loading";
-        })
-        .addCase(deleteClinic.fulfilled, (state, action) => {
-            console.log("CLÍNICA ELIMINADA: ", action.payload);
+            // ELIMINAR CLÍNICA
+            .addCase(deleteClinic.pending, (state) => {
+                state.status = "loading";
+            })
+            .addCase(deleteClinic.fulfilled, (state, action) => {
+                console.log("CLÍNICA ELIMINADA: ", action.payload);
 
-            state.status = "succeeded";
-            state.clinics = state.clinics.filter((clinic) => clinic.id !== action.payload.id);
-        })
-        .addCase(deleteClinic.rejected, (state, action) => {
-            console.log("ERROR AL ELIMINAR LA CLINICA: ", action.payload);
-            state.status = "failed";
-            state.error = action.payload;
-        })
+                state.status = "succeeded";
+                state.clinics = state.clinics.filter((clinic) => clinic.id !== action.payload.id);
+            })
+            .addCase(deleteClinic.rejected, (state, action) => {
+                console.log("ERROR AL ELIMINAR LA CLINICA: ", action.payload);
+                state.status = "failed";
+                state.error = action.payload;
+            })
     }
-    
+
 });
 
 export const { fetchClinicsStart, fetchClinicsSuccess, fetchClinicsFailure } = clinicSlice.actions;

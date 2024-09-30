@@ -10,17 +10,15 @@ const authSlice = createSlice({
     },
     reducers: { // Objeto que define las funciones reductoras para manejar diferentes acciones
         login: (state, action) => {
-    // console.log("LOGIN ACTION PAYLOAD: ", action.payload);
-    if (action.payload && action.payload.user) {
-        state.user = action.payload.user;
-        state.access = action.payload.access;
-        state.isAuthenticated = true;
-        localStorage.setItem("user", JSON.stringify(action.payload.user));
-    // console.log("LOGIN ACTION PAYLOAD ACCESS: ", action.payload.access);
-    } else {
-        console.error("Invalid login payload:", action.payload);
-    }
-},
+            if (action.payload && action.payload.user) {
+                state.user = action.payload.user;
+                state.access = action.payload.access;
+                state.isAuthenticated = true;
+                localStorage.setItem("user", JSON.stringify(action.payload.user));
+            } else {
+                console.error("Invalid login payload:", action.payload);
+            }
+        },
         logout: (state) => {
             state.user = null;
             state.access = null;

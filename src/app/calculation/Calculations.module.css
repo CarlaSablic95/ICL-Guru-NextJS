@@ -1,16 +1,17 @@
 /* CALCULATIONS */
 .calculations-table {
-    border-spacing: 10px; /* Adjust spacing value as needed */
-  }
-  
+    border-spacing: 10px;
+}
+
 .calculations-table>:not(caption) {
     background-color: var(--white-color) !important;
 }
-.calculations-table >tbody>tr:nth-of-type(odd)>* {
+
+.calculations-table>tbody>tr:nth-of-type(odd)>* {
     background-color: #ADD7EE;
 }
 
-.calculations-table >tbody>tr:nth-of-type(even)>* {
+.calculations-table>tbody>tr:nth-of-type(even)>* {
     background-color: #82BECA;
 }
 
@@ -71,19 +72,20 @@
 
 /* SPLIDE */
 .is-active {
-        background-color: 2px solid #495AFF !important;
-        color: var(--white-color);
+    background-color: 2px solid #495AFF !important;
+    color: var(--white-color);
 }
 
 /* FORMS (FOLLOW UP) */
-span.input-group-text  {
+span.input-group-text {
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
     background: white;
     border-left-color: transparent;
 }
 
-input[type="text"], input[type="number"] {
+input[type="text"],
+input[type="number"] {
     border-right-color: transparent;
     border-top-left-radius: 1rem;
     border-bottom-left-radius: 1rem;

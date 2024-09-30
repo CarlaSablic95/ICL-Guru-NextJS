@@ -43,16 +43,16 @@ const routes = [
 const NavbarMobile = () => {
   const pathname = usePathname();
   const dispatch = useDispatch();
-    const username = useSelector(state => state.auth.user);
+  const username = useSelector((state) => state.auth.user);
 
-    useEffect(() => {
-        const storedUser = localStorage.getItem("user");
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
 
-        if(storedUser && !username) {
-            const parsedUser = JSON.parse(storedUser);
-            dispatch(login({user: parsedUser}))
-        }
-    }, [dispatch, username]);
+    if (storedUser && !username) {
+      const parsedUser = JSON.parse(storedUser);
+      dispatch(login({ user: parsedUser }));
+    }
+  }, [dispatch, username]);
 
   return (
     <nav className="navbar navbar-mobile py-3 py-md-4 d-flex d-lg-none">
@@ -64,11 +64,21 @@ const NavbarMobile = () => {
           data-bs-target="#offcanvasNavbar"
           aria-controls="offcanvasNavbar"
           aria-label="Toggle navigation"
-          style={{ border:"none" }}
+          style={{ border: "none" }}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="currentColor" className="bi bi-list text-white" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
-      </svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="38"
+            height="38"
+            fill="currentColor"
+            className="bi bi-list text-white"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
+            />
+          </svg>
         </button>
         <a className="navbar-brand bg-warning" href="#">
           Logo
@@ -81,7 +91,7 @@ const NavbarMobile = () => {
         >
           <div className="offcanvas-header">
             <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
-              { `User: ${username}` }
+              {`User: ${username}`}
             </h5>
             <button
               type="button"
@@ -101,25 +111,26 @@ const NavbarMobile = () => {
                   <i className="bi bi-key-fill fs-4"></i>
                 </a>
               </li>
-              { routes.map((route) => {
-          const isActive = pathname === route.path;
-          return (
-          <li key={route.path} className="mb-3">
-            <Image src={isActive ? route.activeIcon : route.icon} width="35" height="35" className="pb-2" alt="icon" />
-                  <Link
-                    href={route.path}
-                    className={
-                      `text-dark text-decoration-none menu-list fs-5
+              {routes.map((route) => {
+                const isActive = pathname === route.path;
+                return (
+                  <li key={route.path} className="mb-3">
+                    <Image
+                      src={isActive ? route.activeIcon : route.icon}
+                      width="35"
+                      height="35"
+                      className="pb-2"
+                      alt="icon"
+                    />
+                    <Link
+                      href={route.path}
+                      className={`text-dark text-decoration-none menu-list fs-5
                         ${isActive ? "is-active" : ""}`}
-                  >
-                       {
-                        <>
-                           {route.link}
-                        </>
-                      }
-                  </Link>
-                </li>
-          );
+                    >
+                      {<>{route.link}</>}
+                    </Link>
+                  </li>
+                );
               })}
               <li className="mb-3">
                 <a
@@ -127,7 +138,13 @@ const NavbarMobile = () => {
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
                 >
-                  <Image src="../icons/logout.svg" width="30" height="30" alt="logout icon" /> Logout
+                  <Image
+                    src="../icons/logout.svg"
+                    width="30"
+                    height="30"
+                    alt="logout icon"
+                  />{" "}
+                  Logout
                 </a>
               </li>
             </ul>

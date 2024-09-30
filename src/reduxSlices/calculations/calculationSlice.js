@@ -9,7 +9,7 @@ export const addCalculation = createAsyncThunk(
             const response = await postData(`/calculation/register/${id}/`, calculationData);
             return response;
         } catch (error) {
-           return rejectWithValue(error.response.data);
+            return rejectWithValue(error.response.data);
         }
     }
 )

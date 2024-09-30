@@ -1,5 +1,5 @@
 import axiosInstance from "./axiosConfig";
-import{ store }from "@/app/store";
+import { store } from "@/app/store";
 import { login } from "@/reduxSlices/auth/authSlice"; // Utilidad para verificar la expiración del token
 
 export const authenticate = async (credentials) => {
@@ -15,7 +15,7 @@ export const authenticate = async (credentials) => {
             access: response.data.access,
             user: credentials.username
         }
-         store.dispatch(login(payload));
+        store.dispatch(login(payload));
         console.log("Estado después del login:", store.getState().auth);
         return response.data;
     } catch (error) {
@@ -53,7 +53,7 @@ export const postData = async (url, data, token) => {
         return response.data;
     } catch (error) {
         throw error;
-}
+    }
 }
 
 // EDIT
@@ -172,7 +172,7 @@ export const changePassword = async () => {
         return response;
     } catch (error) {
         console.error("Error fetching account: ", error);
-        
+
     }
 }
 

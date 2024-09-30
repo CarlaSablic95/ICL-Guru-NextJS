@@ -52,7 +52,7 @@ export const updatePass = createAsyncThunk(
     async (clinicData, { rejectWithValue }) => {
         console.log("EDIT PASSWORD: ", clinicData);
         try {
-            const response = await postData("/accounts/change-password/",clinicData);
+            const response = await postData("/accounts/change-password/", clinicData);
             console.log("Respuesta al cambiar contraseña: ", response);
             return response;
         } catch (error) {
