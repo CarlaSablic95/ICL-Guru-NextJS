@@ -4,13 +4,12 @@ import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { addAccount } from "@/reduxSlices/accounts/accountSlice";
-import Button from "../Button/Button2";
 import { Input } from "../Inputs/Input";
 
 
 const AddAccount = () => {
     const dispatch = useDispatch();
-    // const [success, setSuccess] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
     const methods = useForm();
@@ -39,6 +38,7 @@ const AddAccount = () => {
         try {
             const response = await dispatch(addAccount(data)).unwrap();
             console.log("Response: ", response);
+
             // setSuccess(true);
             // setError(null);
             // reset();
@@ -176,9 +176,14 @@ const AddAccount = () => {
                         </div>
                                 </div>
                             <div className="modal-footer border-0 d-flex justify-content-center">
-                                {/* <Button type="submit" title="Submit" bgColor="#3DC2DD" disabled={isLoading} /> */}
-
-                                <Button type="submit" title="Submit" bgColor="#3DC2DD"  />
+                                <button
+                                type="submit"
+                                className="btn py-2 px-4 border-0 fw-bold"
+                                style={{ backgroundColor: "#3DC2DD", color: "#fefefe", textTransform: "uppercase", borderRadius: "3rem", width: "220px", height: "50px"}}
+                                disabled={ isLoading } data-bs-dismiss="modal"
+                            >
+                                {isLoading ? (<div className="d-flex justify-content-center align-items-center"><span className="me-1">Submitting</span> <span className="loader"></span></div>) : "Submit"}
+                            </button>
                             </div>
                             </form>
                         </FormProvider>

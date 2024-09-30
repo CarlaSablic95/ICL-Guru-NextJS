@@ -30,7 +30,7 @@ const FollowUpWizard = () => {
       months: "M",
       years: "Y"
     };
-    return `Postoperative ${value}${unitMapping[unit] || ""}`;
+    return `Postoperative - ${value}${unitMapping[unit] || ""}`;
   };
 
   // Función para calcular un valor numérico total en función de la unidad de tiempo para ordenar cronológicamente
@@ -155,8 +155,6 @@ const FollowUpWizard = () => {
             <label className="form-check-label fw-bold" htmlFor="flexSwitchCheckDefault">See new controls</label>
             <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style={{ cursor: "pointer" }} />
           </div>
-
-          <button className="text-white my-4" type="button" style={{ backgroundColor: "#2C98F0" }}>ADD ANOTHER DAY</button>
         </div>
 
         <div className="col-12">

@@ -14,6 +14,7 @@ import Delete from "/public/icons/delete.svg";
 import styles from "./Account.module.css";
 import AddAccount from "@/components/Modal/AddAccount";
 import DeleteAccount from "@/components/Modal/DeleteAccount";
+import IclGif from "/public/img/icl-gif.gif";
 
 const Accounts = () => {
   const { id } = useParams();
@@ -83,8 +84,17 @@ const handleEdit = (id) => {
   router.push(`/accounts/${id}`);
 }
 
-if(status === "loading") return <div>Loading...</div>;
-if(status === "failed") return <div>Error: {error}</div>;
+if(status === "loading"){ 
+  return (
+<div className="d-flex justify-content-center align-items-center vh-100">
+      <Image src={IclGif} alt="Gif" style={{ width:"250px", height:"200px" }} />
+</div>
+)};
+
+if(status === "failed") {
+  return (
+  <div className="d-flex justify-content-center align-items-center vh-100 text-danger">Error: {error}</div>
+  )}
 
 
     return (

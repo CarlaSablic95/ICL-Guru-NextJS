@@ -1,24 +1,22 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getClinics } from "@/services/ApiService";
 import { useForm, FormProvider } from "react-hook-form";
 import { fetchClinicsStart, fetchClinicsSuccess, fetchClinicsFailure } from "@/reduxSlices/clinics/clinicSlice";
 import { addPatient } from "@/reduxSlices/patients/patientSlice";
-import Button from "../Button/Button2";
 import { Input, InputRadio, Select } from "@/components/Inputs/Input";
 
-const AddPatient = () => {
+const AddPatient = ({ showToast }) => {
     const dispatch = useDispatch();
-    const { clinics, status, error } = useSelector((state) => state.clinics);
+    const { clinics } = useSelector((state) => state.clinics);
     const methods = useForm();
     const [isLoading, setIsLoading] = useState(false);
-    const modalRef = useRef(null);
 
     const { handleSubmit } = methods;
 
-    //   Obtengo las clínicas para añadir, en la lista desplegable
+    //   Obtengo las clínicas para añadir en la lista desplegable
   useEffect(() => {
     const fetchClinics = async () => {
       dispatch(fetchClinicsStart());
@@ -39,11 +37,15 @@ const AddPatient = () => {
     const onSubmit = async (data) => {
         console.log("DATOS A ENVIAR: ", data);
         setIsLoading(true);
+
         try {
             const response = await dispatch(addPatient(data)).unwrap();
-            console.log("Paciente añadido con éxito: ", response);
+            showToast("success", "Patient added successfully");
+            console.log("Patient added successfully: ", response);
+
         } catch (error) {
-            console.error("Error al crear un paciente: ", error);
+            showToast("error", "Patient added failed.");
+            console.error("Patient added failed: ", error);
         } finally {
             setIsLoading(false);
         }
@@ -156,7 +158,15 @@ const AddPatient = () => {
                                     />
                                 </div>
                                 <div className="modal-footer border-0 d-flex justify-content-center">
-                                    <Button type="submit" title="Submit" bgColor="#3DC2DD" disabled={isLoading} />
+
+                                    <button
+                                type="submit"
+                                className="btn py-2 px-4 border-0 fw-bold"
+                                style={{ backgroundColor: "#3DC2DD", color: "#fefefe", textTransform: "uppercase", borderRadius: "3rem", width: "220px", height: "50px"}}
+                                disabled={ isLoading } data-bs-dismiss="modal"
+                            >
+                                {isLoading ? (<div className="d-flex justify-content-center align-items-center"><span className="me-1">Submitting</span> <span className="loader"></span></div>) : "Submit"}
+                            </button>
                                 </div>
                             </form>
                         </FormProvider>

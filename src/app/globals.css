@@ -31,6 +31,17 @@
     border-bottom: none !important;
 }
 
+/* Toastify */
+.Toastify__toast--success {
+    background: #afdeb8 !important;
+    color: #131313 !important;
+}
+
+.Toastify__toast--error {
+    background: #f5cbcb !important;
+    color: #131313 !important;
+}
+
 body {
     font-family: "Roboto", sans-serif !important;
 }
@@ -192,7 +203,11 @@ header, .navbar-mobile, .patient-name {
 }
 
 aside {
-    min-height: 915px;
+    width: 15%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
 .offcanvas.offcanvas-end {
@@ -204,10 +219,6 @@ aside {
 .offcanvas-backdrop {
     background-color: var(--bg-modal) !important;
 }
-
-.is-active > img {
-    color: #3DC2DD !important;
-  }
 
   .navbar-toggler:focus {
     box-shadow: none;

@@ -11,17 +11,16 @@ import Eye from "@/components/Eyes/EyesOdOs";
 import Image from "next/image";
 import CalculationDataGraphic from "@/components/CalculationsPatient/CalculationDataGraphic";
 import AddCalculation from "@/components/Wizard/AddCalculation";
+import IclGif from "/public/img/icl-gif.gif";
 
 const Calculations = () => {
 
     const { id } = useParams(); // obtiene el ID de la URL
     console.log("ID recibido en Calculations: ", id);
     const [patient, setPatient] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);    
-    const [error, setError] = useState(null);
 
     const dispatch = useDispatch();
-    const calculations = useSelector((state) => state.calculations.calculations);
+    const { calculations, status, error } = useSelector((state) => state.calculations.calculations);
     console.log("CALCULATIONS: ", calculations);
     
     const [showCalculation, setShowCalculation] = useState(false);
@@ -32,15 +31,11 @@ const Calculations = () => {
      useEffect(() => {
                  const fetchPantientData = async () => {
                      try {
-                         setIsLoading(true);
                          const patientData = await getPatient(id);
                          console.log("TRAIGO PACIENTE: ", patientData)
                          setPatient(patientData);
                      } catch(error) {
                          console.error("Error fetching data: ", error);
-                         setError("Failed to load patient data");
-                     } finally {
-                         setIsLoading(false);
                      }
                  }
                  fetchPantientData();
@@ -79,9 +74,17 @@ const Calculations = () => {
     }
 
       
-    if(isLoading) return <div>Loading calculation data...</div>
-    if(error) return <div>Error: {error}</div>
-    if(!patient) return <div>Patient not found for ID: {id}</div>
+    if(status === "loading"){ 
+      return (
+    <div className="d-flex justify-content-center align-items-center vh-100">
+          <Image src={IclGif} alt="Gif" style={{ width:"250px", height:"200px" }} />
+    </div>
+    )};
+    
+    if(status === "failed") {
+      return (
+      <div className="d-flex justify-content-center align-items-center vh-100 text-danger">Error: {error}</div>
+      )}
 
             return (
                 <>
@@ -94,19 +97,20 @@ const Calculations = () => {
             <div className="mb-5">
                 <h1 className="text-center text-uppercase fw-bold">Calculations</h1>
             </div>
+            
                     <div className="mb-5 d-flex flex-column align-items-center">
-                    <h4 className="mb-1 fs-4 fw-bold">
-                            Patient: <small className="text-muted">{`${patient.name} ${patient.surname}`}</small>
-                        </h4>
-                        <h4 className="mb-1 fs-4 fw-bold">
-                        DOB: <small className="text-muted">{`${patient.dob}`}</small>
-                        </h4>
+                      <h4 className="mb-1 fs-4 fw-bold">
+                          Patient: <small className="text-muted">{patient ? `${patient.name} ${patient.surname}` : 'Loading...'}</small>
+                      </h4>
+                      <h4 className="mb-1 fs-4 fw-bold">
+                          DOB: <small className="text-muted">{patient ? `${patient.dob}` : 'Loading...'}</small>
+                      </h4>
 
-                        {/* MOSTRAR NOMBRE DE LA CLINICA */}
-                        <h4 className="mb-1 fs-4 fw-bold">
-                        Organization: <small className="text-muted">{`${patient.organization}`}</small>
-                        </h4>
-                    </div>
+                      {/* MOSTRAR NOMBRE DE LA CLINICA */}
+                      <h4 className="mb-1 fs-4 fw-bold">
+                          Organization: <small className="text-muted">{patient ? `${patient.organization}` : 'Loading...'}</small>
+                      </h4>
+              </div>
             <div className="d-flex justify-content-end align-items-center mb-5">
                 <Button title="New calculation" icon="../icons/add-user.svg" bgColor="#3DC2DD" rounded="2rem" fontWeight="bold" onClick={() => handleNewCalculation()} />
             </div>

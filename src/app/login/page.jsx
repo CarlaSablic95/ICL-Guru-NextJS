@@ -51,10 +51,6 @@ const Login = () => {
         console.error("Error: ", error);
         setLoginError("Wrong user or password");
 
-        // Oculto mensaje de error despues de 3 segundos
-        setTimeout(() => {
-            setLoginError("");
-        }, 3000);
       } finally {
         setIsLoading(false);
       }

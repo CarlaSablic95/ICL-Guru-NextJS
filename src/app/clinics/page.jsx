@@ -4,6 +4,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { getClinics } from "@/services/ApiService";
 import { fetchClinicsStart, fetchClinicsSuccess, fetchClinicsFailure } from "@/reduxSlices/clinics/clinicSlice";
 import Image from "next/image";
@@ -15,6 +17,7 @@ import { SearchBar } from "@/components/Inputs/Input";
 import AddClinic from "@/components/Modal/AddClinic";
 import DeleteClinic from "@/components/Modal/DeleteClinic";
 import styles from "./Clinics.module.css";
+import IclGif from "/public/img/icl-gif.gif";
 
 const Clinics = () => {
   const { id } = useParams();
@@ -86,8 +89,40 @@ const totalPages = Math.ceil(filteredClinics.length / clinicsPerPage);
   router.push(`/clinics/${id}`)
  }
 
-if(status === "loading") return <div>Loading...</div>;
-if(status === "failed") return <div>Error: {error}</div>;
+// Mensajes de éxito o error para informar al usuario
+const showToast = (type, message) => {
+  if(type === "success") {
+    toast.success(message, {
+      position: "top-right",
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    })
+  } else {
+    toast.error(message, {
+      position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+    })
+  }
+}
+
+if(status === "loading"){ 
+  return (
+<div className="d-flex justify-content-center align-items-center vh-100">
+      <Image src={IclGif} alt="Gif" style={{ width:"250px", height:"200px" }} />
+</div>
+)};
+
+if(status === "failed") {
+  return (
+  <div className="d-flex justify-content-center align-items-center vh-100 text-danger">Error: {error}</div>
+  )}
 
   return (
     <>
@@ -156,6 +191,8 @@ if(status === "failed") return <div>Error: {error}</div>;
           </div>
         </div>
 
+        <ToastContainer />
+
         <Pagination
       currentPage={currentPage}
       totalPages={totalPages}
@@ -164,8 +201,8 @@ if(status === "failed") return <div>Error: {error}</div>;
       </section>
 
 
-    <AddClinic />
-    <DeleteClinic clinicId={deletedClinicId} />
+    <AddClinic showToast={showToast} />
+    <DeleteClinic clinicId={deletedClinicId} showToast={showToast} />
     </>
   );
 };

@@ -73,7 +73,6 @@ const EditAccount = () => {
                         </div>
 
                             <div className="modal-footer border-0 d-flex justify-content-center">
-                                {/* <Button type="submit" title="Submit" bgColor="#3DC2DD" disabled={isLoading} /> */}
 
                                 <Button type="submit" title="CHANGE DATA" bgColor="#3DC2DD"  />
                             </div>

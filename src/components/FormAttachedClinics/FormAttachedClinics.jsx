@@ -28,7 +28,7 @@ const FormAttachedClinics = ({ accountId }) => {
   const dispatch = useDispatch();
 
   // Fetch clinics and accounts from Redux state
-  const { clinics, clinicsStatus, clinicsError } = useSelector((state) => state.clinics);
+  const { clinics, status, clinicsError } = useSelector((state) => state.clinics);
   const { accounts, accountsStatus, accountsError } = useSelector((state) => state.accounts);
 
   const currentAccount = accounts.find((account) => account.id === Number(accountId));
@@ -93,9 +93,9 @@ const FormAttachedClinics = ({ accountId }) => {
   };
 
   // Manejando estados de carga y error
-  if (clinicsStatus === "loading" || accountsStatus === "loading") return <div>Loading...</div>;
-  if (clinicsStatus === "failed") return <div>Error: {clinicsError}</div>;
-  if (accountsStatus === "failed") return <div>Error: {accountsError}</div>;
+  if (status === "loading" || status === "loading") return <div>Loading...</div>;
+  if (status === "failed") return <div>Error: {clinicsError}</div>;
+  if (status === "failed") return <div>Error: {accountsError}</div>;
   if (!currentAccount) return <div>Cuenta no encontrada</div>;
 
   return (

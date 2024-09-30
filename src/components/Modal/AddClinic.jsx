@@ -1,36 +1,32 @@
 "use client";
-// import { useState } from "react";
+import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { addClinic } from "@/reduxSlices/clinics/clinicSlice";
 import { useDispatch } from "react-redux";
 import { Input } from "../Inputs/Input";
-import Button from "../Button/Button2";
 
-const AddClinic = () => {
+const AddClinic = ({ showToast }) => {
     const dispatch = useDispatch();
     const methods = useForm();
-    // const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     // const [errorMessage, setErrorMessage] = useState(null);
 
     const { handleSubmit } = methods;
 
     const onSubmit = async (data) => {
         console.log("DATOS A ENVIAR: ", data);
+        setIsLoading(true);
 
         try {
             const response = await dispatch(addClinic(data)).unwrap();
-            console.log("Clínica añadida con éxito: ", response);
-            
+
+            showToast("success", "Clinic added successfully");
+            console.log("Clinic added successfully: ", response);
         } catch (error) {
-            if(error.response) {
-                console.error("Data Error: ", error.response.data);
-                console.error("Status Error: ", error.response.status);
-                console.error("Headers Error: ", error.response.headers);
-            } else if(error.request) {
-                console.error("Error creating a patient: ", error);
-            } else {
-                console.error("Error: ", error.message);
-            }
+            showToast("error", "Clinic removal failed");
+            console.error("Clinic removal failed: ", error);
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -91,8 +87,14 @@ const AddClinic = () => {
 
 
                         <div className="modal-footer border-0 d-flex justify-content-center">
-                            {/* <Button2 type="submit" title={ isLoading ? "Saving...": "Save"} bgColor="#3DC2DD" textColor="#ffffff" disabled={isLoading} /> */}
-                            <Button type="submit" title="Save" bgColor="#3DC2DD" textColor="#ffffff"/>
+                            <button
+                                type="submit"
+                                className="btn py-2 px-4 border-0 fw-bold"
+                                style={{ backgroundColor: "#3DC2DD", color: "#fefefe", textTransform: "uppercase", borderRadius: "3rem", width: "220px", height: "50px"}}
+                                disabled={ isLoading } data-bs-dismiss="modal"
+                            >
+                                {isLoading ? (<div className="d-flex justify-content-center align-items-center"><span className="me-1">Saving</span> <span className="loader"></span></div>) : "Save"}
+                            </button>
                         </div>
                         </form>
                     </FormProvider>

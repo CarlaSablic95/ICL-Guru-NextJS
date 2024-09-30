@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Image from "next/image";
 import { fetchPatientsStart, fetchPatientsSuccess, fetchPatientsFailure } from "@/reduxSlices/patients/patientSlice";
 import { getPatients } from "@/services/ApiService";
@@ -14,8 +16,7 @@ import EditPatient from "@/components/Modal/EditPatient";
 import DeletePatient from "@/components/Modal/DeletePatient";
 import Edit from "/public/icons/edit.svg";
 import Delete from "/public/icons/delete.svg";
-// import { current } from "@reduxjs/toolkit";
-// import styles from "../../patients/Patients.module.css";
+import IclGif from "/public/img/icl-gif.gif";
 
 const PatientsList = () => {
   const router = useRouter();
@@ -83,8 +84,17 @@ const filterPatients = (e) => {
   setFilteredPatients(filteredData);
 }
 
-if(status === "loading") return <div>Loading...</div>;
-if(status === "failed") return <div>Error: {error}</div>;
+if(status === "loading"){ 
+  return (
+<div className="d-flex justify-content-center align-items-center vh-100">
+      <Image src={IclGif} alt="Gif" style={{ width:"250px", height:"200px" }} />
+</div>
+)};
+
+if(status === "failed") {
+  return (
+  <div className="d-flex justify-content-center align-items-center vh-100 text-danger">Error: {error}</div>
+  )}
 
 // Función para ver el cálculo del paciente
 
@@ -93,6 +103,29 @@ const handleSetSelectedPatient = (id) => {
   // setSelectedPatient(id);
   router.push(`/calculation/${id}/`);
   // console.log("PACIENTE SELECCIONADO: ", id);
+}
+
+// Mensajes de éxito o error para informar al usuario
+const showToast = (type, message) => {
+  if(type === "success") {
+    toast.success(message, {
+      position: "top-right",
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    })
+  } else {
+    toast.error(message, {
+      position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+    })
+  }
 }
 
 
@@ -108,6 +141,9 @@ return (
     <div className="mb-4 d-flex justify-content-end">
       <ButtonModal dataBsTarget="#addPatient" title="Add patients" icon="./icons/add-user.svg" />
     </div>
+
+    {/* Notificación */}
+    <ToastContainer />
 
     {/* TABLA */}
     <div className="table-responsive mb-4" style={{ backgroundColor:"#EDF2FB" }}>
@@ -167,9 +203,9 @@ return (
     />
   </section>
   {/* VENTANAS MODALES */}
-    <AddPatient />
-    <EditPatient patientId={editingPatientId}/>
-    <DeletePatient patientId={deletedPatientId} />
+    <AddPatient showToast={showToast} />
+    <EditPatient patientId={editingPatientId} showToast={showToast}/>
+    <DeletePatient patientId={deletedPatientId} showToast={showToast}/>
     </>
 )
 }

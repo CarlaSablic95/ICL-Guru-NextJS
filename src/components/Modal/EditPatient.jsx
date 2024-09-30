@@ -4,10 +4,9 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm, FormProvider } from "react-hook-form";
 import { editPatient } from "@/reduxSlices/patients/patientSlice";
-import Button2 from "../Button/Button2";
 import { Input, InputRadio } from "../Inputs/Input";
 
-const EditPatient = ({ patientId }) => {
+const EditPatient = ({ patientId, showToast }) => {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
@@ -18,8 +17,6 @@ const EditPatient = ({ patientId }) => {
 
   const methods = useForm();
   const { reset, watch } = methods;
-  // console.log("METHODS: ", methods);
-
 
   useEffect(() => {
     if(currentPatient) {
@@ -32,11 +29,14 @@ const EditPatient = ({ patientId }) => {
   const onSubmit = async (data) => {
     setIsLoading(true);
     try {
-      await dispatch(editPatient({ id: patientId, ...data })).unwrap();
-      // CERRAR EL MODAL
-      console.log("Submitted data: ", data);
+      const response = await dispatch(editPatient({ id: patientId, ...data })).unwrap();
+
+      showToast("success", "Patient edited successfully");
+      console.log("Patient edited successfully: ", response);
+
     } catch(error) {
-      console.error("Error updating data: ", error);
+      showToast("error", "Patient edited failed.");
+      console.error("Patient edited failed: ", error);
     } finally {
       setIsLoading(false);
     }
@@ -171,13 +171,14 @@ const EditPatient = ({ patientId }) => {
                     />
                   </div>
             <div className="modal-footer border-0 d-flex justify-content-evenly">
-              <Button2
-                type={isLoading ? "Updating..." : "Update"}
-                title="Update"
-                bgColor="#3DC2DD"
-                textColor="#ffffff"
-                disabled={isLoading}
-              />
+            <button
+                                type="submit"
+                                className="btn py-2 px-4 border-0 fw-bold"
+                                style={{ backgroundColor: "#3DC2DD", color: "#fefefe", textTransform: "uppercase", borderRadius: "3rem", width: "220px", height: "50px"}}
+                                disabled={ isLoading } data-bs-dismiss="modal"
+                            >
+                                {isLoading ? (<div className="d-flex justify-content-center align-items-center"><span className="me-1">Submitting</span> <span className="loader"></span></div>) : "Submit"}
+                            </button>
             </div>
                 </form>
               </FormProvider>

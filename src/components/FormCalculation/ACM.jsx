@@ -72,10 +72,10 @@ const ACM = () => {
                                 </div>
 
                                <div className={`${errors.ata_od ? "mb-0" : "mb-3"}`}>
-                              <label htmlFor="id_ata_od" class="form-label fw-bold">ATA:<span className="text-danger">*</span></label>
-                              <div class="input-group">
-                                  <input type="number" step="0.001" class="form-control" id="id_ata_od" aria-label="AtA" aria-describedby="AtA" className={`form-control ${errors.ata_od ? "border border-2 border-danger" : ""}`} {...register("ata_od", { required: true })} name="ata_od" disabled={isEnabled}  />
-                                  <span class="input-group-text" id="basic-addon2" style={{ backgroundColor:"#e9ecef" }}>mm</span>
+                              <label htmlFor="id_ata_od" className="form-label fw-bold">ATA:<span className="text-danger">*</span></label>
+                              <div className="input-group">
+                                  <input type="number" step="0.001" id="id_ata_od" aria-label="AtA" aria-describedby="AtA" className={`form-control ${errors.ata_od ? "border border-2 border-danger" : ""}`} {...register("ata_od", { required: true })} name="ata_od" disabled={isEnabled}  />
+                                  <span className="input-group-text" id="basic-addon2" style={{ backgroundColor:"#e9ecef" }}>mm</span>
                               </div>
                             </div>
                             { errors.ata_od && (

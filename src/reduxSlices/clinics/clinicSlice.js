@@ -20,7 +20,7 @@ export const addClinic = createAsyncThunk(
 export const deleteClinic = createAsyncThunk(
     "clinics/deleteClinic",
     async({id}, { rejectWithValue }) => {
-        console.log("CLINIC DATA ID TO ELIMINATE: ", id);
+        console.log("ID: ", id);
         
         try {
             const response = await deleteData(`/accounts/organizations/${id}/`);

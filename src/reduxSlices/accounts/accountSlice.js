@@ -49,14 +49,10 @@ export const deleteAccount = createAsyncThunk(
 // Cambio de contraseña
 export const updatePass = createAsyncThunk(
     "accounts/updatePass",
-    async ({ target_user_profile_id, current_password, new_password }, { rejectWithValue }) => {
-        console.log("EDIT PASSWORD: ", { target_user_profile_id, current_password, new_password });
+    async (clinicData, { rejectWithValue }) => {
+        console.log("EDIT PASSWORD: ", clinicData);
         try {
-            const response = await postData("/accounts/change-password/", {
-                target_user_profile_id,
-                current_password,
-                new_password
-            });
+            const response = await postData("/accounts/change-password/",clinicData);
             console.log("Respuesta al cambiar contraseña: ", response);
             return response;
         } catch (error) {

@@ -2,17 +2,20 @@
 import { useDispatch, useSelector } from "react-redux";
 import { deleteClinic } from "@/reduxSlices/clinics/clinicSlice";
 
-const DeleteClinic = ({ clinicId }) => {
+const DeleteClinic = ({ clinicId, showToast }) => {
     const dispatch = useDispatch();
     const deletedClinic = useSelector((state) => state.clinics.clinics.find((clinic) => clinic.id === clinicId));
 
     console.log("CLÍNICA A ELIMINAR: ", deletedClinic);
 
-    const handleDelete = () => {
+    const handleDelete = async () => {
         try {
-            dispatch(deleteClinic({id: clinicId}));
+            const response =  await dispatch(deleteClinic({id: clinicId}));
+            showToast("success", "Clinic deleted successfully")
+            ;console.log("Clinic deleted  successfully: ", response);
         } catch (error) {
-            console.error("Error deleting clinic: ", error);
+            showToast("error", "Clinic deletion failed");
+            console.error("Clinic deletion failed: ", error);
         }
     }
     

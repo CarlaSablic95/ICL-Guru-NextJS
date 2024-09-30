@@ -60,23 +60,23 @@ const SurgicalData = () => {
                                     <h4 className="text-white fw-bold text-center">OD</h4>
                                 </div>
                                 <div>
-                                    <label htmlFor="id_power_sph_od" className="fw-bold">IOL power:<span className="text-danger">*</span></label>
-                                    <div className={`${errors.power_sph_od ? "mb-0" : "mb-3"}`}>
+                                    <label htmlFor="id_power_sph" className="fw-bold">IOL power:<span className="text-danger">*</span></label>
+                                    <div className={`${errors.power_sph ? "mb-0" : "mb-3"}`}>
                                         <div className="input-group">
-                                            <input type="number" step="0.5" min="-18" max="-0.5" className={`form-control ${errors.power_sph_od ? "border border-2 border-danger" : ""}`} placeholder="Sphere" aria-label="Sphere power" id="id_power_sph_od" name="power_sph_od"
-                                            {...register("power_sph_od", { required: true })}
+                                            <input type="number" step="0.5" min="-18" max="-0.5" className={`form-control ${errors.power_sph ? "border border-2 border-danger" : ""}`} placeholder="Sphere" aria-label="Sphere power" id="id_power_sph" name="power_sph"
+                                            {...register("power_sph", { required: true })}
                                             disabled={isEnabled} />
                                             <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }}>Dp</span>
                                         </div>
                                     </div>
-                                    { errors.power_sph_od && (
+                                    { errors.power_sph && (
                                         <div className="text-danger text-center fw-bold mb-3">This field is required</div>
                                     ) }
 
-                                    <div className={`${errors.power_cyl_od ? "mb-0" : "mb-3"}`}>
+                                    <div className={`${errors.power_cyl ? "mb-0" : "mb-3"}`}>
                                         <div className="input-group">
-                                        <input type="number" step="0.5" min="-18" max="-0.5" className={`form-control ${errors.power_cyl_od ? "border border-2 border-danger" : ""}`} placeholder="Cylinder" aria-label="Cylinder power" id="id_power_cyl_od" name="power_cyl_od"
-                                        {...register("power_cyl_od")} disabled={isEnabled} />
+                                        <input type="number" step="0.5" min="-18" max="-0.5" className={`form-control ${errors.power_cyl ? "border border-2 border-danger" : ""}`} placeholder="Cylinder" aria-label="Cylinder power" id="id_power_cyl" name="power_cyl"
+                                        {...register("power_cyl")} disabled={isEnabled} />
                                         <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }}>Dp</span>
                                     </div> 
                                     </div>
@@ -84,32 +84,32 @@ const SurgicalData = () => {
                                         <div className="text-danger text-center fw-bold mb-3">This field is required</div>
                                     ) }
 
-                                            <div className={`${errors.power_axis_od ? "mb-0" : "mb-3"}`}>
+                                            <div className={`${errors.power_axis ? "mb-0" : "mb-3"}`}>
                                                 <div className="input-group">
-                                                <input type="number" step="0.1" className={`form-control ${errors.power_axis_od ? "border border-2 border-danger" : ""}`} placeholder="Axis" aria-label="Axis" id="id_power_axis_od" name="power_axis_od" 
-                                                {...register("power_axis_od")}
+                                                <input type="number" step="0.1" className={`form-control ${errors.power_axis ? "border border-2 border-danger" : ""}`} placeholder="Axis" aria-label="Axis" id="id_power_axis" name="power_axis" 
+                                                {...register("power_axis")}
                                                 disabled={isEnabled} />
                                             <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }}>°</span>
                                             </div>
                                         </div>
-                                        { errors.power_axis_od && (
+                                        { errors.power_axis && (
                                         <div className="text-danger text-center fw-bold mb-3">This field is required</div>
                                     ) }
                                     </div>
                                     <div className="form-check form-switch">
-                                <input className="form-check-input" type="checkbox" role="switch" name="viva_od" id="id_viva_od" {...register("viva_od")} disabled={isEnabled} />
-                                <label className="form-check-label fw-bold" for="id_viva_od">VIVA*</label>
+                                <input className="form-check-input" type="checkbox" role="switch" name="viva" id="id_viva" {...register("viva")} disabled={isEnabled} />
+                                <label className="form-check-label fw-bold" for="id_viva">VIVA*</label>
                             </div>
                             
                             <div>
                                     <label className="fw-bold">Data of surgery:<span className="text-danger">*</span></label>
                                     <div className="input-group">
-                                        <input type="date" className={`form-control ${errors.dqx_od ? "border border-2 border-danger" : ""}`} id="id_dqx_od" name="dqx_od" 
-                                        {...register("dqx_od", {required: true})}
+                                        <input type="date" className={`form-control ${errors.qx_date ? "border border-2 border-danger" : ""}`} id="id_dqx" name="qx_date" 
+                                        {...register("qx_date", {required: true})}
                                         disabled={isEnabled} />
                                     </div>
                                 </div>
-                                { errors.dqx_od && (
+                                { errors.qx_date && (
                                         <div className="text-danger text-center fw-bold mb-3">This field is required</div>
                                     ) }
                             </div>
@@ -120,54 +120,54 @@ const SurgicalData = () => {
                             <div className="rounded-5 mx-auto p-2" style={{ backgroundColor:"#2FB297", width:"50px" }}>
                                     <h4 className="text-white fw-bold text-center">OS</h4>
                                 </div>
-                                <label htmlFor="id_power_sph_os" className="fw-bold">IOL power:<span className="text-danger">*</span></label>
-                                <div className={`${errors.power_sph_os ? "mb-0" : "mb-3"}`}>
+                                <label htmlFor="id_power_sph" className="fw-bold">IOL power:<span className="text-danger">*</span></label>
+                                <div className={`${errors.power_sph ? "mb-0" : "mb-3"}`}>
                                         <div className="input-group">
-                                        <input type="number" step="0.5" min="-18" max="-0.5" className={`form-control ${errors.power_sph_os ? "border border-2 border-danger" : ""}`} placeholder="Sphere" aria-label="Sphere power" id="id_power_sph_os" name="power_sph_os" 
-                                        {...register("power_sph_os", {required: true})}
+                                        <input type="number" step="0.5" min="-18" max="-0.5" className={`form-control ${errors.power_sph ? "border border-2 border-danger" : ""}`} placeholder="Sphere" aria-label="Sphere power" id="id_power_sph" name="power_sph" 
+                                        {...register("power_sph", {required: true})}
                                         disabled={isEnabled} />
                                         <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }}>Dp</span>
                                     </div>
-                                    { errors.power_sph_os && (
+                                    { errors.power_sph && (
                                         <div className="text-danger text-center fw-bold mb-3">This field is required</div>
                                     ) }
                                     </div>
 
-                                    <div className={`${errors.power_cyl_os ? "mb-0" : "mb-3"}`}>
+                                    <div className={`${errors.power_cyl ? "mb-0" : "mb-3"}`}>
                                     <div className="input-group">
-                                        <input type="number" step="0.5" className={`form-control ${errors.power_cyl_os ? "border border-2 border-danger" : ""}`} placeholder="Cylinder" aria-label="Cylinder power" id="id_power_cyl_os" name="power_cyl_os" 
-                                        {...register("power_cyl_os")}
+                                        <input type="number" step="0.5" className={`form-control ${errors.power_cyl ? "border border-2 border-danger" : ""}`} placeholder="Cylinder" aria-label="Cylinder power" id="id_power_cyl" name="power_cyl" 
+                                        {...register("power_cyl")}
                                         disabled={isEnabled} />
                                         <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }}>Dp</span>
                                     </div>
-                                    { errors.power_cyl_os && (
+                                    { errors.power_cyl && (
                                         <div className="text-danger text-center fw-bold mb-3">This field is required</div>
                                     ) }
                                     </div>
 
-                                    <div className={`${errors.power_axis_os ? "mb-0" : "mb-3"}`}>
+                                    <div className={`${errors.power_axis ? "mb-0" : "mb-3"}`}>
                                                 <div className="input-group">
-                                        <input type="number" step="0.1" className={`form-control ${errors.power_axis_os ? "border border-2 border-danger" : ""}`} placeholder="Axis" aria-label="Axis" id="id_power_axis_os" name="power_axis_os" 
-                                        {...register("power_axis_os")}
+                                        <input type="number" step="0.1" className={`form-control ${errors.power_axis ? "border border-2 border-danger" : ""}`} placeholder="Axis" aria-label="Axis" id="id_power_axis" name="power_axis" 
+                                        {...register("power_axis")}
                                         disabled={isEnabled} />
                                         <span className="input-group-text" style={{ backgroundColor:"#e9ecef" }}>°</span>
                                     </div>
-                                    { errors.power_axis_os && (
+                                    { errors.power_axis && (
                                         <div className="text-danger text-center fw-bold mb-3">This field is required</div>
                                     ) }
                                     </div>
 
                                     <div className="form-check form-switch">
-                                <input className="form-check-input" type="checkbox" role="switch" name="viva_os" id="id_viva_os" {...register("viva_os")} disabled={isEnabled} />
-                                <label className="form-check-label fw-bold" for="id_viva_os">VIVA* </label>
+                                <input className="form-check-input" type="checkbox" role="switch" name="viva" id="id_viva" {...register("viva")} disabled={isEnabled} />
+                                <label className="form-check-label fw-bold" for="id_viva">VIVA* </label>
                             </div>
 
                                 <div>
                                     <label className="fw-bold">Data of surgery:<span className="text-danger">*</span> </label>
                                     <div className="input-group">
-                                    <input type="date" className={`form-control ${errors.dqx_os ? "border border-2 border-danger" : ""}`} {...register("dqx_os", {required: true})} id="id_dqx_os" name="dqx_os" disabled={isEnabled} />
+                                    <input type="date" className={`form-control ${errors.dqx ? "border border-2 border-danger" : ""}`} {...register("dqx", {required: true})} id="id_dqx" name="dqx" disabled={isEnabled} />
                                     </div>
-                                    { errors.dqx_os && (
+                                    { errors.dqx && (
                                         <div className="text-danger text-center fw-bold mb-3">This field is required</div>
                                     ) }
                                 </div>
