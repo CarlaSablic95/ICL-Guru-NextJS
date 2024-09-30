@@ -6,14 +6,15 @@ import FormIntraoperative from "../FollowUpForms/FormIntraoperative";
 import FormControl from "../FollowUpForms/FormControl";
 import Image from "next/image";
 import Graphic from "../../../public/img/graphic.png";
+import Eye from "../Eyes/EyesOdOs";
 
-const FollowUpWizard = () => {
+const FollowUpOD = () => {
   const [step, setStep] = useState(0);
   const [activeStep, setActiveStep] = useState(step);
   const [stepTitles, setStepTitles] = useState(["Intraoperative"]);
   const [formControl, setFormControl] = useState([<FormIntraoperative key="intraoperative" />]);
-  const [customValue, setCustomValue] = useState(1); // Valor predeterminado
-  const [customUnit, setCustomUnit] = useState("days"); // Unidad predeterminada
+  const [customValue, setCustomValue] = useState("Value");
+  const [customUnit, setCustomUnit] = useState("Select a time unit"); 
 
   const onChange = (nextStep) => {
     setStep(nextStep < 0 ? 0 : nextStep > formControl.length - 1 ? formControl.length - 1 : nextStep);
@@ -80,7 +81,7 @@ const FollowUpWizard = () => {
     <section>
       <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-5">
         <div className="d-flex">
-          <h3 className="my-4">Postoperative</h3>
+          <h3 className="my-4">Postoperative <Eye bgColor="#4888C8" color="#fefefe" title="OD" width={50} height={50} fontSize="1.5rem" /></h3>
         </div>
         <button type="button" className="btn py-2 px-4 border-0 mb-3 mb-md-0" style={{ backgroundColor: "#59B03D", color: "#fefefe", borderRadius: "2rem" }}>
           Exported to Excel
@@ -88,41 +89,62 @@ const FollowUpWizard = () => {
       </div>
 
       {/* Inputs para facilitar el control personalizado */}
-      <div className="d-flex flex-column flex-md-row justify-content-evenly mb-3">
-        <div>
-          <p className="fw-bold">Enter a value</p>
-          <input
-            type="number"
-            min="1"
-            max="10"
-            value={customValue}
-            onChange={(e) => setCustomValue(e.target.value)}
-            placeholder="Valor"
-            className="form-control mb-3"
-          />
-        </div>
-        <div>
-          <p className="fw-bold">Enter a value to indicate day, month, or year.</p>
-          <select
-            value={customUnit}
-            onChange={(e) => setCustomUnit(e.target.value)}
-            className="form-control mb-3"
+      <div className="d-flex flex-column justify-content-center justify-content-md-start align-items-center">
+        <h4 className="text-center text-md-start mb-2">Add control</h4>
+        <div className="col-10 col-md-5 px-2 d-flex flex-column flex-md-row justify-content-center align-items-center gap-3 mb-3" style={{ backgroundColor: "#E9F1F8", borderRadius: "1rem", paddingTop: "20px", paddingBottom: "20px"}}>
+          <div>
+            <label htmlFor="value fs-4">Enter a value</label>
+            <input
+              type="number"
+              min="1"
+              max="10"
+              name="value"
+              id="value"
+              value={customValue}
+              onChange={(e) => setCustomValue(e.target.value)}
+              placeholder="Value"
+              className="form-control mb-3"
+            />
+          </div>
+          <div>
+            <label htmlFor="time-unit fs-4">Enter a time unit</label>
+            <select
+              value={customUnit}
+              onChange={(e) => setCustomUnit(e.target.value)}
+              className="form-control mb-3"
+              name="time-unit"
+              id="time-unit"
+            >
+              <option value>Select a time unit</option>
+              <option value="days">Days</option>
+              <option value="months">Month</option>
+              <option value="years">Years</option>
+            </select>
+          </div>
+          
+          <button
+            type="button"
+            className="btn py-2 px-4 border-0 mb-4 mb-md-0"
+            style={{ backgroundColor: "#B02F92", color: "#fefefe", borderRadius: "2rem" }}
+            onClick={handleAddControl}
           >
-            <option value="days">Days</option>
-            <option value="months">Month</option>
-            <option value="years">Years</option>
-          </select>
+            New control
+          </button>
         </div>
-        
-        <button
-          type="button"
-          className="btn py-2 px-4 border-0 mb-4"
-          style={{ backgroundColor: "#B02F92", color: "#fefefe", borderRadius: "2rem" }}
-          onClick={handleAddControl}
-        >
-          New control
-        </button>
       </div>
+
+
+      <Steps current={activeStep} onChange={onChange}>
+        {stepTitles.map((title, index) => (
+          <Steps.Item
+            key={index}
+            title={title}
+            onClick={() => setStep(index)}
+            style={{ cursor: "pointer" }}
+            className="mb-4"
+          />
+        ))}
+      </Steps>
 
       <ButtonGroup className="mb-4">
         <Button onClick={onPrevious} disabled={step === 0}>
@@ -133,31 +155,18 @@ const FollowUpWizard = () => {
         </Button>
       </ButtonGroup>
 
-      <Steps current={activeStep} onChange={onChange}>
-        {stepTitles.map((title, index) => (
-          <Steps.Item
-            key={index}
-            title={title}
-            onClick={() => setStep(index)}
-            style={{ cursor: "pointer" }}
-          />
-        ))}
-      </Steps>
-
       <hr />
       <Panel>{formControl[step]}</Panel>
       <hr />
 
       {/* GRÁFICO RESULTADO */}
-      <section>
-        <div className="d-flex justify-content-end gap-3">
+      <section className="d-flex flex-column justify-content-center">
           <div className="form-check form-switch my-4">
             <label className="form-check-label fw-bold" htmlFor="flexSwitchCheckDefault">See new controls</label>
             <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style={{ cursor: "pointer" }} />
-          </div>
         </div>
 
-        <div className="col-12">
+        <div className="col-10 d-flex justify-content-center">
           <Image src={Graphic} alt="graphic result" className="img-fluid" />
         </div>
       </section>
@@ -165,4 +174,4 @@ const FollowUpWizard = () => {
   );
 };
 
-export default FollowUpWizard;
+export default FollowUpOD;

@@ -3,7 +3,7 @@
   import { useState, useEffect } from "react";
   import { getPatient } from "@/services/ApiService";
   import { Steps, Panel, Button, ButtonGroup } from "rsuite";
-  import { useParams, useRouter } from "next/navigation";
+  import { useParams } from "next/navigation";
   import "@splidejs/react-splide/css";
   import SurgicalData from "../FormCalculation/SurgicalData";
   import Ultrasound from "../FormCalculation/Ultrasound";

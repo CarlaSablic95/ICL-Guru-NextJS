@@ -26,7 +26,8 @@ const CalculationDataGraphic = ({ handleReturnClick }) => {
     const [showStickyHeader, setShowStickyHeader] = useState(false);
     const [showFollowUp, setShowFollowUp] = useState(false);
 
-    const calculations = useSelector((state) => state.calculations.calculations);
+
+    const calculations = useSelector((state) => state.calculations);
     const dispatch = useDispatch();
 
     const handleShowOD = (e) => {
@@ -90,7 +91,7 @@ const CalculationDataGraphic = ({ handleReturnClick }) => {
             {showFollowUp ? (
                 <FollowUp onReturn={onReturn} />
             ) : (
-                <section className="pt-3 px-3">
+                <section className="pt-3 px-3 px-md-5">
                     {showStickyHeader && patient && (
                         <div className="fixed-top text-white" style={{backgroundColor:"#00507C"}}>
                             <p className="fs-6 text-center">{`Patient: ${patient.name} ${patient.surname}`}</p>
@@ -143,7 +144,7 @@ const CalculationDataGraphic = ({ handleReturnClick }) => {
                                 </h4>
                             </div>
                         )}
-                        <div className="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+                        <div className="d-flex flex-column flex-md-row justify-content-end align-items-center gap-3 mb-4">
                             <a
                                 href="#"
                                 className="p-2 px-3 text-decoration-none"
@@ -159,10 +160,11 @@ const CalculationDataGraphic = ({ handleReturnClick }) => {
                                 rounded="2rem"
                                 icon="../icons/file_download.svg"
                             />
-                            <div className="mb-3">
-                                <div>
-                                <p className="fw-bold text-center">Eye</p>
-                                 <form className="d-flex justify-content-center">
+                        </div>
+                            <div className="d-flex justify-content-center justify-content-md-end mb-3">
+                                <div className='text-center col-5'>
+                                    <h4 className="fw-bold text-center text-md-end">Eye</h4>
+                                 <form className="d-flex justify-content-center justify-content-md-end">
                                     <InputCheckbox
                                         label="OD"
                                         name="eye"
@@ -186,7 +188,6 @@ const CalculationDataGraphic = ({ handleReturnClick }) => {
                                  </form>
                                 </div>
                             </div>
-                        </div>
                     </div>
 
                     <div className="py-4">

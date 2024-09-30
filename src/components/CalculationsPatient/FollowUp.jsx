@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { getPatient } from "@/services/ApiService";
 import { InputCheckbox } from "../Inputs/Input";
 import ArrowBack from "/public/icons/arrow-back.png";
-import FollowUpWizard from "../Wizard/FollowUpWizard";
+import FollowUpOD from "../Wizard/FollowUpOD";
+import FollowUpOS from "../Wizard/FollowUpOS";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 
@@ -138,8 +139,12 @@ const FollowUp = ({ onReturn }) => {
                 </form>
             </div>
             
-            {/* FORM WIZARD */}
-           <FollowUpWizard />
+            {/* OD FORM WIZARD */}
+            { showOD && (<FollowUpOD />)}
+           
+
+           {/* OS FORM WIZARD */}
+           { showOS && (<FollowUpOS />)}
         </div>
         
     )
