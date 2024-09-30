@@ -142,7 +142,7 @@ export const getClinic = async (id) => {
 export const getAccounts = async () => {
     try {
         const response = await getData(`/accounts/profiles/`);
-        console.log("ACCOUNTS: ", response); // 1 - (gabriel quintero) / 2 - (user.demo) / 3 - (user2.demo)
+        console.log("ACCOUNTS: ", response);
 
         return response;
     } catch (error) {
@@ -151,7 +151,7 @@ export const getAccounts = async () => {
     }
 }
 
-// ACOUNT
+// ACCOUNT
 export const getAccount = async (id) => {
     try {
         const response = await getData(`/accounts/profiles/${id}/`);

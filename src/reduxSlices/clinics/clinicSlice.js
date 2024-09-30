@@ -37,52 +37,52 @@ const clinicSlice = createSlice({
     name: "clinics",
     initialState: {
         clinics: [],
-        clinicsStatus: "idle",
+        status: "idle",
         error: null
     },
     reducers: {
         fetchClinicsStart(state) {
-            state.clinicsStatus = "loading";
+            state.status = "loading";
         },
         fetchClinicsSuccess(state, action) {
             state.clinics = action.payload;
-            state.clinicsStatus = "succeeded";
+            state.status = "succeeded";
         },
         fetchClinicsFailure(state, action) {
             state.error = action.payload;
-            state.clinicsStatus = "failed";
+            state.status = "failed";
         },
     },
     extraReducers: (builder) => {
         // AGREGAR CLÍNICA
         builder
         .addCase(addClinic.pending, (state) => {
-            state.clinicsStatus = "loading";
+            state.status = "loading";
         })
         .addCase(addClinic.fulfilled, (state, action) => {
             console.log("CLÍNICA AÑADIDA: ", action.payload);
-            state.clinicsStatus = "succeeded";
+            state.status = "succeeded";
             state.clinics.push(action.payload);
         })
         .addCase(addClinic.rejected, (state, action) => {
             console.log("ERROR AL AÑADIR CLÍNICA", action.payload);
-            state.clinicsStatus = "failed";
+            state.status = "failed";
             state.error = action.payload;
         })
 
         // ELIMINAR CLÍNICA
         .addCase(deleteClinic.pending, (state) => {
-            state.clinicsStatus = "loading";
+            state.status = "loading";
         })
         .addCase(deleteClinic.fulfilled, (state, action) => {
             console.log("CLÍNICA ELIMINADA: ", action.payload);
 
-            state.clinicsStatus = "succeeded";
+            state.status = "succeeded";
             state.clinics = state.clinics.filter((clinic) => clinic.id !== action.payload.id);
         })
         .addCase(deleteClinic.rejected, (state, action) => {
             console.log("ERROR AL ELIMINAR LA CLINICA: ", action.payload);
-            state.clinicsStatus = "failed";
+            state.status = "failed";
             state.error = action.payload;
         })
     }

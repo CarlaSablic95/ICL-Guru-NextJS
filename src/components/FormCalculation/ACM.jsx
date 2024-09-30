@@ -66,7 +66,7 @@ const ACM = () => {
                     <div>
                         <form action="" className="row justify-content-evenly" onSubmit={handleSubmit(onSubmit)}>
                             {/* OD FORM */}
-                            <div className="col-10 col-md-5 rounded-5 p-3 mb-3" style={{ backgroundColor:"#AAC7E5" }}>
+                            <div className="col-12 col-md-5 rounded-5 p-3 mb-3" style={{ backgroundColor:"#AAC7E5" }}>
                                 <div className="rounded-5 mx-auto p-2" style={{ backgroundColor:"#4888C8", width:"50px" }}>
                                     <h4 className="text-white fw-bold text-center">OD</h4>
                                 </div>
@@ -130,7 +130,7 @@ const ACM = () => {
                                     </select>
                             </div>
 
-                            <div className="col-10 col-md-5 rounded-5 p-3 mb-3" style={{ backgroundColor:"#98D3C7" }}>
+                            <div className="col-12 col-md-5 rounded-5 p-3 mb-3" style={{ backgroundColor:"#98D3C7" }}>
                                 <div className="rounded-5 mx-auto p-2" style={{ backgroundColor:"#2FB297", width:"50px" }}>
                                     <h4 className="text-white fw-bold text-center">OS</h4>
                                 </div>

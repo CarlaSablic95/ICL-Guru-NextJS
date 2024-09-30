@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { getPatient } from "@/services/ApiService";
 import { InputCheckbox } from "../Inputs/Input";
 import ArrowBack from "/public/icons/arrow-back.png";
-import WizardComponent from "../Wizard/WizardComponent";
+import FollowUpWizard from "../Wizard/FollowUpWizard";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 
@@ -110,35 +110,36 @@ const FollowUp = ({ onReturn }) => {
             </div>
             </div>) : (<p>Loading patient data...</p>))}
                     
-                <form>
-                <div className="mb-3">
-                  <p className="fw-bold text-center">Eye</p>
-                  <form className="d-flex justify-content-center">
-                                    <InputCheckbox
-                                        label="OD"
-                                        name="eye"
-                                        id="od"
-                                        value="od"
-                                        bgColor="rgb(72, 136, 200)"
-                                        onChange={handleShowOD}
-                                        checked={showOD}
-                                        disabled={!showOS}
-                                    />
-                                    <InputCheckbox
-                                        label="OS"
-                                        name="eye"
-                                        id="os"
-                                        value="os"
-                                        bgColor="rgb(47, 178, 151)"
-                                        onChange={handleShowOS}
-                                        checked={showOS}
-                                        disabled={!showOD}
-                                    />
-                                 </form>
-                        </div>
-            </form>
+                <div className="d-flex justify-content-end mb-3">
+                  <form className="d-flex flex-column justify-content-end">
+                  <h4 className="fw-bold text-center">Eye</h4>
+                        <div className="d-flex justify-content-end">
+                                            <InputCheckbox
+                                                label="OD"
+                                                name="eye"
+                                                id="od"
+                                                value="od"
+                                                bgColor="rgb(72, 136, 200)"
+                                                onChange={handleShowOD}
+                                                checked={showOD}
+                                                disabled={!showOS}
+                                            />
+                                            <InputCheckbox
+                                                label="OS"
+                                                name="eye"
+                                                id="os"
+                                                value="os"
+                                                bgColor="rgb(47, 178, 151)"
+                                                onChange={handleShowOS}
+                                                checked={showOS}
+                                                disabled={!showOD}
+                                            />
+                            </div>
+                </form>
+            </div>
+            
             {/* FORM WIZARD */}
-           <WizardComponent />
+           <FollowUpWizard />
         </div>
         
     )

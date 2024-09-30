@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Button from "../Button/Button2";
 import { useForm } from "react-hook-form";
+
 
 const FormCard = () => {
   const { register, handleSubmit, formState: {errors} } = useForm();

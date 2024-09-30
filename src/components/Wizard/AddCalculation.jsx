@@ -94,19 +94,19 @@
           <div className="d-flex flex-column flex-md-row justify-content-evenly mb-5">
               <div>
               <h4 className="mb-1 fs-4 fw-bold">
-                          Patient: <small class="text-muted">{`${patient.name} ${patient.surname}`}</small>
+                          Patient: <small className="text-muted">{`${patient.name} ${patient.surname}`}</small>
                       </h4>
                       <h4 className="mb-1 fs-4 fw-bold">
-                      Patient ID: <small class="text-muted">{`${patient.id}`}</small>
+                      Patient ID: <small className="text-muted">{`${patient.id}`}</small>
                       </h4>
               </div>
 
               <div>
               <h4 className="mb-1 fs-4 fw-bold">
-                      DOB: <small class="text-muted">{`${patient.dob}`}</small>
+                      DOB: <small className="text-muted">{`${patient.dob}`}</small>
                       </h4>
                   <h4 className="mb-1 fs-4 fw-bold">
-                  Medical Record Number (MRN): <small class="text-muted">{`${patient.medical_record}`}</small>
+                  Medical Record Number (MRN): <small className="text-muted">{`${patient.medical_record}`}</small>
                       </h4>
               </div>
           </div>

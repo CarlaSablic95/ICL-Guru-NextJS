@@ -159,7 +159,7 @@ const CalculationDataGraphic = ({ handleReturnClick }) => {
                                 rounded="2rem"
                                 icon="../icons/file_download.svg"
                             />
-                            <div className="col-5 mb-3">
+                            <div className="mb-3">
                                 <div>
                                 <p className="fw-bold text-center">Eye</p>
                                  <form className="d-flex justify-content-center">

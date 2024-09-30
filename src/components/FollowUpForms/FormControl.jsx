@@ -8,14 +8,11 @@ import Button2 from "../Button/Button2";
 import Image from "next/image";
 import icon from "../../../public/icons/backup.svg";
 
-const FormIMM = () => {
+const FormControl = ({ title }) => {
   const dispatch = useDispatch();
+  const fileInputRef = useRef(null);
   const [fileName, setFileName] = useState("No file chosen");
   const { register, handleSubmit, formState:{errors} }= useForm();
-
-  const  fileInput = useRef(null);
-
-
 
   // Campo File
   const handleFileChange = (e) => {
@@ -28,23 +25,25 @@ const FormIMM = () => {
   }
 
   const handleUploadClick = () => {
-    fileInput.current.click();
-};
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
 
   // Formulario
   const onSubmit = async (data) => {
     console.log("DATOS A ENVIAR: ", data);
 
-    setControlDays((prevDays) => [...prevDays, dayDifference]);
+  
     // try {
       
     // }
   }
 
   return (
-    <div className="card card-form p-0 mb-4" style={{ width:"50%" }}>
+    <div className="card card-form p-0 mb-4">
       <div className="card-header text-start text-white fw-bold">
-        Postoperative - IMM
+        {title}
       </div>
       <div className="card-body d-flex justify-content-evenly w-100" style={{ borderTop: "0px", backgroundColor:"#E9F1F8" }}>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -94,7 +93,7 @@ const FormIMM = () => {
               {/* Central vault */}
               <div className="row justify-content-center justify-content-md-start">
                 <p className="fw-bold">IOL</p>
-                <div className="col-10 col-md-4 mb-3">
+                <div className="col-10 col-lg-4 mb-3">
                   <div className="d-flex flex-column align-items-start">
                     <p className="fw-bold mb-2">Central vault: </p>
                     <div className="input-group">
@@ -105,7 +104,7 @@ const FormIMM = () => {
                 </div>
 
                  {/* Nasal peripheral vault: */}
-                 <div className="col-10 col-md-4 mb-3">
+                 <div className="col-10 col-lg-4 mb-3">
                   <div className="d-flex flex-column align-items-start">
                     <p className="fw-bold mb-2">Nasal peripheral vault: </p>
                     <div className="input-group">
@@ -116,7 +115,7 @@ const FormIMM = () => {
                 </div>
 
                 {/* Temporal peripheral vault: */}
-                <div className="col-10 col-md-4 mb-3">
+                <div className="col-10 col-lg-4 mb-3">
                   <div className="d-flex flex-column align-items-start">
                     <p className="fw-bold mb-2">Temporal peripheral vault: </p>
                     <div className="input-group">
@@ -127,7 +126,7 @@ const FormIMM = () => {
                 </div>
 
                 {/* Nasal angle: */}
-                <div className="col-10 col-md-4 mb-4">
+                <div className="col-10 col-lg-4 mb-4">
                   <div className="d-flex flex-column align-items-start">
                     <p className="fw-bold mb-2">Nasal angle: </p>
                     <div className="input-group">
@@ -138,7 +137,7 @@ const FormIMM = () => {
                 </div>
 
                 {/* Temporal angle: */}
-                <div className="col-10 col-md-4 mb-4">
+                <div className="col-10 col-lg-4 mb-4">
                   <div className="d-flex flex-column align-items-start">
                     <p className="fw-bold mb-2">Temporal angle: </p>
                     <div className="input-group">
@@ -149,7 +148,7 @@ const FormIMM = () => {
                 </div>
 
                 {/* Pupil diameter: */}
-                <div className="col-10 col-md-4 mb-4">
+                <div className="col-10 col-lg-4 mb-4">
                   <div className="d-flex flex-column align-items-start">
                     <p className="fw-bold mb-2">Pupil diameter: </p>
                     <div className="input-group">
@@ -162,17 +161,17 @@ const FormIMM = () => {
 
             {/* INPUT FILE */}
             <label htmlFor="id_report_file" className="form-label w-100">
-                                    <div className="form-control d-flex justify-content-between align-items-center rounded-4">
-                                        <Image alt="icon" loading="lazy" width="36" height="36" decoding="async" data-nimg="1" src={icon} style={{color: "transparent"}} />
-                                        <small className="text-secondary mb-0">{fileName}</small>
-                                        <button type="button" className="btn py-2 px-4" style={{ backgroundColor: "rgb(24, 73, 214)", textTransform: "capitalize", borderRadius: "0.5rem", fontSize: "16px"}}
-                                         onClick={handleUploadClick}>Upload</button>
-                                    </div>
-                                </label>
-                                    <input className="form-control d-none" type="file" id="id_report_file" name="report_file" ref={fileInput} onChange={handleFileChange}  {...register("report_file")}/>
+              <div className="form-control d-flex justify-content-between align-items-center rounded-4">
+                  <Image alt="icon" loading="lazy" width="36" height="36" decoding="async" data-nimg="1" src={icon} style={{color: "transparent"}} />
+                  <small className="text-secondary mb-0">{fileName}</small>
+                  <button type="button" className="btn py-2 px-4" style={{ backgroundColor: "rgb(24, 73, 214)", textTransform: "capitalize", borderRadius: "0.5rem", fontSize: "16px"}}
+                    onClick={handleUploadClick}>Upload</button>
+              </div>
+          </label>
+              <input className="form-control d-none" type="file" id="id_report_file" name="report_file" ref={fileInputRef} onChange={handleFileChange} />
                                     
                 {/* BCVA: */}
-              <div className="col-10 col-md-4 mb-4">
+              <div className="col-10 col-lg-4 mb-4">
                 <div className="d-flex flex-column align-items-start">
                   <p className="fw-bold mb-2">BCVA:</p>
                   <div className="input-group">
@@ -194,7 +193,7 @@ const FormIMM = () => {
                 {/* Sphere */}
             <div className="row justify-content-center justify-content-md-start">
                 <p className="fw-bold">RX</p>
-              <div className="col-10 col-md-4 mb-4">
+              <div className="col-10 col-lg-4 mb-4">
                 <div className="d-flex flex-column align-items-start">
                   <p className="fw-bold mb-2">Sphere:</p>
                   <div className="input-group">
@@ -205,7 +204,7 @@ const FormIMM = () => {
               </div>
 
                 {/* Cylinder: */}
-              <div className="col-10 col-md-4 mb-3">
+              <div className="col-10 col-lg-4 mb-3">
                 <div className="d-flex flex-column align-items-start">
                   <p className="fw-bold mb-2">Cylinder:</p>
                   <div className="input-group">
@@ -216,7 +215,7 @@ const FormIMM = () => {
               </div>
 
                {/* Axis: */}
-               <div className="col-10 col-md-4 mb-3">
+               <div className="col-10 col-lg-4 mb-3">
                 <div className="d-flex flex-column align-items-start mb-4">
                   <p className="fw-bold mb-2">Axis:</p>
                   <div className="input-group">
@@ -246,4 +245,4 @@ const FormIMM = () => {
   );
 };
 
-export default FormIMM;
+export default FormControl;

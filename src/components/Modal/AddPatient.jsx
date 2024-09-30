@@ -11,7 +11,7 @@ import { Input, InputRadio, Select } from "@/components/Inputs/Input";
 
 const AddPatient = () => {
     const dispatch = useDispatch();
-    const { clinics, clinicsStatus, clinicsError } = useSelector((state) => state.clinics);
+    const { clinics, status, error } = useSelector((state) => state.clinics);
     const methods = useForm();
     const [isLoading, setIsLoading] = useState(false);
     const modalRef = useRef(null);

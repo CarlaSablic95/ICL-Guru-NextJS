@@ -35,10 +35,10 @@ body {
     font-family: "Roboto", sans-serif !important;
 }
 
-#id_time {
+/* #id_time {
     border-top-right-radius: 1rem !important;
     border-bottom-right-radius: 1rem !important;
-}
+} */
 
 .bg-aliceblue, .edited-form > div > input {
     background: aliceblue !important;
@@ -324,7 +324,7 @@ input#od, input#os {
     }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
        h1 {
         font-size: 35px !important;
         line-height: 50px !important;
@@ -346,6 +346,8 @@ input#od, input#os {
        }
 
        .card-form {
-        width: 80%;
+        width: 90%;
     }
+
+    
     }
