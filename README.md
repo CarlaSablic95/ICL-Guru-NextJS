@@ -74,24 +74,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
     **Descripción**: Componente de notificaciones que permite mostrar mensajes emergentes de forma sencilla y personalizable en aplicaciones React.
 
 15. **rsuite**  
-    **Descripción**: Conjunto de componentes de UI para React que incluye elementos como tablas, formularios y modales, diseñado para aplicaciones empresariales. 
-
-
-## Estructura del proyecto (archivos y carpetas)
-/src    
- ├── /app                   # Contiene las rutas y la lógica de la aplicación
- ├      ├── layout.jsx      # Componente reutilizable, en este caso el encabezado y el menú lateral.
- ├      ├── page.jsx        # Es el archivo núcleo (index) de la app. En este proyecto, el archivo de inicio es la página de inicio de sesión.
- ├      ├── /globals.css    # En este archivo definimos los estilos globales.
- ├      ├── /metadata.js    # Configuración de los metadatos
- ├      ├── /store.js       # Archivo donde se establece la estructura del store de Redux. Organiza el manejo del estado de la aplicación y facilita la gestión de la lógica para la autenticación, pacientes, clínicas, cuentas y cálculos.
- ├      ├── /accounts       # Componente para la gestión de cuentas
- ├      ├── /calculations   # Componente para la gestión de cálculos
- ├      ├── /patients       # Componente para la gestión de pacientes
- ├      ├── /clinics        # Componente para la gestión de clínicas
- ├      ├── /login          # Componente de inicio de sesión
- ├      ├── /my-account     # Componente para el perfil del usuario
- ├── /components            # Contiene componentes reutilizables
- ├── /reduxSlices           # Contiene los slices de Redux que manejan el estado global de la aplicación: pacientes, clínicas, cuentas y cálculos.
- ├── /services              # Contiene archivos donde se gestiona la autenticación y las solicitudes API.
- ├── /utils                 # Este archivo contiene la gestión de Tokens y la autenticación de usuarios.
+    **Descripción**: Conjunto de componentes de UI para React que incluye elementos como tablas, formularios y modales, diseñado para aplicaciones empresariales.
