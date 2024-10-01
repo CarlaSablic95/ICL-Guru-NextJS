@@ -7,7 +7,6 @@ export const Input = ({
   type,
   rules,
   placeholder,
-  rounded,
   defaultValue,
   disabled,
 }) => {

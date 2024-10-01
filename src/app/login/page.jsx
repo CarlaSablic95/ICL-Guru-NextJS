@@ -11,6 +11,7 @@ import Image from "next/image";
 import EyeOff from "/public/icons/eye-off.svg";
 import EyeOn from "/public/icons/eye.svg";
 import styles from "./Login.module.css";
+import logo from "../../../public/logo.png";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -72,9 +73,9 @@ const Login = () => {
                 onSubmit={methods.handleSubmit(onSubmit)}
                 className="px-3 px-md-5"
               >
-                <h3 className="text-uppercase text-center py-4 text-white">
-                  Icl Guru
-                </h3>
+                <div className="d-flex flex-column justify-content-center align-items-center">
+                  {/* <Image src={logo} alt="logo"/> */}
+                </div>
                 <div className="form-floating mb-4 text-center">
                   <Input
                     id="username"

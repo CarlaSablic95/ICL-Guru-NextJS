@@ -30,7 +30,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - CSS Modules: lo utilicé para definir estilos específicos para algunos componentes.
 
 ## Dependencias instaladas
-Aquí tienes la lista de dependencias enumeradas de manera ordenada:
 
 1. **@popperjs/core**  
    **Descripción**: Biblioteca para crear elementos emergentes, como tooltips y popovers, en aplicaciones web.
@@ -77,9 +76,6 @@ Aquí tienes la lista de dependencias enumeradas de manera ordenada:
 15. **rsuite**  
     **Descripción**: Conjunto de componentes de UI para React que incluye elementos como tablas, formularios y modales, diseñado para aplicaciones empresariales. 
 
----
-
-Esta enumeración clara facilita la lectura y comprensión de cada dependencia y su propósito en el proyecto.
 
 ## Estructura del proyecto (archivos y carpetas)
 /src    

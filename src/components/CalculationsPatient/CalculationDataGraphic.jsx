@@ -185,9 +185,9 @@ const CalculationDataGraphic = ({ handleReturnClick }) => {
               />
             </div>
             <div className="d-flex justify-content-center justify-content-md-end mb-3">
-              <div className="text-center col-5">
-                <h4 className="fw-bold text-center text-md-end">Eye</h4>
-                <form className="d-flex justify-content-center justify-content-md-end">
+              <div className="text-center col-2">
+                <h4 className="fw-bold text-center text-md-center">Eye</h4>
+                <form className="d-flex justify-content-center justify-content-md-center">
                   <InputCheckbox
                     label="OD"
                     name="eye"

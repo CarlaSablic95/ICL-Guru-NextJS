@@ -15,7 +15,7 @@ const FollowUpOD = () => {
   const [formControl, setFormControl] = useState([
     <FormIntraoperative key="intraoperative" />,
   ]);
-  const [customValue, setCustomValue] = useState("Value");
+  const [customValue, setCustomValue] = useState(1);
   const [customUnit, setCustomUnit] = useState("Select a time unit");
 
   const onChange = (nextStep) => {

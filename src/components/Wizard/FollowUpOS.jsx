@@ -208,7 +208,7 @@ const FollowUpOS = () => {
         <div className="form-check form-switch my-4">
           <label
             className="form-check-label fw-bold"
-            htmlFor="flexSwitchCheckDefault"
+            htmlFor="flexSwitchCheckDefault1"
           >
             See new controls
           </label>
@@ -216,7 +216,7 @@ const FollowUpOS = () => {
             className="form-check-input"
             type="checkbox"
             role="switch"
-            id="flexSwitchCheckDefault"
+            id="flexSwitchCheckDefault1"
             style={{ cursor: "pointer" }}
           />
         </div>
