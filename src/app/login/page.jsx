@@ -73,8 +73,8 @@ const Login = () => {
                 onSubmit={methods.handleSubmit(onSubmit)}
                 className="px-3 px-md-5"
               >
-                <div className="d-flex flex-column justify-content-center align-items-center">
-                  {/* <Image src={logo} alt="logo"/> */}
+                <div className="d-flex flex-column justify-content-center align-items-center container-logo">
+                  <Image src={logo} alt="logo" className="logo"/>
                 </div>
                 <div className="form-floating mb-4 text-center">
                   <Input

@@ -57,7 +57,7 @@ const Sidebar = () => {
   return (
     <aside className="shadow d-none d-lg-flex flex-column justify-content-start align-items-center">
       <ul className="list-unstyled">
-        <li className="mb-3 pt-5">
+        <li className="mb-3" style={{ paddingTop: "5rem" }}>
           <div
             className="text-dark text-decoration-none menu-list ms-2"
             data-bs-toggle="modal"

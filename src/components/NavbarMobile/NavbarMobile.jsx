@@ -2,48 +2,63 @@
 
 import Link from "next/link";
 import { useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useParams } from "next/navigation";
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "@/reduxSlices/auth/authSlice";
-
-const routes = [
-  {
-    path: "/patients",
-    link: "Patients",
-    icon: "../icons/user.svg",
-    activeIcon: "../icons/user-active.svg",
-  },
-  {
-    path: "/calculation",
-    link: "Calculation",
-    icon: "../icons/calculation.svg",
-    activeIcon: "../icons/calculation-active.svg",
-  },
-  {
-    path: "/clinics",
-    link: "Clinics",
-    icon: "../icons/clinic.svg",
-    activeIcon: "../icons/clinic-active.svg",
-  },
-  {
-    path: "/accounts",
-    link: "Accounts",
-    icon: "../icons/settings.svg",
-    activeIcon: "../icons/settings-active.svg",
-  },
-  {
-    path: "/my-account",
-    link: "My account",
-    icon: "../icons/account.svg",
-    activeIcon: "../icons/account-active.svg",
-  },
-];
+import logo from "../../../public/logo.png";
+import user from "../../../public/icons/user.svg";
+import activeUser from "../../../public/icons/user-active.svg";
+import calculation from "../../../public/icons/calculation.svg";
+import activeCalculation from "../../../public/icons/calculation-active.svg";
+import clinic from "../../../public/icons/clinic.svg";
+import activeClinic from "../../../public/icons/clinic-active.svg";
+import account from "../../../public/icons/account.svg";
+import activeAccount from "../../../public/icons/account-active.svg";
+import myAccount from "../../../public/icons/my-account.svg";
+import activeMyAccount from "../../../public/icons/my-account-active.svg";
+import logoutIcon from "../../../public/icons/logout.svg";
 
 const NavbarMobile = () => {
   const pathname = usePathname();
   const dispatch = useDispatch();
   const username = useSelector((state) => state.auth.user);
+  const { id } = useParams();
+
+  const routes = [
+    {
+      path: "/patients",
+      link: "Patients",
+      icon: user,
+      activeIcon: activeUser,
+    },
+    {
+      path: `/calculation/register/${id}`,
+      link: "Calculation",
+      icon: calculation,
+      activeIcon: activeCalculation,
+      isClickable: false,
+    },
+    {
+      path: "/clinics",
+      link: "Clinics",
+      icon: clinic,
+      activeIcon: activeClinic,
+    },
+    {
+      path: "/accounts",
+      link: "Accounts",
+      icon: account,
+      activeIcon: activeAccount,
+    },
+    {
+      path: "/my-account",
+      link: "My account",
+      icon: myAccount,
+      activeIcon: activeMyAccount,
+    },
+  ];
+
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -80,9 +95,9 @@ const NavbarMobile = () => {
             />
           </svg>
         </button>
-        <a className="navbar-brand bg-warning" href="#">
-          Logo
-        </a>
+        <div className="pe-5">
+          <Image src={logo} alt="logo" className="logo-header"/>
+        </div>
         <div
           className="offcanvas offcanvas-end"
           tabIndex="-1"
@@ -138,13 +153,7 @@ const NavbarMobile = () => {
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
                 >
-                  <Image
-                    src="../icons/logout.svg"
-                    width="30"
-                    height="30"
-                    alt="logout icon"
-                  />{" "}
-                  Logout
+                  <Image src={logoutIcon} width="30" height="30" alt="icon" /> Logout
                 </a>
               </li>
             </ul>
